@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.diegocordeiro.dscproject.domain.Usuario;
-import br.com.diegocordeiro.dscproject.service.UsuarioService;
+import br.com.diegocordeiro.dscproject.services.UsuarioService;
 
 @RestController
 @RequestMapping(value = "/usuarios")
