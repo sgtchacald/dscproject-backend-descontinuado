@@ -11,79 +11,77 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity
-@Table(name="USUARIO")
-public class Usuario implements Serializable{
+@Table(name="USUARIOS")
+public class Usuario extends Auditoria implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "ID", nullable = false)
 	private Integer id;
 	
-	@Column(name = "tipo_permissao", length = 1, nullable = false)
+	@Column(name = "TIPO_PERMISSAO", length = 1, nullable = false)
 	private Integer tipoPerfil;
 	
-	@Column(name = "nome", length = 100, nullable = false)
+	@Column(name = "NOME", length = 100, nullable = false)
 	private String nome;
 	
-	@Column(name = "cpf", length = 11, nullable = false, unique = true)
+	@Column(name = "CPF", length = 11, nullable = false, unique = true)
 	private String cpf;
 	
-	@Column(name = "dt_nascimento", nullable = false)
+	@Column(name = "DATA_NASCIMENTO", nullable = false)
 	private Date dtnascimento;
 	
-	@Column(name = "estado_civil", length = 2, nullable = false)
+	@Column(name = "ESTADO_CIVIL", length = 2, nullable = false)
 	private String estadoCivil;
 	
-	@Column(name = "genero", length = 1, nullable = false)
+	@Column(name = "GENERO", length = 1, nullable = false)
 	private String genero;
 	
-	@Column(name = "ind_portador_deficiencia", length = 1, nullable = false)
+	@Column(name = "IND_PORTADOR_DEFICIENCIA", length = 1, nullable = false)
 	private String indPortadorDeficiencia;
 	
-	@Column(name = "email", length = 512, nullable = false, unique = true)
+	@Column(name = "EMAIL", length = 512, nullable = false, unique = true)
 	private String email;
 	
 	//inserir aqui lista de telefones com os seguintes campos
 	//id, telefone, tipoTelefone, indstatus, indWhatsapp, indReceberMsg
 	
-	@Column(name = "ind_disponivel_viajar", length = 1, nullable = false)
+	@Column(name = "IND_DISPONIVEL_VIAJAR", length = 1, nullable = false)
 	private String indDisponivelViajar;
 	
-	@Column(name = "ind_disponivel_mudar_cidade", length = 1, nullable = false)
+	@Column(name = "IND_DISPONIVEL_MUDAR_CIDADE", length = 1, nullable = false)
 	private String indDisponivelMudarCidade;
 	
 	//inserir aqui idLogradouro
 	
-	@Column(name = "resumo_profissional", length = 7000, nullable = false)
+	@Column(name = "RESUMO_PROFISSIONAL", length = 7000, nullable = false)
 	private String resumoProfissional;
 	
 	//inserir aqui lista de redes sociais 
 	
-	@Column(name = "url_blog_site", length = 512, nullable = false)
+	@Column(name = "URL_BLOG_SITE", length = 512, nullable = false)
 	private String urlBlogSite;
 	
-	@Column(name = "ind_status", length = 1, nullable = false)
+	@Column(name = "IND_STATUS", length = 1, nullable = false)
 	private String indStatus;
 	
-	@Column(name = "login", length = 40, nullable = false)
+	@Column(name = "LOGIN", length = 40, nullable = false)
 	private String login;
 	
-	@Column(name = "senha", length = 255, nullable = false)
+	@Column(name = "SENHA", length = 25, nullable = false)
 	private String senha;
 	
-	@ManyToMany
-	@JsonManagedReference
-	@JoinTable(name="ATIVO_USUARIO", joinColumns = @JoinColumn(name = "ativo_id"), inverseJoinColumns = @JoinColumn(name = "usuario_id"))
-	private List<Ativo> ativos = new ArrayList<>();
+	@OneToMany(mappedBy = "usuario")
+	private List<Operacao> operacoes = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "usuario")
+	private List<Investimento> investimentos = new ArrayList<>();
 	
 	public Usuario(){
 	}
@@ -241,14 +239,14 @@ public class Usuario implements Serializable{
 		this.senha = senha;
 	}
 
-	public List<Ativo> getAtivos() {
-		return ativos;
+	public List<Operacao> getOperacoes() {
+		return operacoes;
 	}
 
-	public void setAtivos(List<Ativo> ativos) {
-		this.ativos = ativos;
+	public void setOperacoes(List<Operacao> operacoes) {
+		this.operacoes = operacoes;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

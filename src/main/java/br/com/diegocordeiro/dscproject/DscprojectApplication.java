@@ -9,6 +9,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import br.com.diegocordeiro.dscproject.domain.Ativo;
+import br.com.diegocordeiro.dscproject.domain.Cidade;
+import br.com.diegocordeiro.dscproject.domain.Estado;
+import br.com.diegocordeiro.dscproject.domain.Pais;
 import br.com.diegocordeiro.dscproject.domain.Usuario;
 import br.com.diegocordeiro.dscproject.enums.EstadoCivil;
 import br.com.diegocordeiro.dscproject.enums.Genero;
@@ -16,39 +19,39 @@ import br.com.diegocordeiro.dscproject.enums.Indicador;
 import br.com.diegocordeiro.dscproject.enums.Perfil;
 import br.com.diegocordeiro.dscproject.enums.Status;
 import br.com.diegocordeiro.dscproject.repositories.AtivoRepository;
+import br.com.diegocordeiro.dscproject.repositories.CidadeRepository;
+import br.com.diegocordeiro.dscproject.repositories.EstadoRepository;
+import br.com.diegocordeiro.dscproject.repositories.PaisRepository;
 import br.com.diegocordeiro.dscproject.repositories.UsuarioRepository;
 
 @SpringBootApplication
 public class DscprojectApplication  implements CommandLineRunner{
 	
 	@Autowired
+	private AtivoRepository ativoRepository;
+	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
 	@Autowired
-	private AtivoRepository ativoRepository;
+	private PaisRepository paisRepository;
+	@Autowired
+	private EstadoRepository estadoRepository;
+	@Autowired
+	private CidadeRepository cidadeRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(DscprojectApplication.class, args);
 	}
 
 	@Override
-	public void run(String... args) throws Exception {
+	public void run(String... args) throws Exception {		
 		
-		Ativo a1 = new Ativo();
-		a1.setId(null);
-		a1.setNome("Bitcoin");
-		a1.setDescricao("Criptomoeda Criada por Satoshi Yamamoto.");
+		//Ativos
+		Ativo a1 = new Ativo(null, "Bitcoin", "Criptomoeda Criada por Satoshi para ser descentralizada.");
+		Ativo a2 = new Ativo(null, "Ada Cardano", "Criptomoeda Criada para auxiliar a Etiópia a encarar melhores opções financeiras.");
+		Ativo a3 = new Ativo(null, "Dogecoin", "Criptomoeda Criada como shitcoin para servir como piada ao bitcoin.");
 		
-		Ativo a2 = new Ativo();
-		a2.setId(null);
-		a2.setNome("Ada Cardano");
-		a2.setDescricao("Criptomoeda Criada para auxiliar a Etiópia.");
-		
-		Ativo a3 = new Ativo();
-		a3.setId(null);
-		a3.setNome("Dogecoin");
-		a3.setDescricao("Criptomoeda Criada como shitcoin para servir como piada ao bitcoin.");
-		
+		//Usuários
 		Usuario u1 = new Usuario();	
 		u1.setId(null);
 		u1.setTipoPerfil(Perfil.VISITANTE.getCodigo());
@@ -66,7 +69,6 @@ public class DscprojectApplication  implements CommandLineRunner{
 		u1.setIndStatus(Status.ATIVO.getCodigo());
 		u1.setLogin("chacalsgt");
 		u1.setSenha("SenhaQueSeráCriptografada");
-		u1.getAtivos().addAll(Arrays.asList(a1,a2));
 		
 		Usuario u2 = new Usuario();	
 		u2.setId(null);
@@ -85,10 +87,30 @@ public class DscprojectApplication  implements CommandLineRunner{
 		u2.setIndStatus(Status.ATIVO.getCodigo());
 		u2.setLogin("chacalsgt");
 		u2.setSenha("SenhaQueSeráCriptografada");
-		u2.getAtivos().addAll(Arrays.asList(a2,a3));
 		
+		//Salvando dados de ativos e usuários
 		ativoRepository.saveAll(Arrays.asList(a1,a2,a3));
 		usuarioRepository.saveAll(Arrays.asList(u1, u2));
+		
+		//Países
+		Pais pais1 = new Pais(null, "Brazil","Brasil","BR",123456,"https://www.google.com/url?sa=i&url=https%3A%2F%2Fimagepng.org%2Fbandeira-do-brasil%2F&psig=AOvVaw1pOEOLML5rciUW7cAajGHL&ust=1628223660477000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCLjA-fiDmfICFQAAAAAdAAAAABAN");
+		Pais pais2 = new Pais(null, "Uruguay", "Uruguai", "UY", 654321, "https://www.google.com/url?sa=i&url=https%3A%2F%2Fpt.wikipedia.org%2Fwiki%2FBandeira_do_Uruguai&psig=AOvVaw1FH2PsKjmhWHuecdg6NZd9&ust=1628223826192000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCMCU-MeEmfICFQAAAAAdAAAAABAI");
+		
+		//Estados
+		Estado est1 = new Estado(null, "Rio de Janeiro","RJ","000001","21",pais1);
+		Estado est2 = new Estado(null, "São Paulo", "SP","000002","11", pais1);
+		Estado est3 = new Estado(null, "SCanelones", "CN","000003","85", pais2);
+		
+		//Cidades
+		Cidade cid1 = new Cidade(null, "Bairro Remanso", est3.getIdIBGE(),"85","CN", est3);
+		Cidade cid2 = new Cidade(null, "Rio de janeiro", est1.getIdIBGE(),"85","CN", est1);
+		Cidade cid3 = new Cidade(null, "Aparecida do Norte", est2.getIdIBGE(),"85","CN", est2);
+		
+		//Salvando dados de Localização
+		paisRepository.saveAll(Arrays.asList(pais1,pais2));
+		estadoRepository.saveAll(Arrays.asList(est1, est2, est3));
+		cidadeRepository.saveAll(Arrays.asList(cid1, cid2, cid3));
+		
 		
 		
 	}

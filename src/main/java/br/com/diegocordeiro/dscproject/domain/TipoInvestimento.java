@@ -16,14 +16,14 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-@Table(name="ATIVOS")
-public class Ativo extends Auditoria implements Serializable{
+@Table(name="TIPO_INVESTIMENTO")
+public class TipoInvestimento extends Auditoria implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "ID", nullable = false)
+	@Column(name = "ID", length = 100, nullable = false)
 	private Integer id;
 	
 	@Column(name = "NOME", length = 100, nullable = false)
@@ -33,13 +33,13 @@ public class Ativo extends Auditoria implements Serializable{
 	private String descricao;
 	
 	@JsonBackReference
-	@OneToMany(mappedBy = "ativo")
-	private List<Operacao> trades = new ArrayList<>();
-	
-	public Ativo() {
-	}
+	@OneToMany(mappedBy = "tipoInvestimento")
+	private List<Investimento> investimentos = new ArrayList<>();
 
-	public Ativo(Integer id, String nome, String descricao) {
+	public TipoInvestimento(){
+	}
+	
+	public TipoInvestimento(Integer id, String nome, String descricao) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -70,12 +70,12 @@ public class Ativo extends Auditoria implements Serializable{
 		this.descricao = descricao;
 	}
 
-	public List<Operacao> getTrades() {
-		return trades;
+	public List<Investimento> getInvestimentos() {
+		return investimentos;
 	}
 
-	public void setTrades(List<Operacao> trades) {
-		this.trades = trades;
+	public void setInvestimentos(List<Investimento> investimentos) {
+		this.investimentos = investimentos;
 	}
 
 	@Override
@@ -91,8 +91,9 @@ public class Ativo extends Auditoria implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Ativo other = (Ativo) obj;
+		TipoInvestimento other = (TipoInvestimento) obj;
 		return Objects.equals(id, other.id);
 	}
 	
 }
+
