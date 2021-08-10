@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="USUARIOS")
 public class Usuario extends Auditoria implements Serializable {
@@ -49,8 +51,9 @@ public class Usuario extends Auditoria implements Serializable {
 	@Column(name = "EMAIL", length = 512, nullable = false, unique = true)
 	private String email;
 	
-	//inserir aqui lista de telefones com os seguintes campos
-	//id, telefone, tipoTelefone, indstatus, indWhatsapp, indReceberMsg
+	@JsonBackReference
+	@OneToMany(mappedBy = "usuario")
+	private List<Telefone> telefones = new ArrayList<>();
 	
 	@Column(name = "IND_DISPONIVEL_VIAJAR", length = 1, nullable = false)
 	private String indDisponivelViajar;
@@ -82,6 +85,9 @@ public class Usuario extends Auditoria implements Serializable {
 	
 	@OneToMany(mappedBy = "usuario")
 	private List<Investimento> investimentos = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "usuario")
+	private List<Endereco> enderecos = new ArrayList<>();
 	
 	public Usuario(){
 	}
@@ -183,6 +189,14 @@ public class Usuario extends Auditoria implements Serializable {
 		this.email = email;
 	}
 
+	public List<Telefone> getTelefones() {
+		return telefones;
+	}
+
+	public void setTelefones(List<Telefone> telefones) {
+		this.telefones = telefones;
+	}
+
 	public String getIndDisponivelViajar() {
 		return indDisponivelViajar;
 	}
@@ -245,6 +259,22 @@ public class Usuario extends Auditoria implements Serializable {
 
 	public void setOperacoes(List<Operacao> operacoes) {
 		this.operacoes = operacoes;
+	}
+
+	public List<Investimento> getInvestimentos() {
+		return investimentos;
+	}
+
+	public void setInvestimentos(List<Investimento> investimentos) {
+		this.investimentos = investimentos;
+	}
+
+	public List<Endereco> getEnderecos() {
+		return enderecos;
+	}
+
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
 	}
 
 	@Override
