@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="INVESTIMENTOS")
-public class Investimento extends Auditoria implements Serializable{
+public class Investimento implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -39,14 +39,17 @@ public class Investimento extends Auditoria implements Serializable{
 	
 	public Investimento(){
 	}
-
-	public Investimento(Integer id, double valorInvestido, String indStatus) {
+	
+	public Investimento(Integer id, double valorInvestido, String indStatus, TipoInvestimento tipoInvestimento,
+			Usuario usuario) {
 		super();
 		this.id = id;
 		this.valorInvestido = valorInvestido;
 		this.indStatus = indStatus;
+		this.tipoInvestimento = tipoInvestimento;
+		this.usuario = usuario;
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}

@@ -15,9 +15,11 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import br.com.diegocordeiro.dscproject.enums.TipoRenda;
+
 @Entity
 @Table(name="TIPO_INVESTIMENTO")
-public class TipoInvestimento extends Auditoria implements Serializable{
+public class TipoInvestimento implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -32,20 +34,24 @@ public class TipoInvestimento extends Auditoria implements Serializable{
 	@Column(name = "DESCRICAO", length = 512, nullable = false)
 	private String descricao;
 	
+	@Column(name = "TIPO_RENDA", length = 1, nullable = false)
+	private String tipoRenda;
+	
 	@JsonBackReference
 	@OneToMany(mappedBy = "tipoInvestimento")
 	private List<Investimento> investimentos = new ArrayList<>();
 
 	public TipoInvestimento(){
 	}
-	
-	public TipoInvestimento(Integer id, String nome, String descricao) {
+
+	public TipoInvestimento(Integer id, String nome, String descricao, TipoRenda tipoRenda) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
+		this.tipoRenda = tipoRenda.getCodigo();
 	}
-
+	
 	public Integer getId() {
 		return id;
 	}
@@ -68,6 +74,14 @@ public class TipoInvestimento extends Auditoria implements Serializable{
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public TipoRenda getTipoRenda() {
+		return TipoRenda.toEnum(tipoRenda);
+	}
+
+	public void setTipoRenda(TipoRenda tipoRenda) {
+		this.tipoRenda = tipoRenda.getCodigo();
 	}
 
 	public List<Investimento> getInvestimentos() {

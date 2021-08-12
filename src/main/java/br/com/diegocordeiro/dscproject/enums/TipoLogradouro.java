@@ -71,7 +71,7 @@ public enum TipoLogradouro {
 		this.descricao = descricao;
 	}
 
-	public static TipoLogradouro toEnum(String codigo){
+	public static TipoLogradouro toEnum(Integer codigo){
 		
 		if(codigo == null) {
 			return null;

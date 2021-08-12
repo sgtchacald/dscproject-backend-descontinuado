@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name="ENDERECOS")
-public class Endereco extends Auditoria implements Serializable{
+public class Endereco implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -47,14 +47,14 @@ public class Endereco extends Auditoria implements Serializable{
 	private String nomeCidade;
 	
 	@Column(name = "ID_IBGE_CIDADE", nullable = false)
-	private Integer idIBGECidade;
+	private String idIBGECidade;
 	
 	
 	@Column(name = "NOME_BAIRRO_CIDADE",length = 255, nullable = false)
 	private String nomeBairroCidade;
 	
 	@Column(name = "ORIGEM_CADASTRO",length = 1, nullable = false)
-	private Character origemCadastro;
+	private String origemCadastro;
 	
 	@ManyToOne
 	@JoinColumn(name = "ID_CIDADE")
@@ -69,8 +69,8 @@ public class Endereco extends Auditoria implements Serializable{
 	}
 
 	public Endereco(Integer id, String cep, String tipoLogradouro, String logradouroComNumero,
-			String logradouroSemNumero, String complemento, String ufCidade, String nomeCidade, Integer idIBGECidade,
-			String nomeBairroCidade, Character origemCadastro, Cidade cidade, Usuario usuario) {
+			String logradouroSemNumero, String complemento, String ufCidade, String nomeCidade, String idIBGECidade,
+			String nomeBairroCidade, String origemCadastro, Cidade cidade, Usuario usuario) {
 		super();
 		this.id = id;
 		this.cep = cep;
@@ -151,11 +151,11 @@ public class Endereco extends Auditoria implements Serializable{
 		this.nomeCidade = nomeCidade;
 	}
 
-	public Integer getIdIBGECidade() {
+	public String getIdIBGECidade() {
 		return idIBGECidade;
 	}
 
-	public void setIdIBGECidade(Integer idIBGECidade) {
+	public void setIdIBGECidade(String idIBGECidade) {
 		this.idIBGECidade = idIBGECidade;
 	}
 
@@ -167,11 +167,11 @@ public class Endereco extends Auditoria implements Serializable{
 		this.nomeBairroCidade = nomeBairroCidade;
 	}
 
-	public Character getOrigemCadastro() {
+	public String getOrigemCadastro() {
 		return origemCadastro;
 	}
 
-	public void setOrigemCadastro(Character origemCadastro) {
+	public void setOrigemCadastro(String origemCadastro) {
 		this.origemCadastro = origemCadastro;
 	}
 

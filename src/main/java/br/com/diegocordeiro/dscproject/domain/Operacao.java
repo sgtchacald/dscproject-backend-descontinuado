@@ -12,19 +12,24 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import br.com.diegocordeiro.dscproject.enums.TipoOperacao;
+
 @Entity
 @Table(name="OPERACOES")
-public class Operacao extends Auditoria implements Serializable{
+public class Operacao implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "ID", length = 100, nullable = false)
 	private Integer id;
 	
 	@Column(name = "DATA_OPERACAO")
 	private Date dataOperacao;
+	
+	@Column(name = "PARIDADE", length = 50, nullable = false)
+	private String paridade;
 	
 	@Column(name = "TIPO_OPERACAO", length = 1, nullable = false)
 	private String tipoOperacao;
@@ -52,12 +57,13 @@ public class Operacao extends Auditoria implements Serializable{
 	public Operacao(){
 	}
 
-	public Operacao(Integer id, Date dataOperacao, String tipoOperacao, double valorAtivo, double quantiaAtivo,
+	public Operacao(Integer id, Date dataOperacao, String paridade,  TipoOperacao tipoOperacao, double valorAtivo, double quantiaAtivo,
 			double valorExecutadoNaOperacao, double taxaOperacao, Usuario usuario, Ativo ativo) {
 		super();
 		this.id = id;
 		this.dataOperacao = dataOperacao;
-		this.tipoOperacao = tipoOperacao;
+		this.paridade = paridade;
+		this.tipoOperacao = tipoOperacao.getCodigo();
 		this.valorAtivo = valorAtivo;
 		this.quantiaAtivo = quantiaAtivo;
 		this.valorExecutadoNaOperacao = valorExecutadoNaOperacao;
@@ -81,13 +87,21 @@ public class Operacao extends Auditoria implements Serializable{
 	public void setDataOperacao(Date dataOperacao) {
 		this.dataOperacao = dataOperacao;
 	}
-
-	public String getTipoOperacao() {
-		return tipoOperacao;
+	
+	public String getParidade() {
+		return paridade;
 	}
 
-	public void setTipoOperacao(String tipoOperacao) {
-		this.tipoOperacao = tipoOperacao;
+	public void setParidade(String paridade) {
+		this.paridade = paridade;
+	}
+
+	public TipoOperacao getTipoOperacao() {
+		return TipoOperacao.toEnum(tipoOperacao);
+	}
+
+	public void setTipoOperacao(TipoOperacao tipoOperacao) {
+		this.tipoOperacao = tipoOperacao.getCodigo();
 	}
 
 	public double getValorAtivo() {

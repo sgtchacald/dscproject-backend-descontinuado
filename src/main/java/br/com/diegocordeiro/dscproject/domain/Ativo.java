@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name="ATIVOS")
-public class Ativo extends Auditoria implements Serializable{
+public class Ativo implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -25,6 +25,9 @@ public class Ativo extends Auditoria implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "ID", nullable = false)
 	private Integer id;
+	
+	@Column(name = "CODIGO", length = 10, nullable = false)
+	private String codigo;
 	
 	@Column(name = "NOME", length = 100, nullable = false)
 	private String nome;
@@ -34,14 +37,15 @@ public class Ativo extends Auditoria implements Serializable{
 	
 	@JsonBackReference
 	@OneToMany(mappedBy = "ativo")
-	private List<Operacao> trades = new ArrayList<>();
+	private List<Operacao> operacoes = new ArrayList<>();
 	
 	public Ativo() {
 	}
 
-	public Ativo(Integer id, String nome, String descricao) {
+	public Ativo(Integer id, String codigo, String nome, String descricao) {
 		super();
 		this.id = id;
+		this.codigo = codigo;
 		this.nome = nome;
 		this.descricao = descricao;
 	}
@@ -52,6 +56,14 @@ public class Ativo extends Auditoria implements Serializable{
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 
 	public String getNome() {
@@ -70,12 +82,12 @@ public class Ativo extends Auditoria implements Serializable{
 		this.descricao = descricao;
 	}
 
-	public List<Operacao> getTrades() {
-		return trades;
+	public List<Operacao> getOperacoes() {
+		return operacoes;
 	}
 
-	public void setTrades(List<Operacao> trades) {
-		this.trades = trades;
+	public void setOperacoes(List<Operacao> operacoes) {
+		this.operacoes = operacoes;
 	}
 
 	@Override

@@ -1,14 +1,14 @@
 package br.com.diegocordeiro.dscproject.enums;
 
-public enum TipoOperacao {
-	
-	COMPRA("C", "Compra"),
-	VENDA("V", "Venda");
-	
+public enum TipoRenda {
+
+	RENDA_FIXA	  ("F", "Renda Fixa"	  ),
+    RENDA_VARIAVEL ("V", "Renda Variável");
+
 	private String codigo;
 	private String descricao;
 	
-	private TipoOperacao(String codigo, String descricao) {
+	private TipoRenda(String codigo, String descricao) {
 		this.codigo = codigo;
 		this.descricao = descricao;
 	}
@@ -29,13 +29,13 @@ public enum TipoOperacao {
 		this.descricao = descricao;
 	}
 
-	public static TipoOperacao toEnum(String codigo){
+	public static TipoRenda toEnum(String codigo){
 		
 		if(codigo == null) {
 			return null;
 		}
 		
-		for(TipoOperacao x : TipoOperacao.values()) {
+		for(TipoRenda x : TipoRenda.values()) {
 			if(codigo.equals(x.getCodigo())) {
 				return x;
 			}
