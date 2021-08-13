@@ -15,10 +15,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="USUARIOS")
-public class Usuario implements Serializable {
+public class Usuario extends Auditoria implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -80,12 +81,15 @@ public class Usuario implements Serializable {
 	@Column(name = "SENHA", length = 25, nullable = false)
 	private String senha;
 	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "usuario")
 	private List<Operacao> operacoes = new ArrayList<>();
 	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "usuario")
 	private List<Investimento> investimentos = new ArrayList<>();
 	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "usuario")
 	private List<Endereco> enderecos = new ArrayList<>();
 	

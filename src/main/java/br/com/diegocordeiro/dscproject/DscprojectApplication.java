@@ -63,8 +63,6 @@ public class DscprojectApplication  implements CommandLineRunner{
 	@Autowired
 	private OperacaoRepository operacaoRepository;
 	
-	
-
 	public static void main(String[] args) {
 		SpringApplication.run(DscprojectApplication.class, args);
 	}
@@ -162,11 +160,11 @@ public class DscprojectApplication  implements CommandLineRunner{
 			"Ferreira de andrade, 136", 
 			"Ferreira de andrade", 
 			"Bloco 1, Apartamento 404", 
-			cid1.getUf(), 
-			cid1.getNome(), 
-			cid1.getIdIBGE(), 
+			cid2.getUf(), 
+			cid2.getNome(), 
+			cid2.getIdIBGE(), 
 			"Cachambi", "A",
-			cid1, 
+			cid2, 
 			u1
 		);
 		
@@ -183,7 +181,7 @@ public class DscprojectApplication  implements CommandLineRunner{
 			"Jardim Bom Pastor", 
 			"A",
 			cid4, 
-			u1
+			u2
 		);
 		
 		//Investimentos

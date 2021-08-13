@@ -12,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import br.com.diegocordeiro.dscproject.enums.TipoOperacao;
 
 @Entity
@@ -46,10 +49,12 @@ public class Operacao implements Serializable{
 	@Column(name = "TAXA_OPERACAO")
 	private double taxaOperacao;
 	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "ID_USUARIO")
 	private Usuario usuario;
 	
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "ID_ATIVO")
 	private Ativo ativo;

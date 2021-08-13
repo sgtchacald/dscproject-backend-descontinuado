@@ -12,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name="INVESTIMENTOS")
 public class Investimento implements Serializable{
@@ -29,10 +32,12 @@ public class Investimento implements Serializable{
 	@Column(name = "IND_STATUS", length = 1, nullable = false)
 	private String indStatus;
 	
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "ID_TIPO_INVEST")
 	private TipoInvestimento tipoInvestimento;
 	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "ID_USUARIO")
 	private Usuario usuario;
