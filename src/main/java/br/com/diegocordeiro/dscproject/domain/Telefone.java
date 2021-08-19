@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.diegocordeiro.dscproject.enums.TipoOperadoraTelefone;
 import br.com.diegocordeiro.dscproject.enums.TipoTelefone;
 
@@ -44,6 +46,7 @@ public class Telefone implements Serializable{
 	@Column(name = "IND_RECEBER_MSG_SMS", length = 1, nullable = false)
 	private String indReceberMsgSms;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "ID_USUARIO")
 	private Usuario usuario;
@@ -144,5 +147,6 @@ public class Telefone implements Serializable{
 		Telefone other = (Telefone) obj;
 		return Objects.equals(id, other.id);
 	}
+
 	
 }

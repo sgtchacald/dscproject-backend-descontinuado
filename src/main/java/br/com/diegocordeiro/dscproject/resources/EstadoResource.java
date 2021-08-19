@@ -7,20 +7,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.diegocordeiro.dscproject.domain.TipoInvestimento;
-import br.com.diegocordeiro.dscproject.services.TipoInvestimentoService;
+import br.com.diegocordeiro.dscproject.domain.Estado;
+import br.com.diegocordeiro.dscproject.services.EstadoService;
 
 @RestController
-@RequestMapping(value = "/tipo-investimento")
-public class TipoInvestimentoResource {
+@RequestMapping(value = "/estado")
+public class EstadoResource {
 	
 	@Autowired
-	private TipoInvestimentoService service;
+	private EstadoService service;
 	
 	@RequestMapping(value="{id}", method=RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
-		TipoInvestimento obj = service.buscar(id);
+		Estado obj = service.buscarPorId(id);
 		return ResponseEntity.ok().body(obj);
 	}
+	
+	
 
 }

@@ -56,6 +56,7 @@ public class Endereco implements Serializable{
 	@Column(name = "ORIGEM_CADASTRO",length = 1, nullable = false)
 	private String origemCadastro;
 	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "ID_CIDADE")
 	private Cidade cidade;

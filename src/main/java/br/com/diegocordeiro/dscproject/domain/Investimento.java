@@ -1,6 +1,7 @@
 package br.com.diegocordeiro.dscproject.domain;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -13,7 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="INVESTIMENTOS")
@@ -27,12 +27,12 @@ public class Investimento implements Serializable{
 	private Integer id;
 	
 	@Column(name = "VALOR_INVESTIDO", nullable = false)
-	private double valorInvestido;
+	private BigDecimal valorInvestido;
 	
 	@Column(name = "IND_STATUS", length = 1, nullable = false)
 	private String indStatus;
 	
-	@JsonManagedReference
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "ID_TIPO_INVEST")
 	private TipoInvestimento tipoInvestimento;
@@ -45,7 +45,7 @@ public class Investimento implements Serializable{
 	public Investimento(){
 	}
 	
-	public Investimento(Integer id, double valorInvestido, String indStatus, TipoInvestimento tipoInvestimento,
+	public Investimento(Integer id, BigDecimal valorInvestido, String indStatus, TipoInvestimento tipoInvestimento,
 			Usuario usuario) {
 		super();
 		this.id = id;
@@ -63,11 +63,11 @@ public class Investimento implements Serializable{
 		this.id = id;
 	}
 
-	public double getValorInvestido() {
+	public BigDecimal getValorInvestido() {
 		return valorInvestido;
 	}
 
-	public void setValorInvestido(double valorInvestido) {
+	public void setValorInvestido(BigDecimal valorInvestido) {
 		this.valorInvestido = valorInvestido;
 	}
 

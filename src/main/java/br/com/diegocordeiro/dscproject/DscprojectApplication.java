@@ -1,5 +1,6 @@
 package br.com.diegocordeiro.dscproject;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.Arrays;
 
@@ -185,17 +186,17 @@ public class DscprojectApplication  implements CommandLineRunner{
 		);
 		
 		//Investimentos
-		Investimento inv1 = new Investimento(null, 1000.00, Status.ATIVO.getCodigo(), tipoInvest1, u1);
-		Investimento inv2 = new Investimento(null, 2000.00, Status.ATIVO.getCodigo(), tipoInvest1, u1);
-		Investimento inv3 = new Investimento(null, 3000.00, Status.ATIVO.getCodigo(), tipoInvest1, u1);
-		Investimento inv4 = new Investimento(null, 4000.00, Status.ATIVO.getCodigo(), tipoInvest1, u1);
-		Investimento inv5 = new Investimento(null, 5000.00, Status.ATIVO.getCodigo(), tipoInvest1, u1);
-		Investimento inv6 = new Investimento(null, 6000.00, Status.ATIVO.getCodigo(), tipoInvest10, u1);
-		Investimento inv7 = new Investimento(null, 7000.00, Status.ATIVO.getCodigo(), tipoInvest10, u1);
-		Investimento inv8 = new Investimento(null, 8000.00, Status.ATIVO.getCodigo(), tipoInvest10, u1);
-		Investimento inv9 = new Investimento(null, 9000.00, Status.ATIVO.getCodigo(), tipoInvest10, u1);
-		Investimento inv10 = new Investimento(null, 10000.00, Status.ATIVO.getCodigo(), tipoInvest10, u1);
-		Investimento inv11 = new Investimento(null, 11000.00, Status.ATIVO.getCodigo(), tipoInvest10, u1);
+		Investimento inv1 = new Investimento(null, new BigDecimal(1000.00), Status.ATIVO.getCodigo(), tipoInvest1, u1);
+		Investimento inv2 = new Investimento(null, new BigDecimal(2000.00), Status.ATIVO.getCodigo(), tipoInvest1, u1);
+		Investimento inv3 = new Investimento(null, new BigDecimal(3000.00), Status.ATIVO.getCodigo(), tipoInvest1, u1);
+		Investimento inv4 = new Investimento(null, new BigDecimal(4000.00), Status.ATIVO.getCodigo(), tipoInvest1, u1);
+		Investimento inv5 = new Investimento(null, new BigDecimal(5000.00), Status.ATIVO.getCodigo(), tipoInvest1, u1);
+		Investimento inv6 = new Investimento(null, new BigDecimal(6000.00), Status.ATIVO.getCodigo(), tipoInvest10, u1);
+		Investimento inv7 = new Investimento(null, new BigDecimal(7000.00), Status.ATIVO.getCodigo(), tipoInvest10, u1);
+		Investimento inv8 = new Investimento(null, new BigDecimal(8000.00), Status.ATIVO.getCodigo(), tipoInvest10, u1);
+		Investimento inv9 = new Investimento(null, new BigDecimal(9000.00), Status.ATIVO.getCodigo(), tipoInvest10, u1);
+		Investimento inv10 = new Investimento(null, new BigDecimal(10000.00), Status.ATIVO.getCodigo(), tipoInvest10, u1);
+		Investimento inv11 = new Investimento(null, new BigDecimal(11000.00), Status.ATIVO.getCodigo(), tipoInvest10, u1);
 		
 		//Salvando dados do Usuario
 		usuarioRepository.saveAll(Arrays.asList(u1, u2));
@@ -205,13 +206,13 @@ public class DscprojectApplication  implements CommandLineRunner{
 		
 		//Operações
 		String parBtcUsdt = btc.getCodigo() + usdt.getCodigo();		
-		Operacao op1 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.COMPRA , 45802.12, 0.021859, 1001.108, 1.00118854, u1, btc);
-		Operacao op2 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.VENDA , 44802.12, 0.025859, 1001.108, 1.00118854, u1, btc);
-		Operacao op3 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.COMPRA , 43802.12, 0.026859, 1001.108, 1.00118854, u1, btc);
-		Operacao op4 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.VENDA , 42802.12, 0.027859, 1001.108, 1.00118854, u1, btc);
-		Operacao op5 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.COMPRA , 41802.12, 0.028859, 1001.108, 1.00118854, u1, btc);
-		Operacao op6 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.VENDA , 40802.12, 0.029859, 1001.108, 1.00118854, u1, btc);
-		Operacao op7 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.COMPRA , 39802.12, 0.030859, 1001.108, 1.00118854, u1, btc);
+		Operacao op1 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.COMPRA , new BigDecimal(45802.12), new BigDecimal(0.021859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op2 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.VENDA ,  new BigDecimal(44802.12), new BigDecimal(0.025859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op3 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.COMPRA , new BigDecimal(43802.12), new BigDecimal(0.026859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op4 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.VENDA ,  new BigDecimal(42802.12), new BigDecimal(0.027859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op5 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.COMPRA , new BigDecimal(41802.12), new BigDecimal(0.028859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op6 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.VENDA ,  new BigDecimal(40802.12), new BigDecimal(0.029859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op7 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.COMPRA , new BigDecimal(39802.12), new BigDecimal(0.030859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
 		operacaoRepository.saveAll(Arrays.asList(op1, op2, op3, op4, op5, op6, op7));
 		
 	}

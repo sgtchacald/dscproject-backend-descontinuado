@@ -1,6 +1,7 @@
 package br.com.diegocordeiro.dscproject.domain;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.sql.Date;
 
 import javax.persistence.Column;
@@ -13,7 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.com.diegocordeiro.dscproject.enums.TipoOperacao;
 
@@ -38,23 +38,23 @@ public class Operacao implements Serializable{
 	private String tipoOperacao;
 	
 	@Column(name = "VALOR_COTACAO_ATIVO")
-	private double valorAtivo;
+	private BigDecimal valorAtivo;
 	
 	@Column(name = "QUANTIA_ATIVO")
-	private double quantiaAtivo;
+	private BigDecimal quantiaAtivo;
 	
 	@Column(name = "VALOR_EXECUTADO_OPERACAO")
-	private double valorExecutadoNaOperacao;
+	private BigDecimal valorExecutadoNaOperacao;
 	
 	@Column(name = "TAXA_OPERACAO")
-	private double taxaOperacao;
+	private BigDecimal taxaOperacao;
 	
 	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "ID_USUARIO")
 	private Usuario usuario;
 	
-	@JsonManagedReference
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "ID_ATIVO")
 	private Ativo ativo;
@@ -62,8 +62,8 @@ public class Operacao implements Serializable{
 	public Operacao(){
 	}
 
-	public Operacao(Integer id, Date dataOperacao, String paridade,  TipoOperacao tipoOperacao, double valorAtivo, double quantiaAtivo,
-			double valorExecutadoNaOperacao, double taxaOperacao, Usuario usuario, Ativo ativo) {
+	public Operacao(Integer id, Date dataOperacao, String paridade,  TipoOperacao tipoOperacao, BigDecimal valorAtivo, BigDecimal quantiaAtivo,
+			BigDecimal valorExecutadoNaOperacao, BigDecimal taxaOperacao, Usuario usuario, Ativo ativo) {
 		super();
 		this.id = id;
 		this.dataOperacao = dataOperacao;
@@ -109,35 +109,35 @@ public class Operacao implements Serializable{
 		this.tipoOperacao = tipoOperacao.getCodigo();
 	}
 
-	public double getValorAtivo() {
+	public BigDecimal getValorAtivo() {
 		return valorAtivo;
 	}
 
-	public void setValorAtivo(double valorAtivo) {
+	public void setValorAtivo(BigDecimal valorAtivo) {
 		this.valorAtivo = valorAtivo;
 	}
 
-	public double getQuantiaAtivo() {
+	public BigDecimal getQuantiaAtivo() {
 		return quantiaAtivo;
 	}
 
-	public void setQuantiaAtivo(double quantiaAtivo) {
+	public void setQuantiaAtivo(BigDecimal quantiaAtivo) {
 		this.quantiaAtivo = quantiaAtivo;
 	}
 
-	public double getValorExecutadoNaOperacao() {
+	public BigDecimal getValorExecutadoNaOperacao() {
 		return valorExecutadoNaOperacao;
 	}
 
-	public void setValorExecutadoNaOperacao(double valorExecutadoNaOperacao) {
+	public void setValorExecutadoNaOperacao(BigDecimal valorExecutadoNaOperacao) {
 		this.valorExecutadoNaOperacao = valorExecutadoNaOperacao;
 	}
 
-	public double getTaxaOperacao() {
+	public BigDecimal getTaxaOperacao() {
 		return taxaOperacao;
 	}
 
-	public void setTaxaOperacao(double taxaOperacao) {
+	public void setTaxaOperacao(BigDecimal taxaOperacao) {
 		this.taxaOperacao = taxaOperacao;
 	}
 
