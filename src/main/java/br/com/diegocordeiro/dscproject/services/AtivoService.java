@@ -1,9 +1,13 @@
 package br.com.diegocordeiro.dscproject.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,6 +50,10 @@ public class AtivoService {
 		}
 	}
 	
+	public List<Ativo> buscarTodos() {
+		return repositorio.findAll();
+	}
+	
 	private void updateData(Ativo newObj, Ativo obj) {
 		newObj.setCodigo(obj.getCodigo());
 		newObj.setNome(obj.getNome());
@@ -55,5 +63,11 @@ public class AtivoService {
 	public Ativo fromDTO(AtivoDTO objDto){
 		return new Ativo(objDto.getId(), objDto.getCodigo(), objDto.getNome(), objDto.getDescricao());
 	}
+	
+	public Page<Ativo> buscarTodosComPaginacao(Integer page, Integer linesPerPage, String orderBy, String direction){
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		return repositorio.findAll(pageRequest);
+	}
+	
 
 }

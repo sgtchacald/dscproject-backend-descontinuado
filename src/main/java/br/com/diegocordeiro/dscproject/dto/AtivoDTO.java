@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.validation.constraints.NotBlank;
 
+import br.com.diegocordeiro.dscproject.domain.Ativo;
+
 public class AtivoDTO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -21,12 +23,12 @@ public class AtivoDTO implements Serializable {
 	
 	public AtivoDTO(){
 	}
-
-	public AtivoDTO(Integer id, String nome, String descricao) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.descricao = descricao;
+	
+	public AtivoDTO(Ativo obj){
+		id = obj.getId();
+		codigo = obj.getCodigo();
+		nome = obj.getNome();
+		descricao = obj.getDescricao();
 	}
 
 	public Integer getId() {
