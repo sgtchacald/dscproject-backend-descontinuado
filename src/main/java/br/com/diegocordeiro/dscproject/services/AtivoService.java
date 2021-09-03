@@ -28,6 +28,15 @@ public class AtivoService {
 		return obj.orElseThrow(()-> new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Ativo.class.getName()));
 	}
 	
+	public List<Ativo> buscarTodos() {
+		return repositorio.findAll();
+	}
+	
+	public Page<Ativo> buscarTodosComPaginacao(Integer page, Integer linesPerPage, String orderBy, String direction){
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		return repositorio.findAll(pageRequest);
+	}
+	
 	@Transactional
 	public Ativo insert(Ativo obj) {
 		obj.setId(null);
@@ -50,10 +59,6 @@ public class AtivoService {
 		}
 	}
 	
-	public List<Ativo> buscarTodos() {
-		return repositorio.findAll();
-	}
-	
 	private void updateData(Ativo newObj, Ativo obj) {
 		newObj.setCodigo(obj.getCodigo());
 		newObj.setNome(obj.getNome());
@@ -63,11 +68,4 @@ public class AtivoService {
 	public Ativo fromDTO(AtivoDTO objDto){
 		return new Ativo(objDto.getId(), objDto.getCodigo(), objDto.getNome(), objDto.getDescricao());
 	}
-	
-	public Page<Ativo> buscarTodosComPaginacao(Integer page, Integer linesPerPage, String orderBy, String direction){
-		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-		return repositorio.findAll(pageRequest);
-	}
-	
-
 }

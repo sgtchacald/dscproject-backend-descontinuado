@@ -17,6 +17,8 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import br.com.diegocordeiro.dscproject.enums.TipoPerfil;
+
 @Entity
 @Table(name="USUARIOS")
 public class Usuario extends Auditoria implements Serializable {
@@ -38,7 +40,7 @@ public class Usuario extends Auditoria implements Serializable {
 	private String cpf;
 	
 	@Column(name = "DATA_NASCIMENTO", nullable = false)
-	private Date dtnascimento;
+	private Date dtNascimento;
 	
 	@Column(name = "ESTADO_CIVIL", length = 2, nullable = false)
 	private String estadoCivil;
@@ -48,9 +50,6 @@ public class Usuario extends Auditoria implements Serializable {
 	
 	@Column(name = "IND_PORTADOR_DEFICIENCIA", length = 1, nullable = false)
 	private String indPortadorDeficiencia;
-	
-	@Column(name = "EMAIL", length = 512, nullable = false, unique = true)
-	private String email;
 	
 	@JsonBackReference
 	@OneToMany(mappedBy = "usuario")
@@ -75,6 +74,9 @@ public class Usuario extends Auditoria implements Serializable {
 	@Column(name = "IND_STATUS", length = 1, nullable = false)
 	private String indStatus;
 	
+	@Column(name = "EMAIL", length = 512, nullable = false, unique = true)
+	private String email;
+	
 	@Column(name = "LOGIN", length = 40, nullable = false)
 	private String login;
 	
@@ -96,25 +98,25 @@ public class Usuario extends Auditoria implements Serializable {
 	public Usuario(){
 	}
 
-	public Usuario(Integer id, Integer tipoPerfil, String nome, String cpf, Date dtnascimento, String estadoCivil,
-			String genero, String indPortadorDeficiencia, String email, String indDisponivelViajar,
-			String indDisponivelMudarCidade, String resumoProfissional, String urlBlogSite, String indStatus,
-			String login, String senha) {
+	public Usuario(Integer id, TipoPerfil tipoPerfil, String nome, String cpf, Date dtNascimento, String estadoCivil,
+			String genero, String indPortadorDeficiencia, String indDisponivelViajar,
+			String indDisponivelMudarCidade, String resumoProfissional, String urlBlogSite, String indStatus, 
+			String email,String login, String senha) {
 		super();
 		this.id = id;
-		this.tipoPerfil = tipoPerfil;
+		this.tipoPerfil = (tipoPerfil == null) ? null : tipoPerfil.getCodigo() ;
 		this.nome = nome;
 		this.cpf = cpf;
-		this.dtnascimento = dtnascimento;
+		this.dtNascimento = dtNascimento;
 		this.estadoCivil = estadoCivil;
 		this.genero = genero;
 		this.indPortadorDeficiencia = indPortadorDeficiencia;
-		this.email = email;
 		this.indDisponivelViajar = indDisponivelViajar;
 		this.indDisponivelMudarCidade = indDisponivelMudarCidade;
 		this.resumoProfissional = resumoProfissional;
 		this.urlBlogSite = urlBlogSite;
 		this.indStatus = indStatus;
+		this.email = email;
 		this.login = login;
 		this.senha = senha;
 	}
@@ -153,12 +155,12 @@ public class Usuario extends Auditoria implements Serializable {
 		this.cpf = cpf;
 	}
 
-	public Date getDtnascimento() {
-		return dtnascimento;
+	public Date getDtNascimento() {
+		return dtNascimento;
 	}
 
-	public void setDtnascimento(Date dtnascimento) {
-		this.dtnascimento = dtnascimento;
+	public void setDtNascimento(Date dtNascimento) {
+		this.dtNascimento = dtNascimento;
 	}
 
 	public String getEstadoCivil() {

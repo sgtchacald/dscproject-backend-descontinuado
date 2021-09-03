@@ -23,16 +23,35 @@ import br.com.diegocordeiro.dscproject.services.AtivoService;
 import javassist.tools.rmi.ObjectNotFoundException;
 
 @RestController
-@RequestMapping(value = "/ativo")
+@RequestMapping(value = "/ativos")
 public class AtivoResource {
 	
 	@Autowired
 	private AtivoService service;
 	
 	@RequestMapping(value="{id}", method=RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
+	public ResponseEntity<?> buscarPorId(@PathVariable Integer id) {
 		Ativo obj = service.buscarPorId(id);
 		return ResponseEntity.ok().body(obj);
+	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<List<AtivoDTO>> buscarTodos(){
+		List<Ativo> list = service.buscarTodos();
+		List <AtivoDTO> listDto = list.stream().map(obj -> new AtivoDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDto);
+	}
+	
+	@RequestMapping(value="/page",method=RequestMethod.GET)
+	public ResponseEntity<Page<AtivoDTO>> buscarTodosComPaginacao(
+			@RequestParam(value="page", defaultValue="0") Integer page, 
+			@RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage, 
+			@RequestParam(value="orderBy", defaultValue="id") String orderBy, 
+			@RequestParam(value="direction", defaultValue="ASC") String direction){
+			Page<Ativo> pagina = service.buscarTodosComPaginacao(page, linesPerPage, orderBy, direction);
+			Page<AtivoDTO> listDTO = pagina.map(obj-> new AtivoDTO(obj)
+		);
+		return ResponseEntity.ok().body(listDTO);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
@@ -55,25 +74,5 @@ public class AtivoResource {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
-	
-	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<AtivoDTO>> buscarTodos(){
-		List<Ativo> list = service.buscarTodos();
-		List <AtivoDTO> listDto = list.stream().map(obj -> new AtivoDTO(obj)).collect(Collectors.toList());
-		return ResponseEntity.ok().body(listDto);
-	}
-	
-	@RequestMapping(value="/page",method=RequestMethod.GET)
-	public ResponseEntity<Page<AtivoDTO>> buscarTodosComPaginacao(
-			@RequestParam(value="page", defaultValue="0") Integer page, 
-			@RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage, 
-			@RequestParam(value="orderBy", defaultValue="id") String orderBy, 
-			@RequestParam(value="direction", defaultValue="ASC") String direction){
-			Page<Ativo> pagina = service.buscarTodosComPaginacao(page, linesPerPage, orderBy, direction);
-			Page<AtivoDTO> listDTO = pagina.map(obj-> new AtivoDTO(obj)
-		);
-		return ResponseEntity.ok().body(listDTO);
-	}
-	
 	
 }

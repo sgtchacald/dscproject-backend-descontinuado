@@ -1,6 +1,6 @@
 package br.com.diegocordeiro.dscproject.enums;
 
-public enum Perfil {
+public enum TipoPerfil {
 	
 	ADMIN(1, "ROLE_ADMIN"),
 	VISITANTE(2, "ROLE_VISITANTE");
@@ -8,7 +8,7 @@ public enum Perfil {
 	private int codigo;
 	private String descricao;
 	
-	private Perfil(int codigo, String descricao) {
+	private TipoPerfil(int codigo, String descricao) {
 		this.codigo = codigo;
 		this.descricao = descricao;
 	}
@@ -29,13 +29,13 @@ public enum Perfil {
 		this.descricao = descricao;
 	}
 	
-	public static Perfil toEnum(Integer codigo){
+	public static TipoPerfil toEnum(Integer codigo){
 		
 		if(codigo == null) {
 			return null;
 		}
 		
-		for(Perfil x : Perfil.values()) {
+		for(TipoPerfil x : TipoPerfil.values()) {
 			if(codigo.equals(x.getCodigo())) {
 				return x;
 			}

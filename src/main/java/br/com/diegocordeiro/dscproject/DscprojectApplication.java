@@ -22,7 +22,7 @@ import br.com.diegocordeiro.dscproject.domain.Usuario;
 import br.com.diegocordeiro.dscproject.enums.EstadoCivil;
 import br.com.diegocordeiro.dscproject.enums.Genero;
 import br.com.diegocordeiro.dscproject.enums.Indicador;
-import br.com.diegocordeiro.dscproject.enums.Perfil;
+import br.com.diegocordeiro.dscproject.enums.TipoPerfil;
 import br.com.diegocordeiro.dscproject.enums.Status;
 import br.com.diegocordeiro.dscproject.enums.TipoLogradouro;
 import br.com.diegocordeiro.dscproject.enums.TipoOperacao;
@@ -114,10 +114,10 @@ public class DscprojectApplication  implements CommandLineRunner{
 		//Usuários
 		Usuario u1 = new Usuario();	
 		u1.setId(null);
-		u1.setTipoPerfil(Perfil.VISITANTE.getCodigo());
+		u1.setTipoPerfil(TipoPerfil.VISITANTE.getCodigo());
 		u1.setNome("Diego Dos Santos Cordeiro");
 		u1.setCpf("11754423728");
-		u1.setDtnascimento(Date.valueOf("1986-07-12"));	
+		u1.setDtNascimento(Date.valueOf("1986-07-12"));	
 		u1.setEstadoCivil(EstadoCivil.CASADO.getCodigo());
 		u1.setGenero(Genero.MASCULINO.getCodigo());
 		u1.setIndPortadorDeficiencia(Indicador.NAO.getCodigo());
@@ -133,10 +133,10 @@ public class DscprojectApplication  implements CommandLineRunner{
 		
 		Usuario u2 = new Usuario();	
 		u2.setId(null);
-		u2.setTipoPerfil(Perfil.VISITANTE.getCodigo());
+		u2.setTipoPerfil(TipoPerfil.VISITANTE.getCodigo());
 		u2.setNome("Clayton Santos Cordeiro");
 		u2.setCpf("11754423729");
-		u2.setDtnascimento(Date.valueOf("1986-07-12"));	
+		u2.setDtNascimento(Date.valueOf("1986-07-12"));	
 		u2.setEstadoCivil(EstadoCivil.CASADO.getCodigo());
 		u2.setGenero(Genero.MASCULINO.getCodigo());
 		u2.setIndPortadorDeficiencia(Indicador.NAO.getCodigo());

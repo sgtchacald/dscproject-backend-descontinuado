@@ -1,0 +1,9 @@
+{
+	"id":null,
+	"codigo": "NOME_SITE",
+	"descricao": "Nome do site",
+	"valor": "http://www.diegocordeiro.com.br",
+	"unidade": "S",
+	"dataCadastro": "07/10/2021 19:30:20",
+	"status": "A"
+}
