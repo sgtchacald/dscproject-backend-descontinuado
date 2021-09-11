@@ -3,7 +3,8 @@ package br.com.diegocordeiro.dscproject.enums;
 public enum TipoTelefone {
 	
 	CELULAR("C", "Celular"),
-	RESIDENCIAL("R", "Residencial");
+	FIXO("F", "Residencial"),
+	RECADO("R", "Recado");
 	
 	private String codigo;
 	private String descricao;

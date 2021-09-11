@@ -2,7 +2,7 @@ package br.com.diegocordeiro.dscproject.enums;
 
 public enum TipoRenda {
 
-	RENDA_FIXA	  ("F", "Renda Fixa"	  ),
+	RENDA_FIXA	   ("F", "Renda Fixa"	 ),
     RENDA_VARIAVEL ("V", "Renda Variável");
 
 	private String codigo;

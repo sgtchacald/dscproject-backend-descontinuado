@@ -151,7 +151,7 @@ public class DscprojectApplication  implements CommandLineRunner{
 		
 		//Telefones
 		Telefone t1 = new Telefone(null,TipoOperadoraTelefone.CLARO, TipoTelefone.CELULAR, "21", "994674449", "N", "S", u1);
-		Telefone t2 = new Telefone(null,TipoOperadoraTelefone.OI, TipoTelefone.RESIDENCIAL, "51", "27538361", "S", "N", u1);
+		Telefone t2 = new Telefone(null,TipoOperadoraTelefone.OI, TipoTelefone.FIXO, "51", "27538361", "S", "N", u1);
 		
 		//Endereços
 		Endereco end1 = new Endereco(

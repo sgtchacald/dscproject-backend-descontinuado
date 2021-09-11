@@ -51,10 +51,6 @@ public class Usuario extends Auditoria implements Serializable {
 	@Column(name = "IND_PORTADOR_DEFICIENCIA", length = 1, nullable = false)
 	private String indPortadorDeficiencia;
 	
-	@JsonBackReference
-	@OneToMany(mappedBy = "usuario")
-	private List<Telefone> telefones = new ArrayList<>();
-	
 	@Column(name = "IND_DISPONIVEL_VIAJAR", length = 1, nullable = false)
 	private String indDisponivelViajar;
 	
@@ -82,6 +78,10 @@ public class Usuario extends Auditoria implements Serializable {
 	
 	@Column(name = "SENHA", length = 25, nullable = false)
 	private String senha;
+	
+	@JsonBackReference
+	@OneToMany(mappedBy = "usuario")
+	private List<Telefone> telefones = new ArrayList<>();
 	
 	@JsonManagedReference
 	@OneToMany(mappedBy = "usuario")
@@ -121,7 +121,29 @@ public class Usuario extends Auditoria implements Serializable {
 		this.senha = senha;
 	}
 
-
+	public Usuario(Integer id, TipoPerfil tipoPerfil, String nome, String cpf, Date dtNascimento, String estadoCivil,
+			String genero, String indPortadorDeficiencia, String indDisponivelViajar,
+			String indDisponivelMudarCidade, String resumoProfissional, String urlBlogSite, String indStatus, 
+			String email,String login, String senha, List<Telefone> telefones) {
+		super();
+		this.id = id;
+		this.tipoPerfil = (tipoPerfil == null) ? null : tipoPerfil.getCodigo() ;
+		this.nome = nome;
+		this.cpf = cpf;
+		this.dtNascimento = dtNascimento;
+		this.estadoCivil = estadoCivil;
+		this.genero = genero;
+		this.indPortadorDeficiencia = indPortadorDeficiencia;
+		this.indDisponivelViajar = indDisponivelViajar;
+		this.indDisponivelMudarCidade = indDisponivelMudarCidade;
+		this.resumoProfissional = resumoProfissional;
+		this.urlBlogSite = urlBlogSite;
+		this.indStatus = indStatus;
+		this.email = email;
+		this.login = login;
+		this.senha = senha;
+		this.telefones = telefones;
+	}
 
 	public Integer getId() {
 		return id;

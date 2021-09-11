@@ -2,6 +2,8 @@ package br.com.diegocordeiro.dscproject.dto;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -12,7 +14,12 @@ import org.hibernate.validator.constraints.URL;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.diegocordeiro.dscproject.domain.Auditoria;
+import br.com.diegocordeiro.dscproject.domain.Telefone;
 import br.com.diegocordeiro.dscproject.domain.Usuario;
+import br.com.diegocordeiro.dscproject.validation.constraints.ValidarEstadoCivil;
+import br.com.diegocordeiro.dscproject.validation.constraints.ValidarGenero;
+import br.com.diegocordeiro.dscproject.validation.constraints.ValidarIndicador;
+import br.com.diegocordeiro.dscproject.validation.constraints.ValidarStatus;
 
 public class UsuarioDTO  extends Auditoria implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -21,8 +28,8 @@ public class UsuarioDTO  extends Auditoria implements Serializable{
 	
 	private Integer tipoPerfil;
 	
-	@NotEmpty(message="Preenchimento Obrigatório")
-	@Length(min=5, max=80, message="O tamanho deve ser entre 5 e 80 caracteres")
+	@NotEmpty(message="Preenchimento Obrigatório.")
+	@Length(min=5, max=80, message="O tamanho deve ser entre 5 e 80 caracteres.")
 	private String 	nome;
 	
 	private String cpf;
@@ -30,48 +37,57 @@ public class UsuarioDTO  extends Auditoria implements Serializable{
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss",timezone = "America/Sao_Paulo")
 	private Date dtNascimento;
 	
-	@NotEmpty(message="Preenchimento Obrigatório")
-	@Length(min=1, max=1, message="O tamanho deve ser 1 caracter")
+	@NotEmpty(message="Preenchimento Obrigatório.")
+	@Length(min=1, max=1, message="O tamanho deve ser 1 caracter.")
+	@ValidarEstadoCivil
 	private String estadoCivil;
 	
-	@NotEmpty(message="Preenchimento Obrigatório")
-	@Length(min=1, max=1, message="O tamanho deve ser 1 caracter")
+	@NotEmpty(message="Preenchimento Obrigatório.")
+	@Length(min=1, max=1, message="O tamanho deve ser 1 caracter.")
+	@ValidarGenero
 	private String genero;
 	
-	@NotEmpty(message="Preenchimento Obrigatório")
-	@Length(min=1, max=1, message="O tamanho deve ser 1 caracter")
+	@NotEmpty(message="Preenchimento Obrigatório.")
+	@Length(min=1, max=1, message="O tamanho deve ser 1 caracter.")
+	@ValidarIndicador
 	private String indPortadorDeficiencia;
 	
-	@NotEmpty(message="Preenchimento Obrigatório")
-	@Length(min=1, max=1, message="O tamanho deve ser 1 caracter")
+	@NotEmpty(message="Preenchimento Obrigatório.")
+	@Length(min=1, max=1, message="O tamanho deve ser 1 caracter.")
+	@ValidarIndicador
 	private String indDisponivelViajar;
 	
-	@NotEmpty(message="Preenchimento Obrigatório")
-	@Length(min=1, max=1, message="O tamanho deve ser 1 caracter")
+	@NotEmpty(message="Preenchimento Obrigatório.")
+	@Length(min=1, max=1, message="O tamanho deve ser 1 caracter.")
+	@ValidarIndicador
 	private String indDisponivelMudarCidade;
 	
-	@NotEmpty(message="Preenchimento Obrigatório")
-	@Length(min=5, max=7000, message="O tamanho deve ser entre 5 e 7000 caracteres")	
+	@NotEmpty(message="Preenchimento Obrigatório.")
+	@Length(min=5, max=7000, message="O tamanho deve ser entre 5 e 7000 caracteres.")	
 	private String resumoProfissional;
 	
-	@URL(protocol = "http", message="O valor digitado deve ser uma url válida")
+	@URL(protocol = "http", message="O valor digitado deve ser uma url válida.")
 	private String urlBlogSite;
 	
-	@NotEmpty(message="Preenchimento Obrigatório")
-	@Length(min=1, max=1, message="O tamanho deve ser 1 caracter")
+	@NotEmpty(message="Preenchimento Obrigatório.")
+	@Length(min=1, max=1, message="O tamanho deve ser 1 caracter.")
+	@ValidarStatus
 	private String indStatus;
 	
-	@NotEmpty(message="Preenchimento obrigatório")
-	@Email(message="Email inválido")
+	@NotEmpty(message="Preenchimento obrigatório.")
+	@Email(message="Email inválido.")
 	private String email;
 	
-	@NotEmpty(message="Preenchimento Obrigatório")
-	@Length(min=5, max=60, message="O tamanho deve ser entre 5 e 60 caracteres")
+	@NotEmpty(message="Preenchimento Obrigatório.")
+	@Length(min=5, max=60, message="O tamanho deve ser entre 5 e 60 caracteres.")
 	private String login;
 	
-	@NotEmpty(message="Preenchimento Obrigatório")
-	@Length(min=6, max=25, message="O tamanho deve ser entre 6 e 10 caracteres")
+	@NotEmpty(message="Preenchimento Obrigatório.")
+	@Length(min=6, max=25, message="O tamanho deve ser entre 6 e 10 caracteres.")
 	private String senha;
+	
+	@NotEmpty(message="O usuário deverá ter pelo menos 1 telefone.")
+	private List<Telefone> telefones = new ArrayList<>();
 	
 	public UsuarioDTO() {
 	}
@@ -93,6 +109,7 @@ public class UsuarioDTO  extends Auditoria implements Serializable{
 		this.email = obj.getEmail();
 		this.login = obj.getLogin();
 		this.senha = obj.getSenha();
+		this.telefones = obj.getTelefones();
 	}
 
 	public Integer getId() {
@@ -222,5 +239,13 @@ public class UsuarioDTO  extends Auditoria implements Serializable{
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+
+	public List<Telefone> getTelefones() {
+		return telefones;
+	}
+
+	public void setTelefones(List<Telefone> telefones) {
+		this.telefones = telefones;
+	}	
 	
 }
