@@ -7,4 +7,5 @@ import br.com.diegocordeiro.dscproject.domain.Usuario;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
+	Usuario findByloginList(String login);
 }

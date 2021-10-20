@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,8 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.diegocordeiro.dscproject.enums.TipoPerfil;
 
@@ -39,6 +40,7 @@ public class Usuario extends Auditoria implements Serializable {
 	@Column(name = "CPF", length = 11, nullable = false, unique = true)
 	private String cpf;
 	
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	@Column(name = "DATA_NASCIMENTO", nullable = false)
 	private Date dtNascimento;
 	
@@ -79,19 +81,18 @@ public class Usuario extends Auditoria implements Serializable {
 	@Column(name = "SENHA", length = 25, nullable = false)
 	private String senha;
 	
-	@JsonBackReference
-	@OneToMany(mappedBy = "usuario")
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
 	private List<Telefone> telefones = new ArrayList<>();
 	
-	@JsonManagedReference
+	@JsonIgnore
 	@OneToMany(mappedBy = "usuario")
 	private List<Operacao> operacoes = new ArrayList<>();
 	
-	@JsonManagedReference
+	@JsonIgnore
 	@OneToMany(mappedBy = "usuario")
 	private List<Investimento> investimentos = new ArrayList<>();
 	
-	@JsonManagedReference
+	@JsonIgnore
 	@OneToMany(mappedBy = "usuario")
 	private List<Endereco> enderecos = new ArrayList<>();
 	

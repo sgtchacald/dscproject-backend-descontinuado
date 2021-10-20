@@ -1,5 +1,6 @@
 package br.com.diegocordeiro.dscproject.resources;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.diegocordeiro.dscproject.domain.Usuario;
 import br.com.diegocordeiro.dscproject.dto.UsuarioDTO;
+import br.com.diegocordeiro.dscproject.enums.OperacaoPersistencia;
 import br.com.diegocordeiro.dscproject.services.UsuarioService;
 import javassist.tools.rmi.ObjectNotFoundException;
 
@@ -52,16 +55,17 @@ public class UsuarioResource {
 		return ResponseEntity.ok().body(listDTO);
 	}
 	
-//	@RequestMapping(method = RequestMethod.POST)
-//	public ResponseEntity<Usuario> insert(@RequestBody Usuario obj){
-//		obj = service.insert(obj);
-//		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri(); 
-//		return ResponseEntity.created(uri).build();
-//	}
+	@RequestMapping(method = RequestMethod.POST)
+	public ResponseEntity<Usuario> insert(@Valid @RequestBody UsuarioDTO objDto){
+		Usuario obj = service.fromDTO(objDto, OperacaoPersistencia.INSERIR);
+		obj = service.insert(obj);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri(); 
+		return ResponseEntity.created(uri).build();
+	}
 	
 	@RequestMapping(value="/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Usuario> update(@Valid @RequestBody UsuarioDTO objDto, @PathVariable Integer id) throws ObjectNotFoundException{
-		Usuario obj = service.fromDTO(objDto);
+		Usuario obj = service.fromDTO(objDto, OperacaoPersistencia.EDITAR);
 		obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();

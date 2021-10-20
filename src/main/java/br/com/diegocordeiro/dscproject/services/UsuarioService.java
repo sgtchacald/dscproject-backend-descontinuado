@@ -3,6 +3,8 @@ package br.com.diegocordeiro.dscproject.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -10,8 +12,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import br.com.diegocordeiro.dscproject.domain.Telefone;
 import br.com.diegocordeiro.dscproject.domain.Usuario;
 import br.com.diegocordeiro.dscproject.dto.UsuarioDTO;
+import br.com.diegocordeiro.dscproject.enums.OperacaoPersistencia;
+import br.com.diegocordeiro.dscproject.enums.TipoPerfil;
+import br.com.diegocordeiro.dscproject.repositories.TelefoneRepository;
 import br.com.diegocordeiro.dscproject.repositories.UsuarioRepository;
 import br.com.diegocordeiro.dscproject.services.exceptions.DataIntegrityException;
 import br.com.diegocordeiro.dscproject.services.exceptions.ObjectNotFoundException;
@@ -20,50 +26,65 @@ import br.com.diegocordeiro.dscproject.services.exceptions.ObjectNotFoundExcepti
 public class UsuarioService {
 
 	@Autowired
-	private UsuarioRepository repositorio;
+	private UsuarioRepository usuarioRepository;
+	
+	@Autowired
+	private TelefoneRepository telefoneRepository;
 	
 	public Usuario buscarPorId(Integer id) {
-		Optional<Usuario> obj = repositorio.findById(id);
+		Optional<Usuario> obj = usuarioRepository.findById(id);
 		return obj.orElseThrow(()-> new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Usuario.class.getName()));
 	}
 	
 	public List<Usuario> buscarTodos() {
-		return repositorio.findAll();
+		return usuarioRepository.findAll();
 	}
 	
 	public Page<Usuario> buscarTodosComPaginacao(Integer page, Integer linesPerPage, String orderBy, String direction){
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-		return repositorio.findAll(pageRequest);
+		return usuarioRepository.findAll(pageRequest);
 	}
 	
-//	@Transactional
-//	public Usuario insert(Usuario obj) {
-//		obj.setId(null);
-//		repositorio.save(obj);
-//		return obj;
-//	}
+	@Transactional
+	public Usuario insert(Usuario obj) {
+		
+		//Salvando o usuário
+		usuarioRepository.save(obj);
+		
+		//Atribuindo os telefones caso existam, ao usuario que foi salvo.
+		if(obj.getTelefones() != null) {
+			for(Telefone t : obj.getTelefones()) {
+				t.setUsuario(obj);
+			}
+		
+			telefoneRepository.saveAll(obj.getTelefones());
+		}
+		
+		return obj;
+	}
 	
 	public Usuario update(Usuario obj) throws ObjectNotFoundException {
 		Usuario newObj = buscarPorId(obj.getId());
 		updateData(newObj, obj);
-		return repositorio.save(newObj);
+		return usuarioRepository.save(newObj);
 	}
 	
 	public void delete(Integer id) throws ObjectNotFoundException {
 		buscarPorId(id);
 		try {
-			repositorio.deleteById(id);
+			usuarioRepository.deleteById(id);
 		} catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityException("Não foi possível excluir este usuário pois já existem entidades relacionadas a ele.");
 		}
 	}
 	
-	public Usuario fromDTO(UsuarioDTO objetoDTO){
+	public Usuario fromDTO(UsuarioDTO objetoDTO, OperacaoPersistencia operacao){
+		
 		return new Usuario(
-			objetoDTO.getId(), 
-			null, 
+			operacao.equals(OperacaoPersistencia.INSERIR) ? null : objetoDTO.getId(), 
+			operacao.equals(OperacaoPersistencia.INSERIR) ? TipoPerfil.toEnum(objetoDTO.getTipoPerfil()) : null,
 			objetoDTO.getNome(), 
-			null, 
+			operacao.equals(OperacaoPersistencia.INSERIR) ? objetoDTO.getCpf() : null,
 			objetoDTO.getDtNascimento(), 
 			objetoDTO.getEstadoCivil(), 
 			objetoDTO.getGenero(), 
@@ -75,7 +96,8 @@ public class UsuarioService {
 			objetoDTO.getIndStatus(), 
 			objetoDTO.getEmail(), 
 			objetoDTO.getLogin(), 
-			objetoDTO.getSenha()
+			objetoDTO.getSenha(),
+			objetoDTO.getTelefones()
 		);
 	}
 	
@@ -94,7 +116,8 @@ public class UsuarioService {
 		novoObjeto.setIndStatus(objeto.getIndStatus());
 		novoObjeto.setEmail(objeto.getEmail());  
 		novoObjeto.setLogin(objeto.getLogin());  
-		novoObjeto.setSenha(objeto.getSenha()); 
+		novoObjeto.setSenha(objeto.getSenha());
+		novoObjeto.setTelefones(objeto.getTelefones());
 	}
-
+	
 }

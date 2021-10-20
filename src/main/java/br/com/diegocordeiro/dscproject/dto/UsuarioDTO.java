@@ -10,6 +10,7 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.URL;
+import org.hibernate.validator.constraints.br.CPF;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -20,18 +21,23 @@ import br.com.diegocordeiro.dscproject.validation.constraints.ValidarEstadoCivil
 import br.com.diegocordeiro.dscproject.validation.constraints.ValidarGenero;
 import br.com.diegocordeiro.dscproject.validation.constraints.ValidarIndicador;
 import br.com.diegocordeiro.dscproject.validation.constraints.ValidarStatus;
+import br.com.diegocordeiro.dscproject.validation.constraints.ValidarTipoPerfil;
+import br.com.diegocordeiro.dscproject.validation.constraints.ValidarUsuario;
 
+@ValidarUsuario
 public class UsuarioDTO  extends Auditoria implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
 	
+	@ValidarTipoPerfil
 	private Integer tipoPerfil;
 	
 	@NotEmpty(message="Preenchimento Obrigatório.")
 	@Length(min=5, max=80, message="O tamanho deve ser entre 5 e 80 caracteres.")
 	private String 	nome;
 	
+	@CPF
 	private String cpf;
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss",timezone = "America/Sao_Paulo")
@@ -78,8 +84,8 @@ public class UsuarioDTO  extends Auditoria implements Serializable{
 	@Email(message="Email inválido.")
 	private String email;
 	
-	@NotEmpty(message="Preenchimento Obrigatório.")
-	@Length(min=5, max=60, message="O tamanho deve ser entre 5 e 60 caracteres.")
+//	@NotEmpty(message="Preenchimento Obrigatório.")
+//	@Length(min=5, max=60, message="O tamanho deve ser entre 5 e 60 caracteres.")
 	private String login;
 	
 	@NotEmpty(message="Preenchimento Obrigatório.")
