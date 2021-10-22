@@ -32,9 +32,9 @@ public class ValidarUsuarioValidation implements ConstraintValidator<ValidarUsua
 			list.add(new FieldMessage("Login", "Este campo não pode ser vazio"));
 		}
 		
-		Usuario buscaPorLogin = repo.findByloginList(dto.getLogin());
+		List<Usuario> resultBuscaPorLogin = repo.findUsuarioByLogin(dto.getLogin());
 		
-		if(buscaPorLogin != null){
+		if(resultBuscaPorLogin.size() > 0){
 			list.add(new FieldMessage("Login", "Este nome de usuário já existe no sistema"));
 		}
 
