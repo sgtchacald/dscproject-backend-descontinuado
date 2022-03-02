@@ -15,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -61,7 +63,8 @@ public class Usuario extends Auditoria implements Serializable {
 	
 	//inserir aqui idLogradouro
 	
-	@Column(name = "RESUMO_PROFISSIONAL", length = 7000, nullable = false)
+	@Column(name = "RESUMO_PROFISSIONAL", nullable = false)
+	@Type(type="text")
 	private String resumoProfissional;
 	
 	//inserir aqui lista de redes sociais 
