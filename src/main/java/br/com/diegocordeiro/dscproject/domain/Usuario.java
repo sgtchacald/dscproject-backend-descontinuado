@@ -325,5 +325,21 @@ public class Usuario extends Auditoria implements Serializable {
 		Usuario other = (Usuario) obj;
 		return Objects.equals(id, other.id);
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Usuário Criado: \n");
+		builder.append("id: " + this.id + "\n");
+		builder.append("Nome: " + this.nome + "\n");
+		builder.append("CPF: " + this.cpf + "\n");
+		builder.append("E-Mail: " + this.email + "\n");
+		
+		
+		return builder.toString();
+	}
+	
+	
+	
 		
 }
