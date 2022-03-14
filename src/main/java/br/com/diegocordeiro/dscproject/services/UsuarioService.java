@@ -63,7 +63,7 @@ public class UsuarioService {
 			telefoneRepository.saveAll(obj.getTelefones());
 		}
 		
-		emailService.enviaConfirmacaoCadastroUsuario(obj);
+		emailService.enviaConfirmacaoHtmlCadastroUsuario(obj);
 		
 		return obj;
 	}
