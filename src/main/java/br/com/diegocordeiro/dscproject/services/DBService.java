@@ -143,7 +143,7 @@ public class DBService {
 		u2.setUrlBlogSite("http://www.mseso.com.br");
 		u2.setIndStatus(Status.ATIVO.getCodigo());
 		u2.setLogin("mcristiane");
-		u2.setSenha(passwordEncoder.encode("SenhaQueSeráCriptografada"));
+		u2.setSenha(passwordEncoder.encode("mara@01"));
 		
 		//Telefones
 		Telefone t1 = new Telefone(null,TipoOperadoraTelefone.CLARO, TipoTelefone.CELULAR, "21", "994674449", "N", "S", u1);

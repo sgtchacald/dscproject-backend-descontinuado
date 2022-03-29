@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,12 +30,14 @@ public class AtivoResource {
 	@Autowired
 	private AtivoService service;
 	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value="{id}", method=RequestMethod.GET)
 	public ResponseEntity<?> buscarPorId(@PathVariable Integer id) {
 		Ativo obj = service.buscarPorId(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<AtivoDTO>> buscarTodos(){
 		List<Ativo> list = service.buscarTodos();
@@ -42,6 +45,7 @@ public class AtivoResource {
 		return ResponseEntity.ok().body(listDto);
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value="/page",method=RequestMethod.GET)
 	public ResponseEntity<Page<AtivoDTO>> buscarTodosComPaginacao(
 			@RequestParam(value="page", defaultValue="0") Integer page, 
@@ -54,6 +58,7 @@ public class AtivoResource {
 		return ResponseEntity.ok().body(listDTO);
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Ativo> insert(@RequestBody Ativo obj){
 		obj = service.insert(obj);
@@ -61,6 +66,7 @@ public class AtivoResource {
 		return ResponseEntity.created(uri).build();
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value="/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Ativo> update(@Valid @RequestBody AtivoDTO objDto, @PathVariable Integer id) throws ObjectNotFoundException{
 		Ativo obj = service.fromDTO(objDto);
@@ -69,6 +75,7 @@ public class AtivoResource {
 		return ResponseEntity.noContent().build();
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id) throws ObjectNotFoundException{
 		service.delete(id);

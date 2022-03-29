@@ -11,6 +11,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +19,11 @@ import br.com.diegocordeiro.dscproject.domain.Telefone;
 import br.com.diegocordeiro.dscproject.domain.Usuario;
 import br.com.diegocordeiro.dscproject.dto.UsuarioDTO;
 import br.com.diegocordeiro.dscproject.enums.OperacaoPersistencia;
+import br.com.diegocordeiro.dscproject.enums.TipoPerfil;
 import br.com.diegocordeiro.dscproject.repositories.TelefoneRepository;
 import br.com.diegocordeiro.dscproject.repositories.UsuarioRepository;
+import br.com.diegocordeiro.dscproject.security.UserSS;
+import br.com.diegocordeiro.dscproject.services.exceptions.AuthorizationException;
 import br.com.diegocordeiro.dscproject.services.exceptions.DataIntegrityException;
 import br.com.diegocordeiro.dscproject.services.exceptions.ObjectNotFoundException;
 
@@ -40,7 +44,14 @@ public class UsuarioService {
 	private PasswordEncoder passwordEncoder;
 	
 	public Usuario buscarPorId(Integer id) {
+		UserSS user = authenticated();
+		
+		if(user == null || !user.hasRole(TipoPerfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso Negado");
+		}
+		
 		Optional<Usuario> obj = usuarioRepository.findById(id);
+		
 		return obj.orElseThrow(()-> new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Usuario.class.getName()));
 	}
 	
@@ -126,6 +137,16 @@ public class UsuarioService {
 		novoObjeto.setLogin(objeto.getLogin());  
 		novoObjeto.setSenha(passwordEncoder.encode(objeto.getSenha()));
 		novoObjeto.setTelefones(objeto.getTelefones());
+	}
+	
+	/* Busca o usuario logado do spring security*/
+	public static UserSS authenticated() {
+		try {
+			return (UserSS) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		}
+		catch (Exception e) {
+			return null;
+		}
 	}
 	
 }
