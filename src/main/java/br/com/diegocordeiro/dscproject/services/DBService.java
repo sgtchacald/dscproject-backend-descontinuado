@@ -5,6 +5,8 @@ import java.sql.Date;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.diegocordeiro.dscproject.domain.Ativo;
@@ -40,7 +42,6 @@ import br.com.diegocordeiro.dscproject.repositories.UsuarioRepository;
 
 @Service
 public class DBService {
-	
 	@Autowired
 	private AtivoRepository ativoRepository;
 	@Autowired
@@ -61,6 +62,10 @@ public class DBService {
 	private InvestimentoRepository investimentoRepository;
 	@Autowired
 	private OperacaoRepository operacaoRepository;
+	@Lazy
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	
 	public void instantiateDevDatabase(){
 		//Tipos de Investimento
@@ -106,7 +111,7 @@ public class DBService {
 		//Usuários
 		Usuario u1 = new Usuario();	
 		u1.setId(null);
-		u1.setTipoPerfil(TipoPerfil.VISITANTE.getCodigo());
+		u1.addPerfil(TipoPerfil.ADMIN);
 		u1.setNome("Diego Dos Santos Cordeiro");
 		u1.setCpf("11754423728");
 		u1.setDtNascimento(Date.valueOf("1986-07-12"));	
@@ -121,25 +126,24 @@ public class DBService {
 		u1.setUrlBlogSite("http://www.diegocordeiro.com.br");
 		u1.setIndStatus(Status.ATIVO.getCodigo());
 		u1.setLogin("chacalsgt");
-		u1.setSenha("SenhaQueSeráCriptografada");
+		u1.setSenha(passwordEncoder.encode("chacal@01"));
 		
 		Usuario u2 = new Usuario();	
 		u2.setId(null);
-		u2.setTipoPerfil(TipoPerfil.VISITANTE.getCodigo());
-		u2.setNome("Clayton Santos Cordeiro");
-		u2.setCpf("11754423729");
+		u2.setNome("mcristiane");
+		u2.setCpf("16388733050");
 		u2.setDtNascimento(Date.valueOf("1986-07-12"));	
 		u2.setEstadoCivil(EstadoCivil.CASADO.getCodigo());
 		u2.setGenero(Genero.MASCULINO.getCodigo());
 		u2.setIndPortadorDeficiencia(Indicador.NAO.getCodigo());
-		u2.setEmail("claytonsantos13@gmail.com");
+		u2.setEmail("mcristianeterra@gmail.com");
 		u2.setIndDisponivelViajar(Indicador.SIM.getCodigo());
 		u2.setIndDisponivelMudarCidade(Indicador.NAO.getCodigo());
 		u2.setResumoProfissional("Resumo Profissional");
-		u2.setUrlBlogSite("http://www.diegocordeiro.com.br");
+		u2.setUrlBlogSite("http://www.mseso.com.br");
 		u2.setIndStatus(Status.ATIVO.getCodigo());
-		u2.setLogin("chacalsgt");
-		u2.setSenha("SenhaQueSeráCriptografada");
+		u2.setLogin("mcristiane");
+		u2.setSenha(passwordEncoder.encode("SenhaQueSeráCriptografada"));
 		
 		//Telefones
 		Telefone t1 = new Telefone(null,TipoOperadoraTelefone.CLARO, TipoTelefone.CELULAR, "21", "994674449", "N", "S", u1);
@@ -191,7 +195,7 @@ public class DBService {
 		Investimento inv11 = new Investimento(null, new BigDecimal(11000.00), Status.ATIVO.getCodigo(), tipoInvest10, u1);
 		
 		//Salvando dados do Usuario
-		usuarioRepository.saveAll(Arrays.asList(u1, u2));
+		usuarioRepository.saveAll(Arrays.asList(u1,u2));
 		telefoneRepository.saveAll(Arrays.asList(t1, t2));
 		enderecoRepository.saveAll(Arrays.asList(end1, end2));
 		investimentoRepository.saveAll(Arrays.asList(inv1, inv2, inv3, inv4, inv5, inv6, inv7, inv8, inv9, inv10, inv11));

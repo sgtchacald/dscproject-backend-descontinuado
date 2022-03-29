@@ -6,17 +6,18 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.diegocordeiro.dscproject.domain.Telefone;
 import br.com.diegocordeiro.dscproject.domain.Usuario;
 import br.com.diegocordeiro.dscproject.dto.UsuarioDTO;
 import br.com.diegocordeiro.dscproject.enums.OperacaoPersistencia;
-import br.com.diegocordeiro.dscproject.enums.TipoPerfil;
 import br.com.diegocordeiro.dscproject.repositories.TelefoneRepository;
 import br.com.diegocordeiro.dscproject.repositories.UsuarioRepository;
 import br.com.diegocordeiro.dscproject.services.exceptions.DataIntegrityException;
@@ -33,6 +34,10 @@ public class UsuarioService {
 	
 	@Autowired
 	private EmailService emailService;
+	
+	@Lazy
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	public Usuario buscarPorId(Integer id) {
 		Optional<Usuario> obj = usuarioRepository.findById(id);
@@ -87,7 +92,6 @@ public class UsuarioService {
 		
 		return new Usuario(
 			operacao.equals(OperacaoPersistencia.INSERIR) ? null : objetoDTO.getId(), 
-			operacao.equals(OperacaoPersistencia.INSERIR) ? TipoPerfil.toEnum(objetoDTO.getTipoPerfil()) : null,
 			objetoDTO.getNome(), 
 			operacao.equals(OperacaoPersistencia.INSERIR) ? objetoDTO.getCpf() : null,
 			objetoDTO.getDtNascimento(), 
@@ -101,13 +105,12 @@ public class UsuarioService {
 			objetoDTO.getIndStatus(), 
 			objetoDTO.getEmail(), 
 			objetoDTO.getLogin(), 
-			objetoDTO.getSenha(),
+			passwordEncoder.encode(objetoDTO.getSenha()),
 			objetoDTO.getTelefones()
 		);
 	}
 	
 	private void updateData(Usuario novoObjeto, Usuario objeto) {
-		//novoObjeto.setTipoPerfil(objeto.getTipoPerfil()); 
 		novoObjeto.setNome(objeto.getNome());
 		//novoObjeto.setCpf(objeto.getCpf()); 
 		novoObjeto.setDtNascimento(objeto.getDtNascimento()); 
@@ -121,7 +124,7 @@ public class UsuarioService {
 		novoObjeto.setIndStatus(objeto.getIndStatus());
 		novoObjeto.setEmail(objeto.getEmail());  
 		novoObjeto.setLogin(objeto.getLogin());  
-		novoObjeto.setSenha(objeto.getSenha());
+		novoObjeto.setSenha(passwordEncoder.encode(objeto.getSenha()));
 		novoObjeto.setTelefones(objeto.getTelefones());
 	}
 	

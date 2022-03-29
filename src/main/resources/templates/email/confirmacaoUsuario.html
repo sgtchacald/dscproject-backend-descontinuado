@@ -1,25 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title th:remove="all">Novo Usuário Criado</title>
+<title th:remove="all">Você é o mais novo Usuário Criado</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 	<div>
-		<h1>
-			Id: <span th:text="${usuario.id}"> </span>
-		</h1>
-		<p>
-			Nome: <span th:text="${usuario.nome}"></span>
-		</p>
-		<p>
-			CPF: <span th:text="${usuario.cpf}"></span>
-		</p>
-		<p>
-			E-mail: <span th:text="${usuario.email}"></span>
-		</p>
-		<h3>Prezado Usuário, </h3>
-		<p>Obrigado por se cadastrar em nosso sistema. </p>
+		<h1> Olá, </h1>
+		
+		<p><b><span th:text="${usuario.nome}"></span></b></p>
+		
+		<p><b>CPF: </b> <span th:text="${usuario.cpf}"></span></p>
+		
+		<p><b>E-mail:</b> <span th:text="${usuario.email}"></span></p>
+		
+		<p>Obrigado por se cadastrar em nosso sistema.</p>
 	</div>
 </body>
 </html>

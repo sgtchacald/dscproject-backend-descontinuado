@@ -100,7 +100,6 @@ public class UsuarioDTO  extends Auditoria implements Serializable{
 	
 	public UsuarioDTO(Usuario obj) {
 		this.id = obj.getId();
-		this.tipoPerfil = obj.getTipoPerfil();
 		this.nome = obj.getNome();
 		this.cpf = obj.getCpf();
 		this.dtNascimento = obj.getDtNascimento();

@@ -21,7 +21,7 @@ public class DevConfig {
 	
 	@Bean
 	public boolean instatiateDatabase(){
-		if(!"create-drop".equals(strategy)){
+		if(!"create-drop".equals(strategy) || "create".equals(strategy)){
 			return false;
 		}
 		

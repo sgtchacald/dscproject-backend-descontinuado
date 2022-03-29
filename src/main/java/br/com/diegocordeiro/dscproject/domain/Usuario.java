@@ -3,12 +3,18 @@ package br.com.diegocordeiro.dscproject.domain;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,7 +30,7 @@ import br.com.diegocordeiro.dscproject.enums.TipoPerfil;
 
 @Entity
 @Table(name="USUARIOS")
-public class Usuario extends Auditoria implements Serializable {
+public class Usuario implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -32,9 +38,6 @@ public class Usuario extends Auditoria implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "ID", nullable = false)
 	private Integer id;
-	
-	@Column(name = "TIPO_PERMISSAO", length = 1, nullable = false)
-	private Integer tipoPerfil;
 	
 	@Column(name = "NOME", length = 100, nullable = false)
 	private String nome;
@@ -81,8 +84,13 @@ public class Usuario extends Auditoria implements Serializable {
 	@Column(name = "LOGIN", length = 40, nullable = false)
 	private String login;
 	
-	@Column(name = "SENHA", length = 25, nullable = false)
+	@Column(name = "SENHA", length = 60, nullable = false)
 	private String senha;
+	
+	@Column(name = "PERFIL", length = 1, nullable = false)
+	@ElementCollection(fetch=FetchType.EAGER)
+	@CollectionTable(name="PERFIS_USUARIO")
+	private Set<Integer> perfis =  new HashSet<>();
 	
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
 	private List<Telefone> telefones = new ArrayList<>();
@@ -99,16 +107,20 @@ public class Usuario extends Auditoria implements Serializable {
 	@OneToMany(mappedBy = "usuario")
 	private List<Endereco> enderecos = new ArrayList<>();
 	
+	
+	
 	public Usuario(){
+		addPerfil(TipoPerfil.VISITANTE);
 	}
 
-	public Usuario(Integer id, TipoPerfil tipoPerfil, String nome, String cpf, Date dtNascimento, String estadoCivil,
+	public Usuario(Integer id, String nome, String cpf, Date dtNascimento, String estadoCivil,
 			String genero, String indPortadorDeficiencia, String indDisponivelViajar,
 			String indDisponivelMudarCidade, String resumoProfissional, String urlBlogSite, String indStatus, 
 			String email,String login, String senha) {
 		super();
 		this.id = id;
-		this.tipoPerfil = (tipoPerfil == null) ? null : tipoPerfil.getCodigo() ;
+		//Adiciona o perfil de visitante para todos os usuários criados por default
+		addPerfil(TipoPerfil.VISITANTE);
 		this.nome = nome;
 		this.cpf = cpf;
 		this.dtNascimento = dtNascimento;
@@ -125,13 +137,14 @@ public class Usuario extends Auditoria implements Serializable {
 		this.senha = senha;
 	}
 
-	public Usuario(Integer id, TipoPerfil tipoPerfil, String nome, String cpf, Date dtNascimento, String estadoCivil,
+	public Usuario(Integer id, String nome, String cpf, Date dtNascimento, String estadoCivil,
 			String genero, String indPortadorDeficiencia, String indDisponivelViajar,
 			String indDisponivelMudarCidade, String resumoProfissional, String urlBlogSite, String indStatus, 
 			String email,String login, String senha, List<Telefone> telefones) {
 		super();
 		this.id = id;
-		this.tipoPerfil = (tipoPerfil == null) ? null : tipoPerfil.getCodigo() ;
+		//Adiciona o perfil de visitante para todos os usuários criados por default
+		addPerfil(TipoPerfil.VISITANTE);
 		this.nome = nome;
 		this.cpf = cpf;
 		this.dtNascimento = dtNascimento;
@@ -157,12 +170,12 @@ public class Usuario extends Auditoria implements Serializable {
 		this.id = id;
 	}
 
-	public Integer getTipoPerfil() {
-		return tipoPerfil;
+	public Set<TipoPerfil> getPerfis() {
+		return perfis.stream().map(x -> TipoPerfil.toEnum(x)).collect(Collectors.toSet());
 	}
 
-	public void setTipoPerfil(Integer tipoPerfil) {
-		this.tipoPerfil = tipoPerfil;
+	public void addPerfil(TipoPerfil perfil) {
+		perfis.add(perfil.getCodigo());
 	}
 
 	public String getNome() {

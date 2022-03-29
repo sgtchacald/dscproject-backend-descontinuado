@@ -66,7 +66,7 @@ public abstract class AbstractEmailService implements EmailService {
 		MimeMessageHelper mmh = new MimeMessageHelper(mm, true); 
 		mmh.setTo(obj.getEmail());
 		mmh.setFrom(remetente);
-		mmh.setSubject("Usuário Cadastrado com Sucesso: \n " + obj.getId());
+		mmh.setSubject("[DSCPROJECT] Novo Usuário Cadastrado");
 		mmh.setSentDate(new Date(System.currentTimeMillis()));
 		mmh.setText(htmlFromTemplateNovoUsuario(obj),true);
 		return mm;
