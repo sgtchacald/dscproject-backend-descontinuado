@@ -71,6 +71,20 @@ public class UsuarioService {
 		return obj.orElseThrow(()-> new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Usuario.class.getName()));
 	}
 	
+	public Usuario buscarPorEmail(String email) {
+		UserSS user = authenticated();
+		if (user == null || !user.hasRole(TipoPerfil.ADMIN) && !email.equals(user.getUsername())) {
+			throw new AuthorizationException("Acesso negado");
+		}
+	
+		Usuario obj = usuarioRepository.findByEmail(email);
+		if (obj == null) {
+			throw new ObjectNotFoundException("Objeto não encontrado! Id: " + user.getId() + ", Tipo: " + Usuario.class.getName());
+		}
+		
+		return obj;
+	}
+	
 	public List<Usuario> buscarTodos() {
 		return usuarioRepository.findAll();
 	}

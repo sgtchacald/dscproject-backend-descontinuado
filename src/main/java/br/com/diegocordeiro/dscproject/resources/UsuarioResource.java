@@ -37,6 +37,12 @@ public class UsuarioResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
+	@RequestMapping(value="/email", method=RequestMethod.GET)
+	public ResponseEntity<Usuario> find(@RequestParam(value="value") String email) {
+		Usuario obj = service.buscarPorEmail(email);
+		return ResponseEntity.ok().body(obj);
+	}
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<UsuarioDTO>> buscarTodos(){
 		List<Usuario> list = service.buscarTodos();
