@@ -75,6 +75,8 @@ public class UsuarioDTO  extends Auditoria implements Serializable{
 	@URL(protocol = "http", message="O valor digitado deve ser uma url válida.")
 	private String urlBlogSite;
 	
+	private String urlImagemPerfil;
+	
 	@NotEmpty(message="Preenchimento Obrigatório.")
 	@Length(min=1, max=1, message="O tamanho deve ser 1 caracter.")
 	@ValidarStatus
@@ -110,6 +112,7 @@ public class UsuarioDTO  extends Auditoria implements Serializable{
 		this.indDisponivelMudarCidade = obj.getIndDisponivelMudarCidade();
 		this.resumoProfissional = obj.getResumoProfissional();
 		this.urlBlogSite = obj.getUrlBlogSite();
+		this.urlImagemPerfil = obj.getUrlImagemPerfil();
 		this.indStatus = obj.getIndStatus();
 		this.email = obj.getEmail();
 		this.login = obj.getLogin();
@@ -211,6 +214,14 @@ public class UsuarioDTO  extends Auditoria implements Serializable{
 
 	public void setUrlBlogSite(String urlBlogSite) {
 		this.urlBlogSite = urlBlogSite;
+	}
+
+	public String getUrlImagemPerfil() {
+		return urlImagemPerfil;
+	}
+
+	public void setUrlImagemPerfil(String urlImagemPerfil) {
+		this.urlImagemPerfil = urlImagemPerfil;
 	}
 
 	public String getIndStatus() {

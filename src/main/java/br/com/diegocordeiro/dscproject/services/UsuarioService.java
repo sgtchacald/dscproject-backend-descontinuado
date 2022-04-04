@@ -1,11 +1,14 @@
 package br.com.diegocordeiro.dscproject.services;
 
+import java.awt.image.BufferedImage;
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -14,6 +17,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.com.diegocordeiro.dscproject.domain.Telefone;
 import br.com.diegocordeiro.dscproject.domain.Usuario;
@@ -42,6 +46,18 @@ public class UsuarioService {
 	@Lazy
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private S3Service s3Service;
+	
+	@Autowired
+	private ImageService imageService;
+	
+	@Value("${usuario.img.perfil.prefix}")
+	private String prefix;
+	
+	@Value("${usuario.img.perfil.size}")
+	private Integer size;
 	
 	public Usuario buscarPorId(Integer id) {
 		UserSS user = authenticated();
@@ -112,7 +128,8 @@ public class UsuarioService {
 			objetoDTO.getIndDisponivelViajar(), 
 			objetoDTO.getIndDisponivelMudarCidade(), 
 			objetoDTO.getResumoProfissional(), 
-			objetoDTO.getUrlBlogSite(), 
+			objetoDTO.getUrlBlogSite(),
+			operacao.equals(OperacaoPersistencia.INSERIR) ? null : objetoDTO.getUrlImagemPerfil(),
 			objetoDTO.getIndStatus(), 
 			objetoDTO.getEmail(), 
 			objetoDTO.getLogin(), 
@@ -147,6 +164,27 @@ public class UsuarioService {
 		catch (Exception e) {
 			return null;
 		}
+	}
+	
+	/* Faz upload da imagem de perfil do usuario */
+	public URI uploadProfilePicture(MultipartFile multipartFile) {
+		UserSS userSS = authenticated();
+		if (userSS == null) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		
+		BufferedImage jpgImage = imageService.getJpgImageFromFile(multipartFile);
+		jpgImage = imageService.cropSquare(jpgImage);
+		jpgImage = imageService.resize(jpgImage, size);
+		
+		String fileName = prefix + "_" + userSS.getId() + ".jpg";
+		URI uri = s3Service.uploadFile(imageService.getInputStream(jpgImage, "jpg"), fileName, "image");
+		
+		Usuario usuario = usuarioRepository.getById(userSS.getId());
+		usuario.setUrlImagemPerfil(uri.toString());
+		usuarioRepository.saveAndFlush(usuario);
+		
+		return uri;
 	}
 	
 }

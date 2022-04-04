@@ -75,6 +75,9 @@ public class Usuario implements Serializable {
 	@Column(name = "URL_BLOG_SITE", length = 512, nullable = false)
 	private String urlBlogSite;
 	
+	@Column(name = "URL_IMAGEM_PERFIL", length = 512, nullable = true)
+	private String urlImagemPerfil;
+	
 	@Column(name = "IND_STATUS", length = 1, nullable = false)
 	private String indStatus;
 	
@@ -115,7 +118,7 @@ public class Usuario implements Serializable {
 
 	public Usuario(Integer id, String nome, String cpf, Date dtNascimento, String estadoCivil,
 			String genero, String indPortadorDeficiencia, String indDisponivelViajar,
-			String indDisponivelMudarCidade, String resumoProfissional, String urlBlogSite, String indStatus, 
+			String indDisponivelMudarCidade, String resumoProfissional, String urlBlogSite, String urlImagemPerfil, String indStatus, 
 			String email,String login, String senha) {
 		super();
 		this.id = id;
@@ -131,6 +134,7 @@ public class Usuario implements Serializable {
 		this.indDisponivelMudarCidade = indDisponivelMudarCidade;
 		this.resumoProfissional = resumoProfissional;
 		this.urlBlogSite = urlBlogSite;
+		this.urlImagemPerfil = urlImagemPerfil;
 		this.indStatus = indStatus;
 		this.email = email;
 		this.login = login;
@@ -139,7 +143,7 @@ public class Usuario implements Serializable {
 
 	public Usuario(Integer id, String nome, String cpf, Date dtNascimento, String estadoCivil,
 			String genero, String indPortadorDeficiencia, String indDisponivelViajar,
-			String indDisponivelMudarCidade, String resumoProfissional, String urlBlogSite, String indStatus, 
+			String indDisponivelMudarCidade, String resumoProfissional, String urlBlogSite, String urlImagemPerfil, String indStatus, 
 			String email,String login, String senha, List<Telefone> telefones) {
 		super();
 		this.id = id;
@@ -155,6 +159,7 @@ public class Usuario implements Serializable {
 		this.indDisponivelMudarCidade = indDisponivelMudarCidade;
 		this.resumoProfissional = resumoProfissional;
 		this.urlBlogSite = urlBlogSite;
+		this.urlImagemPerfil = urlImagemPerfil;
 		this.indStatus = indStatus;
 		this.email = email;
 		this.login = login;
@@ -272,6 +277,14 @@ public class Usuario implements Serializable {
 
 	public void setUrlBlogSite(String urlBlogSite) {
 		this.urlBlogSite = urlBlogSite;
+	}
+
+	public String getUrlImagemPerfil() {
+		return urlImagemPerfil;
+	}
+
+	public void setUrlImagemPerfil(String urlImagemPerfil) {
+		this.urlImagemPerfil = urlImagemPerfil;
 	}
 
 	public String getIndStatus() {
