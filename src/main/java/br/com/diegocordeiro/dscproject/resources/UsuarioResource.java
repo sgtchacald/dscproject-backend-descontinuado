@@ -31,18 +31,6 @@ public class UsuarioResource {
 	@Autowired
 	private UsuarioService service;
 	
-	@RequestMapping(value="{id}", method=RequestMethod.GET)
-	public ResponseEntity<?> buscarPorId(@PathVariable Integer id) {
-		Usuario obj = service.buscarPorId(id);
-		return ResponseEntity.ok().body(obj);
-	}
-	
-	@RequestMapping(value="/email", method=RequestMethod.GET)
-	public ResponseEntity<Usuario> find(@RequestParam(value="value") String email) {
-		Usuario obj = service.buscarPorEmail(email);
-		return ResponseEntity.ok().body(obj);
-	}
-	
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<UsuarioDTO>> buscarTodos(){
 		List<Usuario> list = service.buscarTodos();
@@ -60,6 +48,18 @@ public class UsuarioResource {
 			Page<UsuarioDTO> listDTO = pagina.map(obj-> new UsuarioDTO(obj)
 		);
 		return ResponseEntity.ok().body(listDTO);
+	}
+	
+	@RequestMapping(value="{id}", method=RequestMethod.GET)
+	public ResponseEntity<?> buscarPorId(@PathVariable Integer id) {
+		Usuario obj = service.buscarPorId(id);
+		return ResponseEntity.ok().body(obj);
+	}
+	
+	@RequestMapping(value="/buscar", method=RequestMethod.GET)
+	public ResponseEntity<Usuario> buscarPorEmail(@RequestParam(value="email") String email) {
+		Usuario obj = service.buscarPorEmail(email);
+		return ResponseEntity.ok().body(obj);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)

@@ -1,5 +1,6 @@
 package br.com.diegocordeiro.dscproject.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,10 @@ public class CidadeService {
 	public Cidade buscarPorId(Integer id) {
 		Optional<Cidade> obj = repositorio.findById(id);
 		return obj.orElseThrow(()-> new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Pais.class.getName()));
+	}
+	
+	public List<Cidade> buscarPorEstado(Integer estadoId) {
+		return repositorio.findCidades(estadoId);
 	}
 
 }
