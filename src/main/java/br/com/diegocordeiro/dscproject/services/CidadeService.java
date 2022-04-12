@@ -22,8 +22,8 @@ public class CidadeService {
 		return obj.orElseThrow(()-> new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Pais.class.getName()));
 	}
 	
-	public List<Cidade> buscarPorEstado(Integer estadoId) {
-		return repositorio.findCidades(estadoId);
+	public List<Cidade> buscarPorEstado(String uf) {
+		return repositorio.findCidades(uf);
 	}
 
 }

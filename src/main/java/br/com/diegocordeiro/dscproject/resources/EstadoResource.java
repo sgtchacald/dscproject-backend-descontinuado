@@ -1,7 +1,6 @@
 package br.com.diegocordeiro.dscproject.resources;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +28,10 @@ public class EstadoResource {
 	@Autowired
 	private CidadeService cidadeService;
 	
-	
 	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity<List<EstadoDTO>> findAll() {
-		List<Estado> list = estadoService.findAll();
-		List<EstadoDTO> listDto = list.stream().map(obj -> new EstadoDTO(obj)).collect(Collectors.toList());  
+	public ResponseEntity<List<EstadoDTO>> buscarPorPais(@RequestParam(value="pais") String sigla) {
+		List<Estado> list = estadoService.buscarEstadosPorPais(sigla);
+		List<EstadoDTO> listDto = list.stream().map(obj -> new EstadoDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
 	}
 	
@@ -43,15 +41,9 @@ public class EstadoResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
-	@RequestMapping(value="/buscarPorPais", method=RequestMethod.GET)
-	public ResponseEntity<Optional<List<Estado>>> buscarPorPais(@RequestParam(value="sigla") String sigla) {
-		Optional<List<Estado>> obj = estadoService.buscarEstadosPorPais(sigla);
-		return ResponseEntity.ok().body(obj);
-	}
-	
-	@RequestMapping(value="/{estadoId}/cidades", method=RequestMethod.GET)
-	public ResponseEntity<List<CidadeDTO>> findCidades(@PathVariable Integer estadoId) {
-		List<Cidade> list = cidadeService.buscarPorEstado(estadoId);
+	@RequestMapping(value="/{uf}/cidades", method=RequestMethod.GET)
+	public ResponseEntity<List<CidadeDTO>> findCidades(@PathVariable String uf) {
+		List<Cidade> list = cidadeService.buscarPorEstado(uf);
 		List<CidadeDTO> listDto = list.stream().map(obj -> new CidadeDTO(obj)).collect(Collectors.toList());  
 		return ResponseEntity.ok().body(listDto);
 	}

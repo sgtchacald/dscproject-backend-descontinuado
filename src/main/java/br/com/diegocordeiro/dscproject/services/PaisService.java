@@ -26,8 +26,11 @@ public class PaisService {
 	}
 
 	public Pais buscarPorSigla(String sigla) {
-		Optional<Pais> obj = repositorio.findBySigla(sigla);
-		return obj.orElseThrow(()-> new ObjectNotFoundException("Objeto não encontrado! Sigla: " + sigla + ", Tipo: " + Pais.class.getName()));
+		Pais obj = repositorio.findBySigla(sigla);
+		if(obj == null) {
+			throw new ObjectNotFoundException("Objeto não encontrado! Pais: " + obj + ", Tipo: " + Pais.class.getName());
+		}
+		return obj;
 	}
 
 }

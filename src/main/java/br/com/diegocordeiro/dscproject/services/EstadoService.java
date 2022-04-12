@@ -30,13 +30,13 @@ public class EstadoService {
 		return obj.orElseThrow(()-> new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Pais.class.getName()));
 	}
 	
-	public Optional<List<Estado>> buscarEstadosPorPais(String siglaPais) {
-		Optional<Pais> pais = paisRepositorio.findBySigla(siglaPais);
+	public List<Estado> buscarEstadosPorPais(String siglaPais) {
+		Pais pais = paisRepositorio.findBySigla(siglaPais);
 		if (pais == null) {
 			throw new ObjectNotFoundException("Objeto não encontrado! Pais: " + pais + ", Tipo: " + Pais.class.getName());
 		}
 	
-		Optional<List<Estado>> estado = estadoRepositorio.findByPais(pais);
+		List<Estado> estado = estadoRepositorio.findByPais(pais);
 		if (estado == null) {
 			throw new ObjectNotFoundException("Objeto não encontrado! Pais: " + estado + ", Tipo: " + Estado.class.getName());
 		}

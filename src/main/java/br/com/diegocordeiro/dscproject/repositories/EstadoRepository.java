@@ -1,7 +1,6 @@
 package br.com.diegocordeiro.dscproject.repositories;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -13,5 +12,5 @@ import br.com.diegocordeiro.dscproject.domain.Pais;
 @Repository
 public interface EstadoRepository extends JpaRepository<Estado, Integer>{
 	@Transactional(readOnly=true)
-	Optional<List<Estado>> findByPais(Optional<Pais> pais);
+	List<Estado> findByPais(Pais pais);
 }
