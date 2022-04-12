@@ -209,7 +209,57 @@ public class DBService {
 		Operacao op5 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.COMPRA , new BigDecimal(41802.12), new BigDecimal(0.028859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
 		Operacao op6 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.VENDA ,  new BigDecimal(40802.12), new BigDecimal(0.029859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
 		Operacao op7 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.COMPRA , new BigDecimal(39802.12), new BigDecimal(0.030859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
-		operacaoRepository.saveAll(Arrays.asList(op1, op2, op3, op4, op5, op6, op7));
+		Operacao op8 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.COMPRA , new BigDecimal(45802.12), new BigDecimal(0.021859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op9 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.VENDA ,  new BigDecimal(44802.12), new BigDecimal(0.025859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op10 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.COMPRA , new BigDecimal(43802.12), new BigDecimal(0.026859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op11 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.VENDA ,  new BigDecimal(42802.12), new BigDecimal(0.027859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op12 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.COMPRA , new BigDecimal(41802.12), new BigDecimal(0.028859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op13 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.VENDA ,  new BigDecimal(40802.12), new BigDecimal(0.029859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op14 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.COMPRA , new BigDecimal(39802.12), new BigDecimal(0.030859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op15 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.COMPRA , new BigDecimal(45802.12), new BigDecimal(0.021859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op16 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.VENDA ,  new BigDecimal(44802.12), new BigDecimal(0.025859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op17 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.COMPRA , new BigDecimal(43802.12), new BigDecimal(0.026859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op18 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.VENDA ,  new BigDecimal(42802.12), new BigDecimal(0.027859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op19 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.COMPRA , new BigDecimal(41802.12), new BigDecimal(0.028859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op20 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.VENDA ,  new BigDecimal(40802.12), new BigDecimal(0.029859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op21 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.COMPRA , new BigDecimal(39802.12), new BigDecimal(0.030859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op22 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.COMPRA , new BigDecimal(45802.12), new BigDecimal(0.021859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op23 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.VENDA ,  new BigDecimal(44802.12), new BigDecimal(0.025859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op24 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.COMPRA , new BigDecimal(43802.12), new BigDecimal(0.026859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op25 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.VENDA ,  new BigDecimal(42802.12), new BigDecimal(0.027859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op26 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.COMPRA , new BigDecimal(41802.12), new BigDecimal(0.028859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op27 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.VENDA ,  new BigDecimal(40802.12), new BigDecimal(0.029859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op28 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.COMPRA , new BigDecimal(39802.12), new BigDecimal(0.030859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op29 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.COMPRA , new BigDecimal(45802.12), new BigDecimal(0.021859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op30 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.VENDA ,  new BigDecimal(44802.12), new BigDecimal(0.025859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op31 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.COMPRA , new BigDecimal(43802.12), new BigDecimal(0.026859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op32 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.VENDA ,  new BigDecimal(42802.12), new BigDecimal(0.027859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op33 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.COMPRA , new BigDecimal(41802.12), new BigDecimal(0.028859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op34 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.VENDA ,  new BigDecimal(40802.12), new BigDecimal(0.029859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op35 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.COMPRA , new BigDecimal(39802.12), new BigDecimal(0.030859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op36 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.COMPRA , new BigDecimal(45802.12), new BigDecimal(0.021859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op37 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.VENDA ,  new BigDecimal(44802.12), new BigDecimal(0.025859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op38 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.COMPRA , new BigDecimal(43802.12), new BigDecimal(0.026859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op39 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.VENDA ,  new BigDecimal(42802.12), new BigDecimal(0.027859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op40 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.COMPRA , new BigDecimal(41802.12), new BigDecimal(0.028859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op41 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.VENDA ,  new BigDecimal(40802.12), new BigDecimal(0.029859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op42 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.COMPRA , new BigDecimal(39802.12), new BigDecimal(0.030859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op43 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.COMPRA , new BigDecimal(45802.12), new BigDecimal(0.021859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op44 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.VENDA ,  new BigDecimal(44802.12), new BigDecimal(0.025859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op45 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.COMPRA , new BigDecimal(43802.12), new BigDecimal(0.026859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op46 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.VENDA ,  new BigDecimal(42802.12), new BigDecimal(0.027859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op47 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.COMPRA , new BigDecimal(41802.12), new BigDecimal(0.028859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op48 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.VENDA ,  new BigDecimal(40802.12), new BigDecimal(0.029859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op49 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.COMPRA , new BigDecimal(39802.12), new BigDecimal(0.030859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		Operacao op50 = new Operacao(null, Date.valueOf("2021-08-11"), parBtcUsdt, TipoOperacao.COMPRA , new BigDecimal(45802.12), new BigDecimal(0.021859), new BigDecimal(1001.108), new BigDecimal(1.00118854), u1, btc);
+		
+		operacaoRepository.saveAll(Arrays.asList(
+			op1,  op2,  op3,  op4,  op5,  op6,  op7,  op8,  op9, op10, 
+			op11, op12, op13, op14, op15, op16, op17, op18, op19, op20,
+			op21, op22, op23, op24, op25, op26, op27, op28, op29, op30,
+			op31, op32, op33, op34, op35, op36, op37, op38, op39, op40,
+			op41, op42, op43, op44, op45, op46, op47, op48, op49, op50)
+		);
 	}
 
 }
