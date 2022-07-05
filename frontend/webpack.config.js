@@ -1,56 +1,53 @@
-const webpack = require('webpack')
+const path = require('path')
 
-const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
-    mode: 'development',
-    entry: './src/index.jsx',
+    entry: {
+        main: path.resolve(__dirname, './src/index.jsx'),
+    },
     output: {
-        path: __dirname + '/public',
-        filename: './app.js'
+        path: path.resolve(__dirname, './dist'),
+        filename: '[name].bundle.js',
     },
     devServer: {
         port: 3000,
         static: './public',
     },
     resolve: {
-        extensions: ['', '.js', '.jsx'],
+        extensions: ['', '.js', '.jsx','css'],
         alias: {
             modules: __dirname + '/node_modules',
-            jquery: 'modules/jquery/dist/jquery.min.js',
-            bootstrap: 'modules/admin-lte/plugins/bootstrap/js/bootstrap.js'
         }
     },
-    plugins: [ 
-        new webpack.ProvidePlugin({
-            $: 'jquery',
-            jQuery: 'jquery',
-            'window.jQuery': 'jquery'
-        })
+    plugins: [
+        new HtmlWebpackPlugin({
+            title: 'dscproject-frontend',
+            template: path.resolve(__dirname, './public/index.html'), // template file
+            filename: 'index.html', // output file
+        }),
+        new CleanWebpackPlugin(),
     ],
     module: {
         rules: [
+            // JavaScript
             {
                 test: /\.m?js[x]$/,
                 exclude: /node_modules/,
-                use: {
-                  loader: 'babel-loader',
-                  options: {
-                    presets: [
-                      ['@babel/preset-env', { targets: 'defaults' }],
-                      ['@babel/preset-react'],
-                    ]
-                  }
-                }
+                use: ['babel-loader'],
             },
+            //Css
             {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader']
             },
+            // Images
             {
-                test: /\.woff|.woff2|.ttf|.eot|.svg|.png|.jpg*.*$/,
-                use: ['file-loader']
-            }
-          ]
-    }
+                test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
+                type: 'asset/resource',
+            },
+        ],
+    },
 }
