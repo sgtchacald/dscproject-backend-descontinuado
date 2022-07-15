@@ -8,7 +8,7 @@ export default class Content extends Component {
   render() {
     return (
       <div>
-        <div className="page-content">
+        <div className="page-content conteudo">
           <div id="content">
             <div className="cover">
               <div className="container">

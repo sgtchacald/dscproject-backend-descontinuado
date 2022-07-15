@@ -1,8 +1,15 @@
 html {
-  scroll-behavior: smooth; }
+  height: 100%;
+  scroll-behavior: smooth; 
+}
 
 html, body {
-  overflow-x: hidden; }
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  margin: 0px;
+  padding: 0px; 
+}
 
 a {
   color: #00A68E !important;

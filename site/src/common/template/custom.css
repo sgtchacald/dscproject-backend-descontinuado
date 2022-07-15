@@ -1,3 +1,7 @@
-.alteraCor {
-    color:red;
+.conteudo {
+    flex: 1 0 auto !important;
+}
+
+.footer {
+   flex-shrink: 0;
 }
