@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import br.com.diegocordeiro.dscproject.dto.ExisteUsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -88,6 +89,11 @@ public class UsuarioResource {
 	public ResponseEntity<Void> uploadProfilePicture(@RequestParam(name="file") MultipartFile file) {
 		URI uri = service.uploadProfilePicture(file);
 		return ResponseEntity.created(uri).build();
+	}
+
+	@RequestMapping(value="/existe-usuario", method=RequestMethod.GET)
+	public ResponseEntity<ExisteUsuarioDTO> buscarPorEmailOuLogin(@RequestParam(value="valor") String valor) {
+		return ResponseEntity.ok().body(service.existeUsuario(valor));
 	}
 
 }

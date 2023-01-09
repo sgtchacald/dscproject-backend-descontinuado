@@ -2,11 +2,13 @@ package br.com.diegocordeiro.dscproject.services;
 
 import java.awt.image.BufferedImage;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import br.com.diegocordeiro.dscproject.dto.ExisteUsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
@@ -199,6 +201,23 @@ public class UsuarioService {
 		usuarioRepository.saveAndFlush(usuario);
 		
 		return uri;
+	}
+
+	public ExisteUsuarioDTO existeUsuario(String valor) {
+
+		List<Usuario> usuario = new ArrayList<Usuario>();
+		ExisteUsuarioDTO existeUsuarioDTO = new ExisteUsuarioDTO();
+
+		existeUsuarioDTO.setExisteUsuario(false);
+
+		usuario = usuarioRepository.findUsuarioByEmailOrLogin(valor);
+
+		if(usuario.size() > 0){
+			existeUsuarioDTO.setExisteUsuario(true);
+			return existeUsuarioDTO;
+		}
+
+		return existeUsuarioDTO;
 	}
 	
 }
