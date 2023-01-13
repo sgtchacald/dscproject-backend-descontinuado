@@ -111,7 +111,7 @@ public class UsuarioService {
 			telefoneRepository.saveAll(obj.getTelefones());
 		}
 		
-		emailService.enviaConfirmacaoHtmlCadastroUsuario(obj);
+		//emailService.enviaConfirmacaoHtmlCadastroUsuario(obj);
 		
 		return obj;
 	}
