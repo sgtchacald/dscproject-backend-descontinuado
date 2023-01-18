@@ -9,13 +9,13 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import br.com.diegocordeiro.dscproject.validation.ValidarTipoLogradouroValidation;
+import br.com.diegocordeiro.dscproject.validation.TipoPerfilValidation;
 
 @Documented
-@Constraint(validatedBy = ValidarTipoLogradouroValidation.class)
+@Constraint(validatedBy = TipoPerfilValidation.class)
 @Target( { ElementType.METHOD, ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ValidarTipoLogradouro {
+public @interface TipoPerfil {
 
     String message() default "O valor digitado não consta na lista de valores aceitos";
     Class<?>[] groups() default {};

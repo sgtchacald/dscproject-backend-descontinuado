@@ -1,14 +1,13 @@
 package br.com.diegocordeiro.dscproject.validation;
 
+import br.com.diegocordeiro.dscproject.validation.constraints.Genero;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import br.com.diegocordeiro.dscproject.enums.TipoOperadoraTelefone;
-import br.com.diegocordeiro.dscproject.validation.constraints.ValidarTipoOperadoraTelefone;
-
-public class ValidarTipoOperadoraTelefoneValidation implements ConstraintValidator<ValidarTipoOperadoraTelefone, String> {   
+public class GeneroValidation implements ConstraintValidator<Genero, String> {
 	
-	public void initialize(ValidarTipoOperadoraTelefone constraintAnnotation) {
+	public void initialize(Genero constraintAnnotation) {
     }
 
 	@Override
@@ -16,7 +15,7 @@ public class ValidarTipoOperadoraTelefoneValidation implements ConstraintValidat
 		boolean retorno = true;
 		try {
 			if(!value.isBlank()) {
-				TipoOperadoraTelefone.toEnum(value);
+				br.com.diegocordeiro.dscproject.enums.Genero.toEnum(value);
 				retorno = true;
 			}
 		} catch (Exception e) {

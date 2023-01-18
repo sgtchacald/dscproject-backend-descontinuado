@@ -9,13 +9,13 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import br.com.diegocordeiro.dscproject.validation.ValidarStatusValidation;
+import br.com.diegocordeiro.dscproject.validation.StatusValidation;
 
 @Documented
-@Constraint(validatedBy = ValidarStatusValidation.class)
+@Constraint(validatedBy = StatusValidation.class)
 @Target( { ElementType.METHOD, ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ValidarStatus {
+public @interface Status {
 
     String message() default "O valor digitado não consta na lista de valores aceitos";
     Class<?>[] groups() default {};

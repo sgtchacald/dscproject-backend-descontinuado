@@ -3,12 +3,11 @@ package br.com.diegocordeiro.dscproject.validation;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import br.com.diegocordeiro.dscproject.enums.Indicador;
-import br.com.diegocordeiro.dscproject.validation.constraints.ValidarIndicador;
+import br.com.diegocordeiro.dscproject.validation.constraints.Indicador;
 
-public class ValidarIndicadorValidation implements ConstraintValidator<ValidarIndicador, String> {   
+public class IndicadorValidation implements ConstraintValidator<Indicador, String> {
 	
-	public void initialize(ValidarIndicador constraintAnnotation) {
+	public void initialize(Indicador constraintAnnotation) {
     }
 
 	@Override
@@ -16,7 +15,7 @@ public class ValidarIndicadorValidation implements ConstraintValidator<ValidarIn
 		boolean retorno = true;
 		try {
 			if(!value.isBlank()) {
-				Indicador.toEnum(value);
+				br.com.diegocordeiro.dscproject.enums.Indicador.toEnum(value);
 				retorno = true;
 			}
 		} catch (Exception e) {

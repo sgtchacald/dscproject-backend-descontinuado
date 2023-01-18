@@ -3,12 +3,11 @@ package br.com.diegocordeiro.dscproject.validation;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import br.com.diegocordeiro.dscproject.enums.Status;
-import br.com.diegocordeiro.dscproject.validation.constraints.ValidarStatus;
+import br.com.diegocordeiro.dscproject.validation.constraints.EstadoCivil;
 
-public class ValidarStatusValidation implements ConstraintValidator<ValidarStatus, String> {   
+public class EstadoCivilValidation implements ConstraintValidator<EstadoCivil, String> {
 	
-	public void initialize(ValidarStatus constraintAnnotation) {
+	public void initialize(EstadoCivil constraintAnnotation) {
     }
 
 	@Override
@@ -16,7 +15,7 @@ public class ValidarStatusValidation implements ConstraintValidator<ValidarStatu
 		boolean retorno = true;
 		try {
 			if(!value.isBlank()) {
-				Status.toEnum(value);
+				br.com.diegocordeiro.dscproject.enums.EstadoCivil.toEnum(value);
 				retorno = true;
 			}
 		} catch (Exception e) {

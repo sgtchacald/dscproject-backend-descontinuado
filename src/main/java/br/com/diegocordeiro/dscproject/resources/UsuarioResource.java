@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import br.com.diegocordeiro.dscproject.dto.ExisteUsuarioDTO;
+import br.com.diegocordeiro.dscproject.dto.UsuarioSiteNovoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -68,6 +69,14 @@ public class UsuarioResource {
 		Usuario obj = service.fromDTO(objDto, OperacaoPersistencia.INSERIR);
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri(); 
+		return ResponseEntity.created(uri).build();
+	}
+
+	@RequestMapping(value="/inserir-usuario-site", method = RequestMethod.POST)
+	public ResponseEntity<Usuario> insert(@Valid @RequestBody UsuarioSiteNovoDTO objDto){
+		Usuario obj = service.fromDTOSite(objDto);
+		obj = service.insert(obj);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
 	

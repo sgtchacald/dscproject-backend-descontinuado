@@ -16,21 +16,20 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.diegocordeiro.dscproject.domain.Auditoria;
 import br.com.diegocordeiro.dscproject.domain.Telefone;
-import br.com.diegocordeiro.dscproject.domain.Usuario;
-import br.com.diegocordeiro.dscproject.validation.constraints.ValidarEstadoCivil;
-import br.com.diegocordeiro.dscproject.validation.constraints.ValidarGenero;
-import br.com.diegocordeiro.dscproject.validation.constraints.ValidarIndicador;
-import br.com.diegocordeiro.dscproject.validation.constraints.ValidarStatus;
-import br.com.diegocordeiro.dscproject.validation.constraints.ValidarTipoPerfil;
-import br.com.diegocordeiro.dscproject.validation.constraints.ValidarUsuario;
+import br.com.diegocordeiro.dscproject.validation.constraints.EstadoCivil;
+import br.com.diegocordeiro.dscproject.validation.constraints.Genero;
+import br.com.diegocordeiro.dscproject.validation.constraints.Indicador;
+import br.com.diegocordeiro.dscproject.validation.constraints.Status;
+import br.com.diegocordeiro.dscproject.validation.constraints.TipoPerfil;
+import br.com.diegocordeiro.dscproject.validation.constraints.Usuario;
 
-@ValidarUsuario
+@Usuario
 public class UsuarioDTO  extends Auditoria implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
 	
-	@ValidarTipoPerfil
+	@TipoPerfil
 	private Integer tipoPerfil;
 	
 	@NotEmpty(message="Preenchimento Obrigatório.")
@@ -45,27 +44,27 @@ public class UsuarioDTO  extends Auditoria implements Serializable{
 	
 	@NotEmpty(message="Preenchimento Obrigatório.")
 	@Length(min=1, max=1, message="O tamanho deve ser 1 caracter.")
-	@ValidarEstadoCivil
+	@EstadoCivil
 	private String estadoCivil;
 	
 	@NotEmpty(message="Preenchimento Obrigatório.")
 	@Length(min=1, max=1, message="O tamanho deve ser 1 caracter.")
-	@ValidarGenero
+	@Genero
 	private String genero;
 	
 	@NotEmpty(message="Preenchimento Obrigatório.")
 	@Length(min=1, max=1, message="O tamanho deve ser 1 caracter.")
-	@ValidarIndicador
+	@Indicador
 	private String indPortadorDeficiencia;
 	
 	@NotEmpty(message="Preenchimento Obrigatório.")
 	@Length(min=1, max=1, message="O tamanho deve ser 1 caracter.")
-	@ValidarIndicador
+	@Indicador
 	private String indDisponivelViajar;
 	
 	@NotEmpty(message="Preenchimento Obrigatório.")
 	@Length(min=1, max=1, message="O tamanho deve ser 1 caracter.")
-	@ValidarIndicador
+	@Indicador
 	private String indDisponivelMudarCidade;
 	
 	@NotEmpty(message="Preenchimento Obrigatório.")
@@ -79,7 +78,7 @@ public class UsuarioDTO  extends Auditoria implements Serializable{
 	
 	@NotEmpty(message="Preenchimento Obrigatório.")
 	@Length(min=1, max=1, message="O tamanho deve ser 1 caracter.")
-	@ValidarStatus
+	@Status
 	private String indStatus;
 	
 	@NotEmpty(message="Preenchimento obrigatório.")
@@ -100,7 +99,7 @@ public class UsuarioDTO  extends Auditoria implements Serializable{
 	public UsuarioDTO() {
 	}
 	
-	public UsuarioDTO(Usuario obj) {
+	public UsuarioDTO(br.com.diegocordeiro.dscproject.domain.Usuario obj) {
 		this.id = obj.getId();
 		this.nome = obj.getNome();
 		this.cpf = obj.getCpf();

@@ -9,15 +9,15 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import br.com.diegocordeiro.dscproject.validation.ValidarUsuarioValidation;
+import br.com.diegocordeiro.dscproject.validation.GeneroValidation;
 
 @Documented
-@Constraint(validatedBy = ValidarUsuarioValidation.class)
-@Target( { ElementType.TYPE })
+@Constraint(validatedBy = GeneroValidation.class)
+@Target( { ElementType.METHOD, ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ValidarUsuario {
+public @interface Genero {
 
-    String message() default "Erro de validação.";
+    String message() default "O valor digitado não consta na lista de valores aceitos";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 

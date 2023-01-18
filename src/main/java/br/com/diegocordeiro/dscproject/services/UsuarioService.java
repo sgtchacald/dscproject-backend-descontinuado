@@ -9,6 +9,8 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import br.com.diegocordeiro.dscproject.dto.ExisteUsuarioDTO;
+import br.com.diegocordeiro.dscproject.dto.UsuarioSiteNovoDTO;
+import br.com.diegocordeiro.dscproject.enums.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
@@ -107,7 +109,6 @@ public class UsuarioService {
 			for(Telefone t : obj.getTelefones()) {
 				t.setUsuario(obj);
 			}
-		
 			telefoneRepository.saveAll(obj.getTelefones());
 		}
 		
@@ -151,6 +152,28 @@ public class UsuarioService {
 			objetoDTO.getLogin(), 
 			passwordEncoder.encode(objetoDTO.getSenha()),
 			objetoDTO.getTelefones()
+		);
+	}
+
+	public Usuario fromDTOSite(UsuarioSiteNovoDTO objetoDTO){
+
+		return new Usuario(
+				null,
+				objetoDTO.getNome(),
+				objetoDTO.getCpf(),
+				null,
+				null,
+				null,
+				null,
+				null,
+				null,
+				null,
+				null,
+				null,
+				Status.ATIVO.getCodigo(),
+				objetoDTO.getEmail(),
+				objetoDTO.getLogin(),
+				passwordEncoder.encode(objetoDTO.getSenha())
 		);
 	}
 	

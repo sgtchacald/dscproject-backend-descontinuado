@@ -3,12 +3,11 @@ package br.com.diegocordeiro.dscproject.validation;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import br.com.diegocordeiro.dscproject.enums.TipoOperacao;
-import br.com.diegocordeiro.dscproject.validation.constraints.ValidarTipoOperacao;
+import br.com.diegocordeiro.dscproject.validation.constraints.TipoRenda;
 
-public class ValidarTipoOperacaoValidation implements ConstraintValidator<ValidarTipoOperacao, String> {   
+public class TipoRendaValidation implements ConstraintValidator<TipoRenda, String> {
 	
-	public void initialize(ValidarTipoOperacao constraintAnnotation) {
+	public void initialize(TipoRenda constraintAnnotation) {
     }
 
 	@Override
@@ -16,7 +15,7 @@ public class ValidarTipoOperacaoValidation implements ConstraintValidator<Valida
 		boolean retorno = true;
 		try {
 			if(!value.isBlank()) {
-				TipoOperacao.toEnum(value);
+				br.com.diegocordeiro.dscproject.enums.TipoRenda.toEnum(value);
 				retorno = true;
 			}
 		} catch (Exception e) {

@@ -33,7 +33,7 @@ import br.com.diegocordeiro.dscproject.enums.TipoPerfil;
 public class Usuario implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "ID", nullable = false)
@@ -46,33 +46,33 @@ public class Usuario implements Serializable {
 	private String cpf;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
-	@Column(name = "DATA_NASCIMENTO", nullable = false)
+	@Column(name = "DATA_NASCIMENTO", nullable = true)
 	private Date dtNascimento;
 	
-	@Column(name = "ESTADO_CIVIL", length = 2, nullable = false)
+	@Column(name = "ESTADO_CIVIL", length = 2, nullable = true)
 	private String estadoCivil;
 	
-	@Column(name = "GENERO", length = 1, nullable = false)
+	@Column(name = "GENERO", length = 1, nullable = true)
 	private String genero;
 	
-	@Column(name = "IND_PORTADOR_DEFICIENCIA", length = 1, nullable = false)
+	@Column(name = "IND_PORTADOR_DEFICIENCIA", length = 1, nullable = true)
 	private String indPortadorDeficiencia;
 	
-	@Column(name = "IND_DISPONIVEL_VIAJAR", length = 1, nullable = false)
+	@Column(name = "IND_DISPONIVEL_VIAJAR", length = 1, nullable = true)
 	private String indDisponivelViajar;
 	
-	@Column(name = "IND_DISPONIVEL_MUDAR_CIDADE", length = 1, nullable = false)
+	@Column(name = "IND_DISPONIVEL_MUDAR_CIDADE", length = 1, nullable = true)
 	private String indDisponivelMudarCidade;
 	
 	//inserir aqui idLogradouro
 	
-	@Column(name = "RESUMO_PROFISSIONAL", nullable = false)
+	@Column(name = "RESUMO_PROFISSIONAL", nullable = true)
 	@Type(type="text")
 	private String resumoProfissional;
 	
-	//inserir aqui lista de redes sociais 
+	//inserir aqui lista de redes sociais
 	
-	@Column(name = "URL_BLOG_SITE", length = 512, nullable = false)
+	@Column(name = "URL_BLOG_SITE", length = 512, nullable = true)
 	private String urlBlogSite;
 	
 	@Column(name = "URL_IMAGEM_PERFIL", length = 512, nullable = true)
@@ -84,13 +84,13 @@ public class Usuario implements Serializable {
 	@Column(name = "EMAIL", length = 512, nullable = false, unique = true)
 	private String email;
 	
-	@Column(name = "LOGIN", length = 40, nullable = false)
+	@Column(name = "LOGIN", length = 40, nullable = false, unique = true)
 	private String login;
 	
 	@Column(name = "SENHA", length = 60, nullable = false)
 	private String senha;
 	
-	@Column(name = "PERFIL", length = 1, nullable = false)
+	@Column(name = "PERFIL", length = 1, nullable = true)
 	@ElementCollection(fetch=FetchType.EAGER)
 	@CollectionTable(name="PERFIS_USUARIO")
 	private Set<Integer> perfis =  new HashSet<>();
@@ -109,9 +109,7 @@ public class Usuario implements Serializable {
 	@JsonIgnore
 	@OneToMany(mappedBy = "usuario")
 	private List<Endereco> enderecos = new ArrayList<>();
-	
-	
-	
+
 	public Usuario(){
 		addPerfil(TipoPerfil.VISITANTE);
 	}
@@ -123,7 +121,7 @@ public class Usuario implements Serializable {
 		super();
 		this.id = id;
 		//Adiciona o perfil de visitante para todos os usuários criados por default
-		addPerfil(TipoPerfil.VISITANTE);
+		addPerfil(TipoPerfil.ADMIN);
 		this.nome = nome;
 		this.cpf = cpf;
 		this.dtNascimento = dtNascimento;
@@ -148,7 +146,7 @@ public class Usuario implements Serializable {
 		super();
 		this.id = id;
 		//Adiciona o perfil de visitante para todos os usuários criados por default
-		addPerfil(TipoPerfil.VISITANTE);
+		addPerfil(TipoPerfil.ADMIN);
 		this.nome = nome;
 		this.cpf = cpf;
 		this.dtNascimento = dtNascimento;

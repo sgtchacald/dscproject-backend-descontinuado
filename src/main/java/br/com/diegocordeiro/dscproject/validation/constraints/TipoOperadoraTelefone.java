@@ -9,13 +9,13 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import br.com.diegocordeiro.dscproject.validation.ValidarEstadoCivilValidation;
+import br.com.diegocordeiro.dscproject.validation.TipoOperadoraTelefoneValidation;
 
 @Documented
-@Constraint(validatedBy = ValidarEstadoCivilValidation.class)
+@Constraint(validatedBy = TipoOperadoraTelefoneValidation.class)
 @Target( { ElementType.METHOD, ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ValidarEstadoCivil {
+public @interface TipoOperadoraTelefone {
 
     String message() default "O valor digitado não consta na lista de valores aceitos";
     Class<?>[] groups() default {};

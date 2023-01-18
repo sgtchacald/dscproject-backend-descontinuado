@@ -1,8 +1,6 @@
 package br.com.diegocordeiro.dscproject.enums;
 
 public enum OperacaoPersistencia {
-	
-	
 	INSERIR("I", "Inserir"),
 	EDITAR("E", "Editar"),
 	EXCLUIR("D", "Excluir");

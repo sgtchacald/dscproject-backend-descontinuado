@@ -3,12 +3,11 @@ package br.com.diegocordeiro.dscproject.validation;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import br.com.diegocordeiro.dscproject.enums.TipoPerfil;
-import br.com.diegocordeiro.dscproject.validation.constraints.ValidarTipoPerfil;
+import br.com.diegocordeiro.dscproject.validation.constraints.TipoLogradouro;
 
-public class ValidarTipoPerfilValidation implements ConstraintValidator<ValidarTipoPerfil, Integer> {   
+public class TipoLogradouroValidation implements ConstraintValidator<TipoLogradouro, Integer> {
 	
-	public void initialize(ValidarTipoPerfil constraintAnnotation) {
+	public void initialize(TipoLogradouro constraintAnnotation) {
     }
 
 	@Override
@@ -16,7 +15,7 @@ public class ValidarTipoPerfilValidation implements ConstraintValidator<ValidarT
 		boolean retorno = true;
 		try {
 			if(value != null) {
-				TipoPerfil.toEnum(value);
+				br.com.diegocordeiro.dscproject.enums.TipoLogradouro.toEnum(value);
 				retorno = true;
 			}
 		} catch (Exception e) {

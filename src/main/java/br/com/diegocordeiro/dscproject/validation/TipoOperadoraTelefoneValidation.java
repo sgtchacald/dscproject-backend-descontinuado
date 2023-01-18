@@ -3,12 +3,11 @@ package br.com.diegocordeiro.dscproject.validation;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import br.com.diegocordeiro.dscproject.enums.Genero;
-import br.com.diegocordeiro.dscproject.validation.constraints.ValidarGenero;
+import br.com.diegocordeiro.dscproject.validation.constraints.TipoOperadoraTelefone;
 
-public class ValidarGeneroValidation implements ConstraintValidator<ValidarGenero, String> {   
+public class TipoOperadoraTelefoneValidation implements ConstraintValidator<TipoOperadoraTelefone, String> {
 	
-	public void initialize(ValidarGenero constraintAnnotation) {
+	public void initialize(TipoOperadoraTelefone constraintAnnotation) {
     }
 
 	@Override
@@ -16,7 +15,7 @@ public class ValidarGeneroValidation implements ConstraintValidator<ValidarGener
 		boolean retorno = true;
 		try {
 			if(!value.isBlank()) {
-				Genero.toEnum(value);
+				br.com.diegocordeiro.dscproject.enums.TipoOperadoraTelefone.toEnum(value);
 				retorno = true;
 			}
 		} catch (Exception e) {
