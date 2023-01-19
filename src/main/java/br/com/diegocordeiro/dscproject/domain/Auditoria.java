@@ -3,8 +3,8 @@ package br.com.diegocordeiro.dscproject.domain;
 import java.io.Serializable;
 import java.sql.Date;
 
-import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
+import jakarta.persistence.Column;
+import jakarta.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public class Auditoria implements Serializable{

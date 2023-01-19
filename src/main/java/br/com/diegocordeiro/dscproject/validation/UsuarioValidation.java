@@ -7,8 +7,8 @@ import br.com.diegocordeiro.dscproject.resources.exception.FieldMessage;
 import br.com.diegocordeiro.dscproject.validation.constraints.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,9 +29,21 @@ public class UsuarioValidation implements ConstraintValidator<Usuario, UsuarioSi
 		if(dto.getLogin().isBlank()){
 			list.add(new FieldMessage("Login", "Este campo não pode ser vazio"));
 		}
-		
-		List<br.com.diegocordeiro.dscproject.domain.Usuario> resultBuscaPorLogin = repo.findUsuarioByLogin(dto.getLogin());
-		
+
+		List<br.com.diegocordeiro.dscproject.domain.Usuario> resultBuscaPorCPF = repo.findByCredenciais(dto.getCpf());
+
+		if(resultBuscaPorCPF.size() > 0){
+			list.add(new FieldMessage("CPF", "Este CPF já existe no sistema"));
+		}
+
+		List<br.com.diegocordeiro.dscproject.domain.Usuario> resultBuscaPorEmail = repo.findByCredenciais(dto.getEmail());
+
+		if(resultBuscaPorEmail.size() > 0){
+			list.add(new FieldMessage("E-mail", "Este E-mail já existe no sistema"));
+		}
+
+		List<br.com.diegocordeiro.dscproject.domain.Usuario> resultBuscaPorLogin = repo.findByCredenciais(dto.getLogin());
+
 		if(resultBuscaPorLogin.size() > 0){
 			list.add(new FieldMessage("Login", "Este nome de usuário já existe no sistema"));
 		}

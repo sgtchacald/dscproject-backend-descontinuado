@@ -2,7 +2,7 @@ package br.com.diegocordeiro.dscproject.dto;
 
 import java.io.Serializable;
 
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 
 import br.com.diegocordeiro.dscproject.domain.Ativo;
 

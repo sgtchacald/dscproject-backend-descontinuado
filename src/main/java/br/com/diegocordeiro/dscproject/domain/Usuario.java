@@ -1,32 +1,15 @@
 package br.com.diegocordeiro.dscproject.domain;
 
-import java.io.Serializable;
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import javax.persistence.CascadeType;
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-import org.hibernate.annotations.Type;
-
+import br.com.diegocordeiro.dscproject.enums.TipoPerfil;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import org.hibernate.annotations.Type;
 
-import br.com.diegocordeiro.dscproject.enums.TipoPerfil;
+import java.io.Serializable;
+import java.sql.Date;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name="USUARIOS")
@@ -66,8 +49,7 @@ public class Usuario implements Serializable {
 	
 	//inserir aqui idLogradouro
 	
-	@Column(name = "RESUMO_PROFISSIONAL", nullable = true)
-	@Type(type="text")
+	@Column(name = "RESUMO_PROFISSIONAL", length = 2048, nullable = true)
 	private String resumoProfissional;
 	
 	//inserir aqui lista de redes sociais

@@ -2,8 +2,8 @@ package br.com.diegocordeiro.dscproject.dto;
 
 import java.io.Serializable;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 
 
 public class EmailDTO implements Serializable {

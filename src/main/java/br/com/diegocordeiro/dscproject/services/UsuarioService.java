@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 
 import br.com.diegocordeiro.dscproject.dto.ExisteUsuarioDTO;
 import br.com.diegocordeiro.dscproject.dto.UsuarioSiteNovoDTO;
@@ -233,7 +233,7 @@ public class UsuarioService {
 
 		existeUsuarioDTO.setExisteUsuario(false);
 
-		usuario = usuarioRepository.findUsuarioByEmailOrLogin(valor);
+		usuario = usuarioRepository.findByCredenciais(valor);
 
 		if(usuario.size() > 0){
 			existeUsuarioDTO.setExisteUsuario(true);

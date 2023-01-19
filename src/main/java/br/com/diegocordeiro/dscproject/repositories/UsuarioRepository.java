@@ -11,11 +11,8 @@ import br.com.diegocordeiro.dscproject.domain.Usuario;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
-	
-	List<Usuario> findUsuarioByLogin(String login);
-
-	@Query("SELECT u FROM Usuario u WHERE u.login = ?1 OR u.email = ?1")
-	List<Usuario> findUsuarioByEmailOrLogin(String valor);
+	@Query("SELECT u FROM Usuario u WHERE u.cpf = ?1 OR u.login = ?1 OR u.email = ?1")
+	List<Usuario> findByCredenciais(String valor);
 
 	@Transactional(readOnly=true)
 	Usuario findByEmail(String email);

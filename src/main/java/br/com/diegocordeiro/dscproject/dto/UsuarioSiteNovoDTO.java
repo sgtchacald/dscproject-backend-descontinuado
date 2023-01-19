@@ -5,10 +5,8 @@ import br.com.diegocordeiro.dscproject.validation.constraints.Usuario;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
 
-import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 import java.io.Serializable;
 @Usuario
 public class UsuarioSiteNovoDTO extends Auditoria implements Serializable{
@@ -18,6 +16,7 @@ public class UsuarioSiteNovoDTO extends Auditoria implements Serializable{
 	private Integer tipoPerfil;
 	@NotEmpty(message="Preenchimento Obrigatório.")
 	@Length(min=5, max=80, message="O tamanho deve ser entre 5 e 80 caracteres.")
+	@CPF
 	private String 	cpf;
 	@NotEmpty(message="Preenchimento Obrigatório.")
 	private String 	nome;

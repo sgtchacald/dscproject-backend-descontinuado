@@ -4,10 +4,11 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 import br.com.diegocordeiro.dscproject.dto.ExisteUsuarioDTO;
 import br.com.diegocordeiro.dscproject.dto.UsuarioSiteNovoDTO;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,6 @@ import br.com.diegocordeiro.dscproject.domain.Usuario;
 import br.com.diegocordeiro.dscproject.dto.UsuarioDTO;
 import br.com.diegocordeiro.dscproject.enums.OperacaoPersistencia;
 import br.com.diegocordeiro.dscproject.services.UsuarioService;
-import javassist.tools.rmi.ObjectNotFoundException;
 
 @RestController
 @RequestMapping(value = "/usuarios")
@@ -81,7 +81,7 @@ public class UsuarioResource {
 	}
 	
 	@RequestMapping(value="/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Usuario> update(@Valid @RequestBody UsuarioDTO objDto, @PathVariable Integer id) throws ObjectNotFoundException{
+	public ResponseEntity<Usuario> update(@Valid @RequestBody UsuarioDTO objDto, @PathVariable Integer id) throws ObjectNotFoundException {
 		Usuario obj = service.fromDTO(objDto, OperacaoPersistencia.EDITAR);
 		obj.setId(id);
 		obj = service.update(obj);

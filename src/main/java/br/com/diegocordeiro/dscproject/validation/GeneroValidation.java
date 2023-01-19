@@ -2,8 +2,8 @@ package br.com.diegocordeiro.dscproject.validation;
 
 import br.com.diegocordeiro.dscproject.validation.constraints.Genero;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 
 public class GeneroValidation implements ConstraintValidator<Genero, String> {
 	
