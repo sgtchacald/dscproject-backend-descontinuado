@@ -1,6 +1,7 @@
 package br.com.diegocordeiro.dscproject.domain;
 
 import br.com.diegocordeiro.dscproject.enums.TipoPerfil;
+import br.com.diegocordeiro.dscproject.security.UserSS;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -13,7 +14,7 @@ import java.util.stream.Collectors;
 
 @Entity
 @Table(name="USUARIOS")
-public class Usuario implements Serializable {
+public class Usuario extends UserSS implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 

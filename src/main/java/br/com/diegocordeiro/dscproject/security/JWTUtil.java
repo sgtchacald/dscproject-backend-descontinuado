@@ -1,58 +1,50 @@
 package br.com.diegocordeiro.dscproject.security;
 
-import java.util.Date;
-
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import java.util.Date;
 
 @Component
 public class JWTUtil {
-	
-	@Value("${jwt.secret}")
-	private String secret;
 
-	@Value("${jwt.expiration}")
-	private Long expiration;
-	
-	public String generateToken(String username) {
-		return Jwts.builder()
-				.setSubject(username)
-				.setExpiration(new Date(System.currentTimeMillis() + expiration))
-				.signWith(SignatureAlgorithm.HS512, secret.getBytes())
-				.compact();
-	}
-	
-	public boolean tokenValido(String token) {
-		Claims claims = getClaims(token);
-		if (claims != null) {
-			String username = claims.getSubject();
-			Date expirationDate = claims.getExpiration();
-			Date now = new Date(System.currentTimeMillis());
-			if (username != null && expirationDate != null && now.before(expirationDate)) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Value("${jwt.secret}")
+    private String secret;
 
-	public String getUsername(String token) {
-		Claims claims = getClaims(token);
-		if (claims != null) {
-			return claims.getSubject();
-		}
-		return null;
-	}
-	
-	private Claims getClaims(String token) {
-		try {
-			return Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJws(token).getBody();
-		}
-		catch (Exception e) {
-			return null;
-		}
-	}
+    @Value("${jwt.expiration}")
+    private Long expiration;
+
+    @Value("${jwt.whith.is.user}")
+    private String whithIsUser;
+
+    public String gerarToken(UserSS usuario) {
+        try {
+
+            return JWT.create()
+                    .withIssuer(whithIsUser)
+                    .withSubject(usuario.getEmail())
+                    .withExpiresAt(new Date(System.currentTimeMillis() + expiration))
+                    .sign(Algorithm.HMAC256(secret));
+
+        } catch (JWTVerificationException e){
+            throw new RuntimeException("Erro ao gerar o token jwt.", e);
+        }
+    }
+
+    public String getSubject(String tokenJWT) {
+        try {
+            var algoritmo = Algorithm.HMAC256(secret);
+            return JWT.require(algoritmo)
+                    .withIssuer(whithIsUser)
+                    .build()
+                    .verify(tokenJWT)
+                    .getSubject();
+        } catch (JWTVerificationException exception) {
+            throw new RuntimeException("Token JWT inválido ou expirado!");
+        }
+    }
+
 }

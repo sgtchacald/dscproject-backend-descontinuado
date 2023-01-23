@@ -69,7 +69,7 @@ public class UsuarioResource {
 		Usuario obj = service.fromDTO(objDto, OperacaoPersistencia.INSERIR);
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri(); 
-		return ResponseEntity.created(uri).build();
+		return ResponseEntity.created(uri).body(obj);
 	}
 
 	@RequestMapping(value="/inserir-usuario-site", method = RequestMethod.POST)

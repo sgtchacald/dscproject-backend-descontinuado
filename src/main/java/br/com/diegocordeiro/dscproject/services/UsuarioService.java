@@ -233,7 +233,7 @@ public class UsuarioService {
 
 		existeUsuarioDTO.setExisteUsuario(false);
 
-		usuario = usuarioRepository.findByCredenciais(valor);
+		usuario = usuarioRepository.findByCredenciaisList(valor);
 
 		if(usuario.size() > 0){
 			existeUsuarioDTO.setExisteUsuario(true);

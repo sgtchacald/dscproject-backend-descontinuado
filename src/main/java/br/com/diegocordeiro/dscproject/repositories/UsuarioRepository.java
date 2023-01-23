@@ -12,7 +12,10 @@ import br.com.diegocordeiro.dscproject.domain.Usuario;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
 	@Query("SELECT u FROM Usuario u WHERE u.cpf = ?1 OR u.login = ?1 OR u.email = ?1")
-	List<Usuario> findByCredenciais(String valor);
+	List<Usuario> findByCredenciaisList(String valor);
+
+	@Query("SELECT u FROM Usuario u WHERE u.cpf = ?1 OR u.login = ?1 OR u.email = ?1")
+	Usuario findByCredenciais(String valor);
 
 	@Transactional(readOnly=true)
 	Usuario findByEmail(String email);

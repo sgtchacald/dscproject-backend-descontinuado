@@ -30,19 +30,19 @@ public class UsuarioValidation implements ConstraintValidator<Usuario, UsuarioSi
 			list.add(new FieldMessage("Login", "Este campo não pode ser vazio"));
 		}
 
-		List<br.com.diegocordeiro.dscproject.domain.Usuario> resultBuscaPorCPF = repo.findByCredenciais(dto.getCpf());
+		List<br.com.diegocordeiro.dscproject.domain.Usuario> resultBuscaPorCPF = repo.findByCredenciaisList(dto.getCpf());
 
 		if(resultBuscaPorCPF.size() > 0){
 			list.add(new FieldMessage("CPF", "Este CPF já existe no sistema"));
 		}
 
-		List<br.com.diegocordeiro.dscproject.domain.Usuario> resultBuscaPorEmail = repo.findByCredenciais(dto.getEmail());
+		List<br.com.diegocordeiro.dscproject.domain.Usuario> resultBuscaPorEmail = repo.findByCredenciaisList(dto.getEmail());
 
 		if(resultBuscaPorEmail.size() > 0){
 			list.add(new FieldMessage("E-mail", "Este E-mail já existe no sistema"));
 		}
 
-		List<br.com.diegocordeiro.dscproject.domain.Usuario> resultBuscaPorLogin = repo.findByCredenciais(dto.getLogin());
+		List<br.com.diegocordeiro.dscproject.domain.Usuario> resultBuscaPorLogin = repo.findByCredenciaisList(dto.getLogin());
 
 		if(resultBuscaPorLogin.size() > 0){
 			list.add(new FieldMessage("Login", "Este nome de usuário já existe no sistema"));
