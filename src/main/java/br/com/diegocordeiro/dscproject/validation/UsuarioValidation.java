@@ -24,11 +24,6 @@ public class UsuarioValidation implements ConstraintValidator<Usuario, UsuarioSi
 	public boolean isValid(UsuarioSiteNovoDTO dto, ConstraintValidatorContext context) {
 
 		List<FieldMessage> list = new ArrayList<>();
-		
-		//validações personalizadas
-		if(dto.getLogin().isBlank()){
-			list.add(new FieldMessage("Login", "Este campo não pode ser vazio"));
-		}
 
 		List<br.com.diegocordeiro.dscproject.domain.Usuario> resultBuscaPorCPF = repo.findByCredenciaisList(dto.getCpf());
 
