@@ -21,9 +21,9 @@ import br.com.diegocordeiro.dscproject.validation.constraints.Genero;
 import br.com.diegocordeiro.dscproject.validation.constraints.Indicador;
 import br.com.diegocordeiro.dscproject.validation.constraints.Status;
 import br.com.diegocordeiro.dscproject.validation.constraints.TipoPerfil;
-import br.com.diegocordeiro.dscproject.validation.constraints.Usuario;
+import br.com.diegocordeiro.dscproject.validation.constraints.UsuarioNovo;
 
-@Usuario
+@UsuarioNovo
 public class UsuarioDTO  extends Auditoria implements Serializable{
 	private static final long serialVersionUID = 1L;
 	

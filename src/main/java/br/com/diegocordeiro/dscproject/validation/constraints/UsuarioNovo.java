@@ -17,7 +17,7 @@ import br.com.diegocordeiro.dscproject.validation.UsuarioValidation;
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = UsuarioValidation.class)
 @Documented
-public @interface Usuario {
+public @interface UsuarioNovo {
 
     String message() default "Erro de validação.";
     Class<?>[] groups() default {};
