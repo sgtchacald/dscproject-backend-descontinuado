@@ -19,7 +19,6 @@ import static java.util.Locale.ROOT;
 
 public class UsuarioValidation implements ConstraintValidator<UsuarioNovo, UsuarioSiteNovoDTO> {
 
-	private static final Locale US = Locale.US;
 	@Autowired
 	private UsuarioRepository repo;
 
@@ -38,7 +37,7 @@ public class UsuarioValidation implements ConstraintValidator<UsuarioNovo, Usuar
 		List<br.com.diegocordeiro.dscproject.domain.Usuario> resultBuscaPorCPF = repo.findByCredenciaisList(dto.getCpf());
 
 		if(resultBuscaPorCPF.size() > 0){
-			list.add(new FieldMessage("cpf", messageSource.getMessage("validacao.campo.cpf.existe.no.sistema",null, US)));
+			list.add(new FieldMessage("cpf", messageSource.getMessage("validacao.campo.cpf.existe.no.sistema",null, ROOT)));
 		}
 
 		List<br.com.diegocordeiro.dscproject.domain.Usuario> resultBuscaPorEmail = repo.findByCredenciaisList(dto.getEmail());

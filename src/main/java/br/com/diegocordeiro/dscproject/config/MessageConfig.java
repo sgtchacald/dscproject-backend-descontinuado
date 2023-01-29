@@ -8,13 +8,9 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 public class MessageConfig {
     @Bean
     public ResourceBundleMessageSource messageSource() {
-
         var source = new ResourceBundleMessageSource();
-        source.setBasenames("messages/validacao.dados");
+        source.setBasenames("messages/validacao");
         source.setUseCodeAsDefaultMessage(true);
-        source.setDefaultEncoding("UTF-8");
-        source.setCacheSeconds(1);
-
         return source;
     }
 }
