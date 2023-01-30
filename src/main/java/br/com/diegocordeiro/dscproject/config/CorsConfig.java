@@ -19,56 +19,19 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.Arrays;
+import java.util.List;
 
 @Configuration
-@EnableWebSecurity
-public class SecurityConfig {
+@EnableWebMvc
+public class CorsConfig implements WebMvcConfigurer{
 
-	@Autowired
-	private UserDetailsService userDetailsService;
-	
-	@Autowired
-    private Environment env;
-
-	@Autowired
-	private SecurityFilter securityFilter;
-
-	private static final String[] PUBLIC_MATCHERS = {
-	};
-
-	private static final String[] PUBLIC_MATCHERS_GET = {
-		"/usuarios/existe-usuario",
-	};
-
-	private static final String[] PUBLIC_MATCHERS_POST = {
-		"/login",
-		"/usuarios/inserir-usuario-site"
-	};
-
-	@Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-		return http.csrf().disable()
-			.authorizeRequests()
-			.requestMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST).permitAll()
-			.requestMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll()
-			.requestMatchers(PUBLIC_MATCHERS).permitAll()
-			.anyRequest().authenticated()
-			.and().sessionManagement()
-			.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-			.and().addFilterBefore(this.securityFilter, UsernamePasswordAuthenticationFilter.class)
-			.build();
-	}
-
-	@Bean
-	public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
-		return configuration.getAuthenticationManager();
-	}
-
-	@Bean
-	PasswordEncoder passwordEncoder(){
-		return new BCryptPasswordEncoder();
-	}
-
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**");
+    }
 }
