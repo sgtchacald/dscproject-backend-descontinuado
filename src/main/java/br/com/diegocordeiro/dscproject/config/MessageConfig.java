@@ -9,7 +9,8 @@ public class MessageConfig {
     @Bean
     public ResourceBundleMessageSource messageSource() {
         var source = new ResourceBundleMessageSource();
-        source.setBasenames("messages/validacao");
+        source.addBasenames("messages/validacao");
+        source.addBasenames("messages/negocio");
         source.setUseCodeAsDefaultMessage(true);
         return source;
     }
