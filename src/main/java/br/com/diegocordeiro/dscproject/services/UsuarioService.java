@@ -9,7 +9,7 @@ import java.util.Optional;
 import jakarta.transaction.Transactional;
 
 import br.com.diegocordeiro.dscproject.dto.ExisteUsuarioDTO;
-import br.com.diegocordeiro.dscproject.dto.UsuarioSiteNovoDTO;
+import br.com.diegocordeiro.dscproject.dto.UsuarioNovoSiteDTO;
 import br.com.diegocordeiro.dscproject.enums.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -155,7 +155,7 @@ public class UsuarioService {
 		);
 	}
 
-	public Usuario fromDTOSite(UsuarioSiteNovoDTO objetoDTO){
+	public Usuario fromDTOSite(UsuarioNovoSiteDTO objetoDTO){
 
 		return new Usuario(
 				null,

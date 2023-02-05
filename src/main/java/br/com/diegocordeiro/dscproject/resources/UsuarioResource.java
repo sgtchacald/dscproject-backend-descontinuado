@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import jakarta.validation.Valid;
 
 import br.com.diegocordeiro.dscproject.dto.ExisteUsuarioDTO;
-import br.com.diegocordeiro.dscproject.dto.UsuarioSiteNovoDTO;
+import br.com.diegocordeiro.dscproject.dto.UsuarioNovoSiteDTO;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -73,7 +73,7 @@ public class UsuarioResource {
 	}
 
 	@RequestMapping(value="/inserir-usuario-site", method = RequestMethod.POST)
-	public ResponseEntity<Usuario> insert(@Valid @RequestBody UsuarioSiteNovoDTO objDto){
+	public ResponseEntity<Usuario> insert(@Valid @RequestBody UsuarioNovoSiteDTO objDto){
 		Usuario obj = service.fromDTOSite(objDto);
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();

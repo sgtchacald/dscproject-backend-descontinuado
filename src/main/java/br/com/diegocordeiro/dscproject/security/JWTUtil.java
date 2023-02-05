@@ -25,7 +25,7 @@ public class JWTUtil {
 
             return JWT.create()
                     .withIssuer(whithIsUser)
-                    .withSubject(usuario.getEmail())
+                    .withSubject(usuario.getLogin())
                     .withExpiresAt(new Date(System.currentTimeMillis() + expiration))
                     .sign(Algorithm.HMAC256(secret));
 

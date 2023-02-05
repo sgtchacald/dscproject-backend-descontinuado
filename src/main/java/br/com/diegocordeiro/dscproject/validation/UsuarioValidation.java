@@ -1,6 +1,6 @@
 package br.com.diegocordeiro.dscproject.validation;
 
-import br.com.diegocordeiro.dscproject.dto.UsuarioSiteNovoDTO;
+import br.com.diegocordeiro.dscproject.dto.UsuarioNovoSiteDTO;
 import br.com.diegocordeiro.dscproject.repositories.UsuarioRepository;
 import br.com.diegocordeiro.dscproject.resources.exception.FieldMessage;
 import br.com.diegocordeiro.dscproject.validation.constraints.UsuarioNovo;
@@ -9,15 +9,13 @@ import org.springframework.context.MessageSource;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-import org.springframework.context.i18n.LocaleContextHolder;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import static java.util.Locale.ROOT;
 
-public class UsuarioValidation implements ConstraintValidator<UsuarioNovo, UsuarioSiteNovoDTO> {
+public class UsuarioValidation implements ConstraintValidator<UsuarioNovo, UsuarioNovoSiteDTO> {
 
 	@Autowired
 	private UsuarioRepository repo;
@@ -29,7 +27,7 @@ public class UsuarioValidation implements ConstraintValidator<UsuarioNovo, Usuar
 	public void initialize(UsuarioNovo constraintAnnotation) {
 	}
 
-	public boolean isValid(UsuarioSiteNovoDTO dto, ConstraintValidatorContext context) {
+	public boolean isValid(UsuarioNovoSiteDTO dto, ConstraintValidatorContext context) {
 
 		List<FieldMessage> list = new ArrayList<>();
 		boolean semErros = false;

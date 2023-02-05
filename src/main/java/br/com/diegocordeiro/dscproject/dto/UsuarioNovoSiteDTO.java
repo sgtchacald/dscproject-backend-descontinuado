@@ -11,7 +11,7 @@ import jakarta.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 @UsuarioNovo
-public class UsuarioSiteNovoDTO extends Auditoria implements Serializable{
+public class UsuarioNovoSiteDTO extends Auditoria implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
@@ -40,10 +40,10 @@ public class UsuarioSiteNovoDTO extends Auditoria implements Serializable{
 	@Length(max=60, message="Este campo deve ter no máximo 60 caracteres.")
 	private String senha;
 
-	public UsuarioSiteNovoDTO() {
+	public UsuarioNovoSiteDTO() {
 	}
 
-	public UsuarioSiteNovoDTO(br.com.diegocordeiro.dscproject.domain.Usuario obj) {
+	public UsuarioNovoSiteDTO(br.com.diegocordeiro.dscproject.domain.Usuario obj) {
 		this.id = obj.getId();
 		this.tipoPerfil = TipoPerfil.ADMIN.getCodigo();
 		this.nome = obj.getNome();

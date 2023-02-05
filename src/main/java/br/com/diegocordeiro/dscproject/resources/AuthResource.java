@@ -29,7 +29,7 @@ public class AuthResource {
 
 	@PostMapping
 	public ResponseEntity efetuarLogin(@RequestBody @Valid UserSS usuario, HttpServletResponse response) {
-		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(usuario.getEmail(), usuario.getSenha());
+		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(usuario.getLogin(), usuario.getSenha());
 
 		Authentication authentication = manager.authenticate(authenticationToken);
 
