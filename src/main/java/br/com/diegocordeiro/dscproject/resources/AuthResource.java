@@ -1,5 +1,6 @@
 package br.com.diegocordeiro.dscproject.resources;
 
+import br.com.diegocordeiro.dscproject.dto.CredenciaisDTO;
 import br.com.diegocordeiro.dscproject.dto.EmailDTO;
 import br.com.diegocordeiro.dscproject.dto.TokenJWT;
 import br.com.diegocordeiro.dscproject.security.JWTUtil;
@@ -28,7 +29,13 @@ public class AuthResource {
 	private AuthenticationManager manager;
 
 	@PostMapping
-	public ResponseEntity efetuarLogin(@RequestBody @Valid UserSS usuario, HttpServletResponse response) {
+	public ResponseEntity efetuarLogin(@RequestBody @Valid CredenciaisDTO credenciais, HttpServletResponse response) {
+
+		UserSS usuario = new UserSS();
+
+		usuario.setLogin(credenciais.getLogin());
+		usuario.setSenha(credenciais.getSenha());
+
 		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(usuario.getLogin(), usuario.getSenha());
 
 		Authentication authentication = manager.authenticate(authenticationToken);
