@@ -35,6 +35,7 @@ public class AuthService {
 		usuario.setSenha(pe.encode(newPass));
 		
 		usuarioRepository.save(usuario);
+
 		emailService.sendNewPasswordEmail(usuario, newPass);
 	}
 

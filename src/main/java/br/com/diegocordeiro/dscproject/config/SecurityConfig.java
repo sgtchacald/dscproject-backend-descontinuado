@@ -39,11 +39,12 @@ public class SecurityConfig {
 	};
 
 	private static final String[] PUBLIC_MATCHERS_GET = {
-		"/usuarios/existe-usuario",
+		"/usuarios/existe-usuario"
 	};
 
 	private static final String[] PUBLIC_MATCHERS_POST = {
 		"/login",
+		"/login/esqueci-a-senha",
 		"/usuarios/inserir-usuario-site"
 	};
 
