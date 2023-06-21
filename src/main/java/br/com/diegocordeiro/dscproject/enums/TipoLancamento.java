@@ -1,15 +1,14 @@
 package br.com.diegocordeiro.dscproject.enums;
 
-public enum TipoTelefone {
-	
-	CELULAR("C", "Celular"),
-	FIXO("F", "Residencial"),
-	RECADO("R", "Recado");
-	
+public enum TipoLancamento {
+
+	PAGAR("E", "Pagamento"),
+	RECEBER("S", "Recebimento");
+
 	private String codigo;
 	private String descricao;
-	
-	private TipoTelefone(String codigo, String descricao) {
+
+	private TipoLancamento(String codigo, String descricao) {
 		this.codigo = codigo;
 		this.descricao = descricao;
 	}
@@ -30,13 +29,13 @@ public enum TipoTelefone {
 		this.descricao = descricao;
 	}
 
-	public static TipoTelefone toEnum(String codigo){
+	public static TipoLancamento toEnum(String codigo){
 		
 		if(codigo == null) {
 			return null;
 		}
 		
-		for(TipoTelefone x : TipoTelefone.values()) {
+		for(TipoLancamento x : TipoLancamento.values()) {
 			if(codigo.equals(x.getCodigo())) {
 				return x;
 			}
@@ -44,7 +43,4 @@ public enum TipoTelefone {
 		
 		throw new IllegalArgumentException("Código inválido" + codigo);
 	}
-
-	
-
 }

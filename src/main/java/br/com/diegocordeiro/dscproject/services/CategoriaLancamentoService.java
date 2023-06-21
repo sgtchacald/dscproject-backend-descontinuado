@@ -1,13 +1,11 @@
 package br.com.diegocordeiro.dscproject.services;
 
-import br.com.diegocordeiro.dscproject.domain.Ativo;
-import br.com.diegocordeiro.dscproject.domain.Banco;
-import br.com.diegocordeiro.dscproject.dto.AtivoDTO;
-import br.com.diegocordeiro.dscproject.dto.BancoDTO;
-import br.com.diegocordeiro.dscproject.repositories.AtivoRepository;
-import br.com.diegocordeiro.dscproject.repositories.BancoRepository;
+import br.com.diegocordeiro.dscproject.domain.CategoriaLancamento;
+import br.com.diegocordeiro.dscproject.dto.CategoriaLancamentoDTO;
+import br.com.diegocordeiro.dscproject.repositories.CategoriaLancamentoRepository;
 import br.com.diegocordeiro.dscproject.services.exceptions.DataIntegrityException;
 import br.com.diegocordeiro.dscproject.services.exceptions.ObjectNotFoundException;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -20,34 +18,34 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class BancoService {
+public class CategoriaLancamentoService {
 
 	@Autowired
-	private BancoRepository repositorio;
+	private CategoriaLancamentoRepository repositorio;
 	
-	public Banco buscarPorId(Integer id) {
-		Optional<Banco> obj = repositorio.findById(id);
-		return obj.orElseThrow(()-> new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Banco.class.getName()));
+	public CategoriaLancamento buscarPorId(Integer id) {
+		Optional<CategoriaLancamento> obj = repositorio.findById(id);
+		return obj.orElseThrow(()-> new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " +CategoriaLancamento.class.getName()));
 	}
 	
-	public List<Banco> buscarTodos() {
+	public List<CategoriaLancamento> buscarTodos() {
 		return repositorio.findAll();
 	}
 	
-	public Page<Banco> buscarTodosComPaginacao(Integer page, Integer linesPerPage, String orderBy, String direction){
+	public Page<CategoriaLancamento> buscarTodosComPaginacao(Integer page, Integer linesPerPage, String orderBy, String direction){
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repositorio.findAll(pageRequest);
 	}
 	
 	@Transactional
-	public Banco insert(Banco obj) {
+	public CategoriaLancamento insert(CategoriaLancamento obj) {
 		obj.setId(null);
 		repositorio.save(obj);
 		return obj;
 	}
 	
-	public Banco update(Banco obj) throws ObjectNotFoundException {
-		Banco newObj = buscarPorId(obj.getId());
+	public CategoriaLancamento update(CategoriaLancamento obj) throws ObjectNotFoundException {
+		CategoriaLancamento newObj = buscarPorId(obj.getId());
 		updateData(newObj, obj);
 		return repositorio.save(newObj);
 	}
@@ -61,11 +59,11 @@ public class BancoService {
 		}
 	}
 	
-	private void updateData(Banco newObj, Banco obj) {
+	private void updateData(CategoriaLancamento newObj,CategoriaLancamento obj) {
 		newObj.setNome(obj.getNome());
 	}
 	
-	public Banco fromDTO(BancoDTO objDto){
-		return new Banco(objDto.getId(), objDto.getNumero(), objDto.getNome());
+	public CategoriaLancamento fromDTO(CategoriaLancamentoDTO objDto){
+		return new CategoriaLancamento(objDto.getId(), objDto.getNome());
 	}
 }

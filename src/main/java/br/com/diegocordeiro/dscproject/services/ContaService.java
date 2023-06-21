@@ -1,11 +1,11 @@
 package br.com.diegocordeiro.dscproject.services;
 
-import br.com.diegocordeiro.dscproject.domain.Ativo;
 import br.com.diegocordeiro.dscproject.domain.Banco;
-import br.com.diegocordeiro.dscproject.dto.AtivoDTO;
+import br.com.diegocordeiro.dscproject.domain.Conta;
 import br.com.diegocordeiro.dscproject.dto.BancoDTO;
-import br.com.diegocordeiro.dscproject.repositories.AtivoRepository;
+import br.com.diegocordeiro.dscproject.dto.ContaDTO;
 import br.com.diegocordeiro.dscproject.repositories.BancoRepository;
+import br.com.diegocordeiro.dscproject.repositories.ContaRepository;
 import br.com.diegocordeiro.dscproject.services.exceptions.DataIntegrityException;
 import br.com.diegocordeiro.dscproject.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,34 +20,34 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class BancoService {
+public class ContaService {
 
 	@Autowired
-	private BancoRepository repositorio;
+	private ContaRepository repositorio;
 	
-	public Banco buscarPorId(Integer id) {
-		Optional<Banco> obj = repositorio.findById(id);
-		return obj.orElseThrow(()-> new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Banco.class.getName()));
+	public Conta buscarPorId(Integer id) {
+		Optional<Conta> obj = repositorio.findById(id);
+		return obj.orElseThrow(()-> new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Conta.class.getName()));
 	}
 	
-	public List<Banco> buscarTodos() {
+	public List<Conta> buscarTodos() {
 		return repositorio.findAll();
 	}
 	
-	public Page<Banco> buscarTodosComPaginacao(Integer page, Integer linesPerPage, String orderBy, String direction){
+	public Page<Conta> buscarTodosComPaginacao(Integer page, Integer linesPerPage, String orderBy, String direction){
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repositorio.findAll(pageRequest);
 	}
 	
 	@Transactional
-	public Banco insert(Banco obj) {
+	public Conta insert(Conta obj) {
 		obj.setId(null);
 		repositorio.save(obj);
 		return obj;
 	}
 	
-	public Banco update(Banco obj) throws ObjectNotFoundException {
-		Banco newObj = buscarPorId(obj.getId());
+	public Conta update(Conta obj) throws ObjectNotFoundException {
+		Conta newObj = buscarPorId(obj.getId());
 		updateData(newObj, obj);
 		return repositorio.save(newObj);
 	}
@@ -61,11 +61,23 @@ public class BancoService {
 		}
 	}
 	
-	private void updateData(Banco newObj, Banco obj) {
-		newObj.setNome(obj.getNome());
+	private void updateData(Conta newObj, Conta obj) {
+		newObj.setAgencia(obj.getAgencia());
+		newObj.setAgenciaDigito(obj.getAgenciaDigito());
+		newObj.setConta(obj.getConta());
+		newObj.setConta(obj.getContaDigito());
+		newObj.setUsuario(obj.getUsuario());
 	}
 	
-	public Banco fromDTO(BancoDTO objDto){
-		return new Banco(objDto.getId(), objDto.getNumero(), objDto.getNome());
+	public Conta fromDTO(ContaDTO objDto){
+		return new Conta(
+			objDto.getId(),
+			objDto.getAgencia(),
+			objDto.getAgenciaDigito(),
+			objDto.getConta(),
+			objDto.getContaDigito(),
+			objDto.getBanco(),
+			objDto.getUsuario()
+		);
 	}
 }

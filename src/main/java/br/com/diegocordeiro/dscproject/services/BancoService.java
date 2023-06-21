@@ -1,8 +1,13 @@
 package br.com.diegocordeiro.dscproject.services;
 
-import java.util.List;
-import java.util.Optional;
-
+import br.com.diegocordeiro.dscproject.domain.Ativo;
+import br.com.diegocordeiro.dscproject.domain.Banco;
+import br.com.diegocordeiro.dscproject.dto.AtivoDTO;
+import br.com.diegocordeiro.dscproject.dto.BancoDTO;
+import br.com.diegocordeiro.dscproject.repositories.AtivoRepository;
+import br.com.diegocordeiro.dscproject.repositories.BancoRepository;
+import br.com.diegocordeiro.dscproject.services.exceptions.DataIntegrityException;
+import br.com.diegocordeiro.dscproject.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -11,41 +16,38 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.diegocordeiro.dscproject.domain.Ativo;
-import br.com.diegocordeiro.dscproject.dto.AtivoDTO;
-import br.com.diegocordeiro.dscproject.repositories.AtivoRepository;
-import br.com.diegocordeiro.dscproject.services.exceptions.DataIntegrityException;
-import br.com.diegocordeiro.dscproject.services.exceptions.ObjectNotFoundException;
+import java.util.List;
+import java.util.Optional;
 
 @Service
-public class AtivoService {
+public class BancoService {
 
 	@Autowired
-	private AtivoRepository repositorio;
+	private BancoRepository repositorio;
 	
-	public Ativo buscarPorId(Integer id) {
-		Optional<Ativo> obj = repositorio.findById(id);
-		return obj.orElseThrow(()-> new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Ativo.class.getName()));
+	public Banco buscarPorId(Integer id) {
+		Optional<Banco> obj = repositorio.findById(id);
+		return obj.orElseThrow(()-> new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Banco.class.getName()));
 	}
 	
-	public List<Ativo> buscarTodos() {
+	public List<Banco> buscarTodos() {
 		return repositorio.findAll();
 	}
 	
-	public Page<Ativo> buscarTodosComPaginacao(Integer page, Integer linesPerPage, String orderBy, String direction){
+	public Page<Banco> buscarTodosComPaginacao(Integer page, Integer linesPerPage, String orderBy, String direction){
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repositorio.findAll(pageRequest);
 	}
 	
 	@Transactional
-	public Ativo insert(Ativo obj) {
+	public Banco insert(Banco obj) {
 		obj.setId(null);
 		repositorio.save(obj);
 		return obj;
 	}
 	
-	public Ativo update(Ativo obj) throws ObjectNotFoundException {
-		Ativo newObj = buscarPorId(obj.getId());
+	public Banco update(Banco obj) throws ObjectNotFoundException {
+		Banco newObj = buscarPorId(obj.getId());
 		updateData(newObj, obj);
 		return repositorio.save(newObj);
 	}
@@ -55,17 +57,15 @@ public class AtivoService {
 		try {
 			repositorio.deleteById(id);
 		} catch (DataIntegrityViolationException e) {
-			throw new DataIntegrityException("Não foi possível excluir este ativos pois já existem operações vinculadas a ele.");
+			throw new DataIntegrityException("Não foi possível excluir este registro pois já existem registros vinculados a ele.");
 		}
 	}
 	
-	private void updateData(Ativo newObj, Ativo obj) {
-		newObj.setCodigo(obj.getCodigo());
+	private void updateData(Banco newObj, Banco obj) {
 		newObj.setNome(obj.getNome());
-		newObj.setDescricao(obj.getDescricao());
 	}
 	
-	public Ativo fromDTO(AtivoDTO objDto){
-		return new Ativo(objDto.getId(), objDto.getCodigo(), objDto.getNome(), objDto.getDescricao());
+	public Banco fromDTO(BancoDTO objDto){
+		return new Banco(objDto.getId(), objDto.getNumero(), objDto.getNome());
 	}
 }
