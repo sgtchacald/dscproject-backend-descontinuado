@@ -1,10 +1,7 @@
 package br.com.diegocordeiro.dscproject.services;
 
-import br.com.diegocordeiro.dscproject.domain.Ativo;
 import br.com.diegocordeiro.dscproject.domain.Banco;
-import br.com.diegocordeiro.dscproject.dto.AtivoDTO;
 import br.com.diegocordeiro.dscproject.dto.BancoDTO;
-import br.com.diegocordeiro.dscproject.repositories.AtivoRepository;
 import br.com.diegocordeiro.dscproject.repositories.BancoRepository;
 import br.com.diegocordeiro.dscproject.services.exceptions.DataIntegrityException;
 import br.com.diegocordeiro.dscproject.services.exceptions.ObjectNotFoundException;
@@ -28,6 +25,16 @@ public class BancoService {
 	public Banco buscarPorId(Integer id) {
 		Optional<Banco> obj = repositorio.findById(id);
 		return obj.orElseThrow(()-> new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Banco.class.getName()));
+	}
+
+	public Optional<Banco> buscarPorNome(String nome) {
+		Optional<Banco> obj = Optional.ofNullable(repositorio.findByNomeIgnoringCase(nome));
+		return obj;
+	}
+
+	public Optional<Banco> buscarPorNumero(String numero) {
+		Optional<Banco> obj = Optional.ofNullable(repositorio.findByNumero(numero));
+		return obj;
 	}
 	
 	public List<Banco> buscarTodos() {
@@ -62,10 +69,15 @@ public class BancoService {
 	}
 	
 	private void updateData(Banco newObj, Banco obj) {
+		newObj.setNumero(obj.getNumero());
 		newObj.setNome(obj.getNome());
 	}
 	
 	public Banco fromDTO(BancoDTO objDto){
-		return new Banco(objDto.getId(), objDto.getNumero(), objDto.getNome());
+		return new Banco(
+			objDto.getId(),
+			objDto.getNumero(),
+			objDto.getNome()
+		);
 	}
 }
