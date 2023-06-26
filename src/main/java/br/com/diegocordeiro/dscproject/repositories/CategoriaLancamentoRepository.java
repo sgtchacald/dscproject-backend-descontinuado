@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CategoriaLancamentoRepository extends JpaRepository<CategoriaLancamento, Integer>{
+    CategoriaLancamento findByNomeIgnoringCase(String nome);
+
 };
