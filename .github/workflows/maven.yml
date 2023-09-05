@@ -41,7 +41,7 @@ jobs:
          username: ${{ secrets.SFTP_USER }}
          password: ${{ secrets.SFTP_PASSWORD }}
          compress: false                                                 # Compression
-         forceUpload: true                                               # Optional, Force uploading all files, Default to false(upload only newer files).
+         forceUpload: false                                               # Optional, Force uploading all files, Default to false(upload only newer files).
          localDir: .                                                     # Required, Absolute or relative to cwd.
          remoteDir: /JAVA_HOME/deploy/                                   # Required, Absolute path only.
          exclude: '.jar*'                                                # Optional. exclude patterns (glob) like .gitignore, use ',' to split, Default to ''.
