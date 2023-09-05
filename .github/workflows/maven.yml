@@ -46,12 +46,24 @@ jobs:
             && chmod 777 /home/runner/work/dscproject-backend/temp/ -R
             && ls -la /home/runner/work/dscproject-backend/temp/
 
-    - name: Deploy to SFTP
-      uses: milanmk/actions-file-deployer@master
+    #- name: Deploy to SFTP
+    #  uses: milanmk/actions-file-deployer@master
+    #  with:
+    #    remote-host: ${{ secrets.SFTP_HOST }}
+    #    remote-port: ${{ secrets.SFTP_PORT }}
+    #    remote-user: ${{ secrets.SFTP_USER }}
+    #    remote-password: ${{ secrets.SFTP_PASSWORD }}
+    #    local-path:  "/home/runner/work/dscproject-backend/temp/br.com.diegocordeiro-0.0.1-SNAPSHOT.jar" #Caminho para o arquivo JAR gerado pelo build
+    #    remote-path: "/JAVA_HOME/" #Caminho de destino no servidor SFTP
+    
+    - name: 📂 SFTP uploader                                     # Upload to SFTP 
+      uses: wangyucode/sftp-upload-action@v2.0.2
       with:
-        remote-host: ${{ secrets.SFTP_HOST }}
-        remote-port: ${{ secrets.SFTP_PORT }}
-        remote-user: ${{ secrets.SFTP_USER }}
-        remote-password: ${{ secrets.SFTP_PASSWORD }}
-        local-path:  "/home/runner/work/dscproject-backend/temp/br.com.diegocordeiro-0.0.1-SNAPSHOT.jar" #Caminho para o arquivo JAR gerado pelo build
-        remote-path: "/JAVA_HOME/" #Caminho de destino no servidor SFTP
+        host: ${{ secrets.SFTP_HOST }}                           # Recommended to put the credentials in github secrets.
+        username: ${{ secrets.SFTP_USER }}
+        password: ${{ secrets.SFTP_PASSWORD }}
+        compress: false                                          # Compression
+        forceUpload: true                                        # Optional, Force uploading all files, Default to false(upload only newer files).
+        localDir: '/home/runner/work/dscproject-backend/temp/'   # Required, Absolute or relative to cwd.
+        remoteDir: '/JAVA_HOME/'                                 # Required, Absolute path only.
+        exclude: '.git*,.DS_Store'                               # Optional. exclude patterns (glob) like .gitignore, use ',' to split, Default to ''.
