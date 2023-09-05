@@ -34,11 +34,11 @@ jobs:
     - name: Build Spring Boot project
       run: mvn clean install
 
-    - name: Listar conteúdo do diretório
-      run: ls -l /home/runner/work/dscproject-backend/dscproject-backend/target/
-
     - name: Dá permissão para a pasta target
       run: chmod 777 /home/runner/work/dscproject-backend/dscproject-backend/target/ -R
+
+    - name: Listar conteúdo do diretório
+      run: ls -l /home/runner/work/dscproject-backend/dscproject-backend/target/
 
     - name: Deploy to SFTP
       uses: milanmk/actions-file-deployer@master
@@ -47,5 +47,5 @@ jobs:
         remote-port: ${{ secrets.SFTP_PORT }}
         remote-user: ${{ secrets.SFTP_USER }}
         remote-password: ${{ secrets.SFTP_PASSWORD }}
-        local-path:  ./dscproject-backend/target/br.com.diegocordeiro-0.0.1-SNAPSHOT.jar #Caminho para o arquivo JAR gerado pelo build
-        remote-path: /JAVA_HOME/ #Caminho de destino no servidor SFTP
+        local-path:  "/home/runner/work/dscproject-backend/dscproject-backend/br.com.diegocordeiro-0.0.1-SNAPSHOT.jar" #Caminho para o arquivo JAR gerado pelo build
+        remote-path: "/JAVA_HOME/" #Caminho de destino no servidor SFTP
