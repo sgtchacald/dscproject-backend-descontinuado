@@ -35,7 +35,7 @@ jobs:
       run: mvn clean install
 
     - name: Listar conteúdo do diretório
-      run: ls -R /home/runner/work/dscproject-backend/dscproject-backend/target/
+      run: ll /home/runner/work/dscproject-backend/dscproject-backend/target/
 
     - name: Deploy to SFTP
       uses: milanmk/actions-file-deployer@master
