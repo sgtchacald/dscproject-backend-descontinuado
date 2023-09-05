@@ -41,9 +41,9 @@ jobs:
     - name: Deploy to SFTP
       uses: milanmk/actions-file-deployer@master
       with:
-        host: ${{ secrets.SFTP_HOST }}
-        port: ${{ secrets.SFTP_PORT }}
-        username: ${{ secrets.SFTP_USER }}
-        password: ${{ secrets.SFTP_PASSWORD }}
-        localPath: /home/runner/work/dscproject-backend/dscproject-backend/target/br.com.diegocordeiro-0.0.1-SNAPSHOT.jar # Caminho para o arquivo JAR gerado pelo build
-        remotePath: ${{ secrets.DEPLOY_PATH }}/br.com.diegocordeiro-0.0.1-SNAPSHOT.jar  # Caminho de destino no servidor SFTP
+        remote-host: ${{ secrets.SFTP_HOST }}
+        remote-port: ${{ secrets.SFTP_PORT }}
+        remote-user: ${{ secrets.SFTP_USER }}
+        remote-password: ${{ secrets.SFTP_PASSWORD }}
+        local-path: /home/runner/work/dscproject-backend/dscproject-backend/target/br.com.diegocordeiro-0.0.1-SNAPSHOT.jar # Caminho para o arquivo JAR gerado pelo build
+        remote-path: ${{ secrets.DEPLOY_PATH }}/br.com.diegocordeiro-0.0.1-SNAPSHOT.jar  # Caminho de destino no servidor SFTP
