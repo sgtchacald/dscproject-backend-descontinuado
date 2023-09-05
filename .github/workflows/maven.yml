@@ -37,6 +37,9 @@ jobs:
     - name: Listar conteúdo do diretório
       run: ll /home/runner/work/dscproject-backend/dscproject-backend/target/
 
+    - name: Dá permissão para a pasta target
+      run: chmod 777 /home/runner/work/dscproject-backend/dscproject-backend/target/ -R
+
     - name: Deploy to SFTP
       uses: milanmk/actions-file-deployer@master
       with:
