@@ -34,14 +34,14 @@ jobs:
     - name: Build Spring Boot project
       run: mvn clean install
     
-    - name: 📂 SFTP uploader                                     # Upload to SFTP 
+    - name: 📂 SFTP uploader                                           # Upload to SFTP 
       uses: wangyucode/sftp-upload-action@v2.0.2
       with:
-         host: ${{ secrets.SFTP_HOST }}                           # Recommended to put the credentials in github secrets.
+         host: ${{ secrets.SFTP_HOST }}                                 # Recommended to put the credentials in github secrets.
          username: ${{ secrets.SFTP_USER }}
          password: ${{ secrets.SFTP_PASSWORD }}
-         compress: false                                          # Compression
-         forceUpload: true                                        # Optional, Force uploading all files, Default to false(upload only newer files).
-         localDir: '/home/runner/work/dscproject-backend/dscproject-backend/target/br.com.diegocordeiro-0.0.1-SNAPSHOT.jar'   # Required, Absolute or relative to cwd.
+         compress: false                                                 # Compression
+         forceUpload: true                                               # Optional, Force uploading all files, Default to false(upload only newer files).
+         localDir: './/target/br.com.diegocordeiro-0.0.1-SNAPSHOT.jar'   # Required, Absolute or relative to cwd.
          remoteDir: '/JAVA_HOME/deploy/'                                 # Required, Absolute path only.
-         exclude: '.jar*'                         # Optional. exclude patterns (glob) like .gitignore, use ',' to split, Default to ''.
+         exclude: '.jar*'                                                # Optional. exclude patterns (glob) like .gitignore, use ',' to split, Default to ''.
