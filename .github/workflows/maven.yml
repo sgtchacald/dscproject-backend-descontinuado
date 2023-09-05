@@ -44,4 +44,4 @@ jobs:
         forceUpload: true                                        # Optional, Force uploading all files, Default to false(upload only newer files).
         localDir: '/home/runner/work/dscproject-backend/dscproject-backend/target/br.com.diegocordeiro-0.0.1-SNAPSHOT.jar'   # Required, Absolute or relative to cwd.
         remoteDir: '/JAVA_HOME/'                                 # Required, Absolute path only.
-        exclude: '.git*,.DS_Store'                               # Optional. exclude patterns (glob) like .gitignore, use ',' to split, Default to ''.
+        exclude: '.git*,.DS_Store,.jar*'                               # Optional. exclude patterns (glob) like .gitignore, use ',' to split, Default to ''.
