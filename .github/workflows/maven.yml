@@ -34,6 +34,9 @@ jobs:
     - name: Build Spring Boot project
       run: mvn clean install
 
+    - name: Listar conteúdo do diretório
+      run: ls -R /home/runner/work/dscproject-backend/dscproject-backend/target/
+
     - name: Deploy to SFTP
       uses: milanmk/actions-file-deployer@master
       with:
