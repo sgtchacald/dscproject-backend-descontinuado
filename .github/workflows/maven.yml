@@ -18,7 +18,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0 #busca todo o historico de commits 
     
     - name: Set up JDK 17
       uses: actions/setup-java@v3
@@ -37,7 +41,6 @@ jobs:
     - name: 📂 Sync files
       uses: milanmk/actions-file-deployer@master
       with:
-          fetch-depth: 0
           remote-protocol: "sftp"
           remote-host: ${{ secrets.SFTP_HOST }}
           remote-user: ${{ secrets.SFTP_USER }}
