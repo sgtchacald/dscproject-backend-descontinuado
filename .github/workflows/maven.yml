@@ -21,8 +21,8 @@ jobs:
     
     - name: Checkout code
       uses: actions/checkout@v3
-      with:
-        fetch-depth: 0 #busca todo o historico de commits 
+      #with:
+        #fetch-depth: 0 #busca todo o historico de commits 
     
     - name: Set up JDK 17
       uses: actions/setup-java@v3
@@ -46,4 +46,4 @@ jobs:
         username: ${{ secrets.SFTP_USERNAME }}
         password: ${{ secrets.SFTP_PASSWORD }}
         source: ./target/br.com.diegocordeiro-0.0.1-SNAPSHOT.jar  # Caminho para o arquivo JAR gerado pelo build
-        target: ${{ secrets.DEPLOY_PATH }}/br.com.diegocordeiro-0.0.1-SNAPSHOT.jar  # Caminho de destino no servidor SFTP
+        target: ${{ secrets.DEPLOY_PATH }}/br.com.diegocordeiro-0.0.1-SNAPSHOT.jar  # Caminho de destino no servidor SFTP2
