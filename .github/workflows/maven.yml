@@ -34,7 +34,7 @@ jobs:
     - name: Build Spring Boot project
       run: mvn clean install
     
-    #- name: 📂 SFTP uploader                                     # Upload to SFTP 
+    #-  name: 📂 SFTP uploader                                     # Upload to SFTP 
     #  uses: wangyucode/sftp-upload-action@v2.0.2
     #  with:
     #    host: ${{ secrets.SFTP_HOST }}                           # Recommended to put the credentials in github secrets.
