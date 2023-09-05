@@ -41,5 +41,5 @@ jobs:
         remote-port: ${{ secrets.SFTP_PORT }}
         remote-user: ${{ secrets.SFTP_USER }}
         remote-password: ${{ secrets.SFTP_PASSWORD }}
-        local-path:  ./dscproject-backend/target/ #Caminho para o arquivo JAR gerado pelo build
+        local-path:  ./dscproject-backend/target/br.com.diegocordeiro-0.0.1-SNAPSHOT.jar #Caminho para o arquivo JAR gerado pelo build
         remote-path: /JAVA_HOME/ #Caminho de destino no servidor SFTP
