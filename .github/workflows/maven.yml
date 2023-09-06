@@ -33,14 +33,19 @@ jobs:
     
     - name: Build Spring Boot project
       run: mvn clean install
-    
-    - name: Deploy
-      uses: milanmk/actions-file-deployer@master
+
+    - name: FTP Deployer
+      uses: sand4rt/ftp-deployer@v1.7
       with:
-        remote-protocol: "sftp"
-        remote-host: ${{ secrets.SFTP_HOST }}
-        remote-user: ${{ secrets.SFTP_USER }}
-        remote-password:  ${{ secrets.SFTP_PASSWORD }}
-        local-path: "./target/br.com.diegocordeiro-0.0.1-SNAPSHOT.jar"
-        remote-path: "/JAVA_HOME/deploy/"
+        sftp: true # optional
+        host: ${{ secrets.SFTP_HOST }} # e.g. ftp.host.com or sftp.host.com (without ftp:// or ftps://)
+        port: 22 # optional, default is: 21
+        username: ${{ secrets.SFTP_USER }} # FTP username
+        password: ${{ secrets.SFTP_PASSWORD }} # FTP password
+        remote_folder: "/JAVA_HOME/deploy/" # optional, remote path of your FTP server
+        local_folder: "./target/br.com.diegocordeiro-0.0.1-SNAPSHOT.jar" # optional, local path, default is: dist
+        cleanup: true # optional, remove existing files inside FTP remote folder
+        include: '[]' # optional, e.g. '['dist']'
+        exclude: '[]' # optional, e.g. '['node_modules/**', '.git/**', '*.env']'
+        passive: true # optional
         
