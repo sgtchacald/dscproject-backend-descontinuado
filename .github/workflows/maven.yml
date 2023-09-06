@@ -45,7 +45,7 @@ jobs:
         remote_folder: "/JAVA_HOME/deploy/" # optional, remote path of your FTP server
         local_folder: "/home/runner/work/dscproject-backend/dscproject-backend/target/" # optional, local path, default is: dist
         cleanup: true # optional, remove existing files inside FTP remote folder
-        include: "['.jar/**']" # optional, e.g. '['dist']'
+        include: "br.com.diegocordeiro-0.0.1-SNAPSHOT.jar" # optional, e.g. '['dist']'
         #exclude: "[]" # optional, e.g. '['node_modules/**', '.git/**', '*.env']'
         #passive: true # optional
         
