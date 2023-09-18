@@ -10,7 +10,7 @@ import br.com.diegocordeiro.dscproject.services.DBService;
 import br.com.diegocordeiro.dscproject.services.EmailService;
 import br.com.diegocordeiro.dscproject.services.SmtpEmailService;
 
-@Configuration
+//@Configuration
 @Profile("dev")
 public class DevConfig {
 	@Autowired

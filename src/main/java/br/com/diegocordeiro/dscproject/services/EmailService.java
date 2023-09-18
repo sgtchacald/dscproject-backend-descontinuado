@@ -5,7 +5,9 @@ import jakarta.mail.internet.MimeMessage;
 import org.springframework.mail.SimpleMailMessage;
 
 import br.com.diegocordeiro.dscproject.domain.Usuario;
+import org.springframework.stereotype.Service;
 
+@Service
 public interface EmailService {
 
 	void enviaConfirmacaoCadastroUsuario(Usuario obj);

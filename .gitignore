@@ -30,4 +30,6 @@ build/
 .vscode/
 
 #Arquivos .properties
-#*.properties
+*.properties
+
+/target

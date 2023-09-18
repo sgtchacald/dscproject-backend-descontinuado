@@ -1,6 +1,8 @@
 package br.com.diegocordeiro.dscproject.config;
 
 import br.com.diegocordeiro.dscproject.filters.SecurityFilter;
+import br.com.diegocordeiro.dscproject.services.EmailService;
+import br.com.diegocordeiro.dscproject.services.SmtpEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -72,6 +74,11 @@ public class SecurityConfig {
 	@Bean
 	PasswordEncoder passwordEncoder(){
 		return new BCryptPasswordEncoder();
+	}
+
+	@Bean
+	public EmailService emailService() {
+		return new SmtpEmailService();
 	}
 
 }
