@@ -34,16 +34,14 @@ jobs:
     - name: Build Spring Boot project
       run: mvn clean install
 
-    # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
-    - name: Update dependency graph
-      uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
-
-    - name: Deploy to SFTP
-      uses: milanmk/actions-file-deployer@master
-      with:
-        host: ${{ secrets.SFTP_HOST }}
-        port: ${{ secrets.SFTP_PORT }}
-        username: ${{ secrets.SFTP_USER }}
-        password: ${{ secrets.SFTP_PASSWORD }}
-        localPath: ./target/br.com.diegocordeiro-0.0.1-SNAPSHOT.jar  # Caminho para o arquivo JAR gerado pelo build
-        remotePath: ${{ secrets.DEPLOY_PATH }}/br.com.diegocordeiro-0.0.1-SNAPSHOT.jar  # Caminho de destino no servidor SFTP
+    - name: Fazendo deploy para a VPS da hostinger
+      uses: easingthemes/ssh-deploy@main
+      env:
+        ARGS: "-rltgoDzvO --delete"
+        SOURCE: "target/br.com.diegocordeiro-0.0.1-SNAPSHOT.jar"        #codigo a copiar
+        TARGET: ${{ secrets.REMOTE_BACKEND_TARGET }}                    #destino do codigo copiado
+        REMOTE_HOST: ${{ secrets.REMOTE_BACKEND_HOST }}                 #nome do host ou ip
+        REMOTE_PORT: ${{ secrets.REMOTE_BACKEND_PORT }}                 #porta
+        REMOTE_USER: ${{ secrets.REMOTE_BACKEND_USER }}                 #user
+        SSH_PRIVATE_KEY: ${{ secrets.REMOTE_BACKEND_SERVER_SSH_KEY }}   #chave privada no formato PEM
+        
