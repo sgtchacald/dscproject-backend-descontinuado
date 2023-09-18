@@ -38,8 +38,8 @@ jobs:
       uses: easingthemes/ssh-deploy@main
       env:
         ARGS: "-rltgoDzvO --delete"
-        SOURCE: "/home/runner/work/dscproject-backend/dscproject-backend/target/" #codigo a copiar
-        TARGET: ${{ secrets.REMOTE_BACKEND_TARGET }} #destino do codigo copiado
+        SOURCE: ${{ secrets.LOCAL_BACKEND_GITHUB_SOURCE }} #codigo a copiar
+        TARGET: ${{ secrets.REMOTE_BACKEND_TARGET }}       #destino do codigo copiado
         REMOTE_HOST: ${{ secrets.REMOTE_BACKEND_HOST }}
         REMOTE_PORT: ${{ secrets.REMOTE_BACKEND_PORT }}
         REMOTE_USER: ${{ secrets.REMOTE_BACKEND_USER }}
