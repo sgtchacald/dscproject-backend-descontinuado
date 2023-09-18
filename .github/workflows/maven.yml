@@ -38,10 +38,10 @@ jobs:
       uses: easingthemes/ssh-deploy@main
       env:
         ARGS: "-rltgoDzvO --delete"
-        SOURCE: "target/"                                    #codigo a copiar
-        TARGET: ${{ secrets.REMOTE_BACKEND_TARGET }}         #destino do codigo copiado
-        REMOTE_HOST: ${{ secrets.REMOTE_BACKEND_HOST }}      #nome do host ou ip
-        REMOTE_PORT: ${{ secrets.REMOTE_BACKEND_PORT }}      #porta
-        REMOTE_USER: ${{ secrets.REMOTE_BACKEND_USER }}      #user
+        SOURCE: "target/br.com.diegocordeiro-0.0.1-SNAPSHOT.jar"        #codigo a copiar
+        TARGET: ${{ secrets.REMOTE_BACKEND_TARGET }}                    #destino do codigo copiado
+        REMOTE_HOST: ${{ secrets.REMOTE_BACKEND_HOST }}                 #nome do host ou ip
+        REMOTE_PORT: ${{ secrets.REMOTE_BACKEND_PORT }}                 #porta
+        REMOTE_USER: ${{ secrets.REMOTE_BACKEND_USER }}                 #user
         SSH_PRIVATE_KEY: ${{ secrets.REMOTE_BACKEND_SERVER_SSH_KEY }}
         
