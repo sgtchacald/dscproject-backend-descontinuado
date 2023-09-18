@@ -34,18 +34,14 @@ jobs:
     - name: Build Spring Boot project
       run: mvn clean install
 
-    - name: FTP Deployer
-      uses: sand4rt/ftp-deployer@v1.7
-      with:
-        sftp: true # optional
-        host: ${{ secrets.SFTP_HOST }} # e.g. ftp.host.com or sftp.host.com (without ftp:// or ftps://)
-        port: 22 # optional, default is: 21
-        username: ${{ secrets.SFTP_USER }} # FTP username
-        password: ${{ secrets.SFTP_PASSWORD }} # FTP password
-        remote_folder: "/JAVA_HOME/deploy/" # optional, remote path of your FTP server
-        local_folder: "/home/runner/work/dscproject-backend/dscproject-backend/target/" # optional, local path, default is: dist
-        cleanup: true # optional, remove existing files inside FTP remote folder
-        #include: "br.com.diegocordeiro-0.0.1-SNAPSHOT.jar" # optional, e.g. '['dist']'
-        exclude: '["**/*.original", "*classes", "*maven-archiver", "*maven-status", "*test-classes"]' # optional, e.g. '['node_modules/**', '.git/**', '*.env']'
-        #passive: true # optional
+    - name: Fazendo deploy para a VPS da hostinger
+      uses: easingthemes/ssh-deploy@main
+      env:
+        ARGS: "-rltgoDzvO --delete"
+        SOURCE: "/home/runner/work/dscproject-backend/dscproject-backend/target/" #codigo a copiar
+        TARGET: ${{ secrets.REMOTE_BACKEND_TARGET }} #destino do codigo copiado
+        REMOTE_HOST: ${{ secrets.REMOTE_BACKEND_HOST }}
+        REMOTE_PORT: ${{ secrets.REMOTE_BACKEND_PORT }}
+        REMOTE_USER: ${{ secrets.REMOTE_BACKEND_USER }}
+        SSH_PRIVATE_KEY: ${{ secrets.REMOTE_BACKEND_SERVER_SSH_KEY }}
         
