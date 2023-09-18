@@ -41,7 +41,7 @@ jobs:
         SOURCE: ${{ secrets.LOCAL_BACKEND_GITHUB_SOURCE }}   #codigo a copiar
         TARGET: ${{ secrets.REMOTE_BACKEND_TARGET }}         #destino do codigo copiado
         REMOTE_HOST: ${{ secrets.REMOTE_BACKEND_HOST }}      #nome do host ou ip
-        REMOTE_PORT: ${{ secrets.REMOTE_BACKEND_PORT }}
+        REMOTE_PORT: ${{ secrets.REMOTE_BACKEND_PORT }}      #porta
         REMOTE_USER: ${{ secrets.REMOTE_BACKEND_USER }}
         SSH_PRIVATE_KEY: ${{ secrets.REMOTE_BACKEND_SERVER_SSH_KEY }}
         
