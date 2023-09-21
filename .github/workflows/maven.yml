@@ -31,15 +31,17 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: Ler secret e substituir valor no arquivo .properties
+  
+    - name: Ler secret e substituir valor no arquivo application-prod.properties
+      run: |
+        chmod +x substituidorProperties.sh
+        ./substituidorProperties.sh
       env:
         SPRING_DATASOURCE_URL: ${{ secrets.SPRING_DATASOURCE_URL }}
-      run: |
-        # Ler o valor do secret
-        SPRING_DATASOURCE_URL_VALUE="${SPRING_DATASOURCE_URL}"
-
-        # Substituir a chave no arquivo .properties pelo valor do secret
-        sed -i "s/spring.datasource.url=.*$/spring.datasource.url=${SPRING_DATASOURCE_URL_VALUE}/" src/main/resources/application-prod.properties
+        SPRING_DATASOURCE_USERNAME: ${{ secrets.SPRING_DATASOURCE_USERNAME }}
+        SPRING_DATASOURCE_PASSWORD: ${{ secrets.SPRING_DATASOURCE_PASSWORD }}
+        SPRING_MAIL_USERNAME: ${{ secrets.SPRING_MAIL_USERNAME }}
+        SPRING_MAIL_PASSWORD: ${{ secrets.SPRING_MAIL_PASSWORD }}
     
     - name: Build Spring Boot project
       run: mvn clean install
