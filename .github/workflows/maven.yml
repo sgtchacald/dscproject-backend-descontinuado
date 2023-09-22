@@ -32,7 +32,7 @@ jobs:
         cache: maven
 
   
-    - name: Ler secret e substituir valor no arquivo application-prod.properties
+    - name: Lê secret e substituir valor no arquivo application-prod.properties
       run: |
         chmod +x substituidorProperties.sh
         ./substituidorProperties.sh
