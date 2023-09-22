@@ -56,7 +56,6 @@ jobs:
         REMOTE_PORT: ${{ secrets.REMOTE_BACKEND_PORT }}                 #porta
         REMOTE_USER: ${{ secrets.REMOTE_BACKEND_USER }}                 #user
         SSH_PRIVATE_KEY: ${{ secrets.REMOTE_BACKEND_SERVER_SSH_KEY }}   #chave privada no formato PEM
-        SCRIPT_BEFORE: |
-          pkill -f "java -jar"
         SCRIPT_AFTER: | 
+          pkill -f "java -jar"
           java -jar /JAVA_HOME/deploy/dscproject-backend/target/br.com.diegocordeiro-0.0.1-SNAPSHOT.jar
