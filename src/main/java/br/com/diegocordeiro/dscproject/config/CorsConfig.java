@@ -32,11 +32,6 @@ public class CorsConfig implements WebMvcConfigurer{
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry
-            .addMapping("/**")
-            .allowedOrigins("https://diegocordeiro.com.br:8080")
-            .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "TRACE", "CONNECT")
-            .allowedHeaders("Content-Type");
-
+        registry.addMapping("/**");
     }
 }
