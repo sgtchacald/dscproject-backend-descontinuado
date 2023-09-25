@@ -51,6 +51,8 @@ public class SecurityConfig {
 		return
 			http
 			.csrf().disable()
+			.cors()
+			.and()
 			.authorizeRequests()
 			.requestMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST).permitAll()
 			.requestMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll()
