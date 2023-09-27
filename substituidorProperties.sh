@@ -8,5 +8,5 @@ sed -i "s|spring.datasource.username=.*|spring.datasource.username=${SPRING_DATA
 sed -i "s|spring.datasource.password=.*|spring.datasource.password=${SPRING_DATASOURCE_PASSWORD}|" src/main/resources/application-prod.properties
 
 #Dados de Conexão de envio de email
-sed -i "s|spring.mail.username=.*|spring.mail.username=${SPRING_MAIL_PASSWORD}|" src/main/resources/application-prod.properties
-sed -i "s|spring.mail.password=.*|spring.mail.password=${SPRING_MAIL_USERNAME}|" src/main/resources/application-prod.properties
+sed -i "s|spring.mail.username=.*|spring.mail.username=${SPRING_MAIL_USERNAME}|" src/main/resources/application-prod.properties
+sed -i "s|spring.mail.password=.*|spring.mail.password=${SPRING_MAIL_PASSWORD}|" src/main/resources/application-prod.properties
